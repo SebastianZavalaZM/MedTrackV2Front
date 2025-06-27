@@ -1,0 +1,13 @@
+
+.tabla-ovalada {
+  border-radius: 18px;
+  overflow: hidden;
+ 
+}
+
+
+
+
+td.mat-column-cantidad, th.mat-column-cantidad {
+  text-align: center;
+}

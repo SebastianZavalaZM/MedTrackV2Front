@@ -1,0 +1,4 @@
+.tabla-ovalada {
+  border-radius: 18px;
+  overflow: hidden; /* Para que el contenido respete el borde */
+}
