@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Segoe UI", sans-serif;
+  background: linear-gradient(
+    120deg,
+    #184e77 0%,
+    #1a759f 25%,
+    #34a0a4 50%,
+    #99d98c 75%,
+    #b5e48c 100%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+
+
+
