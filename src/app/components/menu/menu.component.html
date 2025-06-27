@@ -1,0 +1,26 @@
+<mat-toolbar class ="custom-toolbar">
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-verde">
+      <mat-icon>account_circle</mat-icon>
+      Usuarios
+    </button>
+  </div>
+
+</mat-toolbar>
+
+<mat-menu #menuServer="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/usuarios" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/usuarios/formulario" class="item-verde">
+    <mat-icon>how_to_reg</mat-icon>
+    <span>Registrar</span>
+  </button>
+  <button mat-menu-item routerLink="/usuarios/busquedasproveedor" class="item-verde">
+    <mat-icon>search</mat-icon>
+    <span>Buscar por proveedor</span>
+  </button>
+</mat-menu>
+
+
