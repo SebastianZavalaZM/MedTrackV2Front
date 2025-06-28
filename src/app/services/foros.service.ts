@@ -32,12 +32,16 @@ export class ForosService {
     return this.listaCambio.asObservable()
   }
 
-  delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`)
-  }
-
   listId(id: number) {
     return this.http.get<Foros>(`${this.url}/${id}`)
+  }
+
+  update(f: Foros) {
+    return this.http.put(this.url, f)
+  }
+
+  deleteF(id: number) {
+    return this.http.delete(`${this.url}/${id}`)
   }
 
   buscarPorPeriodo(fechaInicio: string, fechaFin: string) {
@@ -46,7 +50,6 @@ export class ForosService {
         fechaInicio: fechaInicio,
         fechaFin: fechaFin
       }
-    })
+    });
   }
-  
 }

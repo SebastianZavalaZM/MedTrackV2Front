@@ -1,0 +1,67 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de Foros</h1>
+  </div>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idforum">
+        <mat-error *ngIf="form.get('idforum')?.hasError('required')">
+          El codigo del Foro es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="titulo">
+        <mat-error *ngIf="form.get('titulo')?.hasError('required')">
+          El Titulo del foro es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <input matInput formControlName="descripcion">
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+          La descripcion del foro es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Escoge una Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechacreacion">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechacreacion')?.hasError('required')">
+          La fecha del foro es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      
+      <br>
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="Users">
+        <mat-error *ngIf="form.get('Users')?.hasError('required')">
+          EL codigo del usario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+      
+      <br />
+
+      <button matButton="elevated"  type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>
+      <button matButton="elevated" [routerLink]="['/Foros']">Cancelar</button>
+    </form>
+  </div>
+</div>

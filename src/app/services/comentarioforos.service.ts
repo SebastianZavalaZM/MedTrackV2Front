@@ -2,11 +2,47 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { ComenarioForos } from '../models/ComentarioForos';
+const base_url = environment.base
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComentarioforosService {
 
-  constructor() { }
+  private listaCambio = new Subject<ComenarioForos[]>()
+
+  private url = `${base_url}/Comentarios`
+
+  constructor(private http: HttpClient) { }
+
+  list() {
+    return this.http.get<ComenarioForos[]>(`${this.url}/Listar`)
+  }
+
+  insert(cf: ComenarioForos) {
+    return this.http.post(`${this.url}/Registrar`, cf)
+  }
+
+  setList(listaNueva: ComenarioForos[]) {
+    this.listaCambio.next(listaNueva)
+  }
+  
+  getList() {
+    return this.listaCambio.asObservable()
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`)
+  }
+
+  listId(id: number) {
+    return this.http.get<ComenarioForos>(`${this.url}/${id}`)
+  }
+
+  buscarPorForo(nTitulo: string) {
+    return this.http.get<ComenarioForos[]>(`${this.url}/buscarPorForo`, {
+      params: { nTitulo: nTitulo }
+    });
+  } 
 }
