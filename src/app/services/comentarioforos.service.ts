@@ -10,9 +10,8 @@ const base_url = environment.base
 })
 export class ComentarioforosService {
 
-  private listaCambio = new Subject<ComenarioForos[]>()
-
   private url = `${base_url}/Comentarios`
+  private listaCambio = new Subject<ComenarioForos[]>()
 
   constructor(private http: HttpClient) { }
 

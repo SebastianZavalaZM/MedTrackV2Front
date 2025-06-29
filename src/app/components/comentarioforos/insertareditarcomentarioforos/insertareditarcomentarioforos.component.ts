@@ -77,8 +77,7 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
         //actualizar
         this.cfS.update(this.comentarioforos).subscribe(data => {
           this.cfS.list().subscribe(data => {
-            this.cfS.setList(data)
-            this.router.navigate(['Comentarios'])
+            this.cfS.setList(data)  
           })
         })
       } else {
@@ -86,10 +85,10 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
         this.cfS.insert(this.comentarioforos).subscribe(data => {
           this.cfS.list().subscribe(data => {
             this.cfS.setList(data)
-            this.router.navigate(['comentarios'])
           })
         })
       }
+      this.router.navigate(['Comentarios'])
     }
   }
 

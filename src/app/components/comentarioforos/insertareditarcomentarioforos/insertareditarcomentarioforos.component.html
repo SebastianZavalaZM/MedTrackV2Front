@@ -64,8 +64,8 @@
       
       <br />
 
-      <button matButton="elevated"  type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>
-      <button matButton="elevated" [routerLink]="['/Comentarios']">Cancelar</button>
+      <button mat-raised-button color="primary" matButton="elevated"  type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>
+      <button mat-raised-button color="warn" matButton="elevated" [routerLink]="['/Comentarios']"> Cancelar </button>
     </form>
   </div>
 </div>
