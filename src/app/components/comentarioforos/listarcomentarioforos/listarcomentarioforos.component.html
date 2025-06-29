@@ -1,1 +1,77 @@
-<p>listarcomentarioforos works!</p>
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Lista de Comentarios </h1>
+  </div>
+
+  <div>
+    <div class="record-count">
+      Total de Comentarios: {{ dataSource.data.length }}  
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+  <!-- ID Column -->
+  <ng-container matColumnDef="c1">
+    <th mat-header-cell *matHeaderCellDef> Codigo </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="c2">
+    <th mat-header-cell *matHeaderCellDef> Contenido </th>
+    <td mat-cell *matCellDef="let element"> {{element.contenido}} </td>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="c4">
+    <th mat-header-cell *matHeaderCellDef> Fecha del Comentario </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaComentario|date:'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="c3">
+    <th mat-header-cell *matHeaderCellDef> Foro </th>
+    <td mat-cell *matCellDef="let element"> {{element.forums}} </td>
+  </ng-container>
+
+
+  <!-- User Column -->
+  <ng-container matColumnDef="c5">
+    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+    <td mat-cell *matCellDef="let element"> {{element.users}} </td>
+  </ng-container>
+
+
+ <!-- Update Column -->
+  <ng-container matColumnDef="c6">
+    <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+    <td mat-cell *matCellDef="let element">
+      <button matButton 
+        [routerLink]="['/Comentarios', 'edicionescomentario', element.idforum]"
+        (click)="openSnackBar('Dirigiendose a Actualizar','OK')"
+      >
+      <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+   <!-- Delete Column -->
+  <ng-container matColumnDef="c7">
+    <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+    <td mat-cell *matCellDef="let element">
+      <button matButton
+        (click)="eliminar(element.id)"
+        (click)="openSnackBar('Eliminación Exitosa','OK')"
+      >
+      <mat-icon>delete_forever</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+  </div>
+</div>

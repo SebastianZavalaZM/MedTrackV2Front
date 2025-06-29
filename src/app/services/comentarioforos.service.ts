@@ -32,12 +32,16 @@ export class ComentarioforosService {
     return this.listaCambio.asObservable()
   }
 
-  delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`)
-  }
-
   listId(id: number) {
     return this.http.get<ComenarioForos>(`${this.url}/${id}`)
+  }
+
+  update(cf: ComenarioForos) {
+    return this.http.put(`${this.url}/Modificar`, cf)
+  }
+
+  deleteCF(id: number) {
+    return this.http.delete(`${this.url}/${id}`)
   }
 
   buscarPorForo(nTitulo: string) {

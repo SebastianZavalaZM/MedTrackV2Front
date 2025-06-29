@@ -1,0 +1,71 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de Comentarios</h1>
+  </div>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id">
+        <mat-error *ngIf="form.get('id')?.hasError('required')">
+          El codigo del Comentario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="contenido">
+        <mat-error *ngIf="form.get('contenido')?.hasError('required')">
+          El Titulo del foro es obligatorio!!
+        </mat-error>
+        <mat-error *ngIf="form.get('contenido')?.hasError('maxLength')">
+          El contenido no debe pasar de los 1000 Caractereres!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      
+      <mat-form-field>
+        <mat-label>Escoge una Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaComentario">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaComentario')?.hasError('required')">
+          La fecha de creacion del comentario es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Foro</mat-label>
+        <input matInput formControlName="forums">
+        <mat-error *ngIf="form.get('forums')?.hasError('required')">
+          EL codigo del foro es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="Users">
+        <mat-error *ngIf="form.get('Users')?.hasError('required')">
+          EL codigo del usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+      
+      <br />
+
+      <button matButton="elevated"  type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>
+      <button matButton="elevated" [routerLink]="['/Comentarios']">Cancelar</button>
+    </form>
+  </div>
+</div>

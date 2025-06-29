@@ -21,7 +21,7 @@ export class ForosService {
   }
 
   insert(f: Foros) {
-    return this.http.post(`${this.url}/Registrar`, f)
+  return this.http.post(`${this.url}/Registrar`, f)
   }
 
   setList(listaNueva: Foros[]) {
@@ -37,7 +37,7 @@ export class ForosService {
   }
 
   update(f: Foros) {
-    return this.http.put(this.url, f)
+    return this.http.put(`${this.url}/Modificar`, f)
   }
 
   deleteF(id: number) {

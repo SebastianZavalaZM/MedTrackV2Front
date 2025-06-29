@@ -8,9 +8,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { Foros } from '../../../models/Foros';
-import { ForosService } from '../../../services/foros.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ComenarioForos } from '../../../models/ComentarioForos';
+import { ComentarioforosService } from '../../../services/comentarioforos.service';
 
 @Component({
   selector: 'app-insertareditar',
@@ -25,13 +25,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     RouterLink
   ],
-  templateUrl: './insertareditar.component.html',
-  styleUrl: './insertareditar.component.css'
+  templateUrl: './insertareditarcomentarioforos.component.html',
+  styleUrl: './insertareditarcomentarioforos.component.css'
 })
-export class InsertareditarComponent implements OnInit {
-  
+export class InsertareditarcomentarioforosComponent implements OnInit {
+
   form: FormGroup = new FormGroup({})
-  servidor: Foros = new Foros()
+  comentarioforos: ComenarioForos = new ComenarioForos()
 
   id: number = 0
   edicion: boolean = false
@@ -42,7 +42,7 @@ export class InsertareditarComponent implements OnInit {
   }
 
   constructor(
-    private fS: ForosService,
+    private cfS: ComentarioforosService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
@@ -56,52 +56,52 @@ export class InsertareditarComponent implements OnInit {
       this.init()
     })
 
-
     this.form = this.formBuilder.group({
-      idforum: [''],
-      titulo: ['', [Validators.required,Validators.maxLength(150)]],
-      descripcion: ['',[Validators.required,Validators.maxLength(150)]],
-      fechacreacion: ['', Validators.required],
-      Users: ['', Validators.required],
+      id: [''],
+      contenido: ['', [Validators.required,Validators.maxLength(1000)]],
+      fechaComentario: ['', Validators.required],
+      forums: ['', Validators.required],
+      users: ['', Validators.required],
     })
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.servidor.idforum = this.form.value.idforum
-      this.servidor.titulo = this.form.value.titulo
-      this.servidor.descripcion = this.form.value.descripcion
-      this.servidor.fechacreacion = this.form.value.fechacreacion
-      this.servidor.Users = this.form.value.Users
+      this.comentarioforos.id = this.form.value.id
+      this.comentarioforos.contenido = this.form.value.contenido
+      this.comentarioforos.fechaComentario = this.form.value.fechaComentario
+      this.comentarioforos.forums = this.form.value.forums
+      this.comentarioforos.users = this.form.value.users
 
       if (this.edicion) {
         //actualizar
-        this.fS.update(this.servidor).subscribe(data => {
-          this.fS.list().subscribe(data => {
-            this.fS.setList(data)
+        this.cfS.update(this.comentarioforos).subscribe(data => {
+          this.cfS.list().subscribe(data => {
+            this.cfS.setList(data)
+            this.router.navigate(['Comentarios'])
           })
         })
       } else {
         //INSERTAR
-        this.fS.insert(this.servidor).subscribe(data => {
-          this.fS.list().subscribe(data => {
-            this.fS.setList(data)
+        this.cfS.insert(this.comentarioforos).subscribe(data => {
+          this.cfS.list().subscribe(data => {
+            this.cfS.setList(data)
+            this.router.navigate(['comentarios'])
           })
         })
       }
-      this.router.navigate(['Foros'])
     }
   }
 
   init() {
     if (this.edicion) {
-      this.fS.listId(this.id).subscribe(data => {
+      this.cfS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          idforum: new FormControl(data.idforum),
-          titulo: new FormControl(data.titulo),
-          descripcion: new FormControl(data.descripcion),
-          fechacreacion: new FormControl(data.fechacreacion),
-          Users: new FormControl(data.Users),
+          id: new FormControl(data.id),
+          contenido: new FormControl(data.contenido),
+          fechaComentario: new FormControl(data.fechaComentario),
+          forums: new FormControl(data.forums),
+          users: new FormControl(data.users),
         })
       })
     }
