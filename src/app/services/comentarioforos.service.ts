@@ -43,9 +43,8 @@ export class ComentarioforosService {
     return this.http.delete(`${this.url}/${id}`)
   }
 
-  buscarPorForo(nTitulo: string) {
-    return this.http.get<ComenarioForos[]>(`${this.url}/buscarPorForo`, {
-      params: { nTitulo: nTitulo }
-    });
-  } 
+  searchTitle(nTitulo: string) {
+    const params = { nTitulo: nTitulo };
+    return this.http.get<ComenarioForos[]>(`${this.url}/buscarPorForo`, { params });
+  }
 }

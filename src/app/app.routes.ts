@@ -5,6 +5,7 @@ import { InsertareditarforosComponent } from './components/foros/insertareditarf
 import { InsertareditarcomentarioforosComponent } from './components/comentarioforos/insertareditarcomentarioforos/insertareditarcomentarioforos.component';
 import { ForosComponent } from './components/foros/foros.component';
 import { ComentarioforosComponent } from './components/comentarioforos/comentarioforos.component';
+import { BuscarforoComponent } from './components/comentarioforos/buscarforo/buscarforo.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,9 @@ export const routes: Routes = [
       },
       { 
       path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent
+      },
+      { 
+      path: 'busquedatituloforo', component:BuscarforoComponent
       }
     ]
   }
