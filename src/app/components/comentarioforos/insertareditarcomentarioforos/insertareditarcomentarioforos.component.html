@@ -54,8 +54,8 @@
 
       <mat-form-field>
         <mat-label>Usuario</mat-label>
-        <input matInput formControlName="Users">
-        <mat-error *ngIf="form.get('Users')?.hasError('required')">
+        <input matInput formControlName="users">
+        <mat-error *ngIf="form.get('users')?.hasError('required')">
           EL codigo del usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
@@ -64,7 +64,7 @@
       
       <br />
 
-      <button mat-raised-button color="primary" matButton="elevated"  type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>
+      <button mat-raised-button color="primary" matButton="elevated" type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>
       <button mat-raised-button color="warn" matButton="elevated" [routerLink]="['/Comentarios']"> Cancelar </button>
     </form>
   </div>

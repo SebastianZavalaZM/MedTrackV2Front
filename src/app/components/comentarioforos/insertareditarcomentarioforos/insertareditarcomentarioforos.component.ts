@@ -99,8 +99,8 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
           id: new FormControl(data.id),
           contenido: new FormControl(data.contenido),
           fechaComentario: new FormControl(data.fechaComentario),
-          forums: new FormControl(data.forums),
-          users: new FormControl(data.users),
+          forums: new FormControl(data.forums?.idforum),
+          users: new FormControl(data.users?.idUsers),
         })
       })
     }

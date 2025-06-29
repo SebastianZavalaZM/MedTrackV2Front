@@ -61,7 +61,7 @@ export class InsertareditarforosComponent implements OnInit {
       titulo: ['', [Validators.required,Validators.maxLength(150)]],
       descripcion: ['',[Validators.required,Validators.maxLength(150)]],
       fechacreacion: ['', Validators.required],
-      Users: ['', Validators.required]
+      users: ['', Validators.required]
     })
 
   }
@@ -72,7 +72,7 @@ export class InsertareditarforosComponent implements OnInit {
       this.foros.titulo = this.form.value.titulo
       this.foros.descripcion = this.form.value.descripcion
       this.foros.fechacreacion = this.form.value.fechacreacion
-      this.foros.Users = this.form.value.Users
+      this.foros.users = this.form.value.users
 
       if (this.edicion) {
         //actualizar
@@ -101,7 +101,7 @@ export class InsertareditarforosComponent implements OnInit {
           titulo: new FormControl(data.titulo),
           descripcion: new FormControl(data.descripcion),
           fechacreacion: new FormControl(data.fechacreacion),
-          Users: new FormControl(data.Users),
+          users: new FormControl(data.users?.idUsers),
         })
       })
     }

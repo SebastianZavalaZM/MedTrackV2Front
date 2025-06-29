@@ -47,7 +47,7 @@
     <th mat-header-cell *matHeaderCellDef> Actualizar </th>
     <td mat-cell *matCellDef="let element">
       <button matButton 
-        [routerLink]="['/Comentarios', 'edicionescomentario', element.idforum]"
+        [routerLink]="['edicionescomentario',element.id]"
         (click)="openSnackBar('Dirigiendose a Actualizar','OK')"
       >
       <mat-icon>edit</mat-icon>
