@@ -1,0 +1,58 @@
+.container {
+  background: #e8f5e9;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(67, 206, 162, 0.12);
+  padding: 32px 24px;
+  margin: 32px auto;
+  max-width: 600px;
+}
+
+h1 {
+  color: #13501b;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background: transparent;
+}
+
+mat-radio-group {
+  display: flex;
+  gap: 24px;
+  margin: 16px 0;
+  background: #f1f8e9;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+mat-radio-button {
+  color: #10330f;
+  font-weight: 500;
+}
+
+button[mat-raised-button]:hover {
+  background: #f0efef;
+}
+
+.mat-error {
+  color: #228b0d;
+  font-size: 0.95em;
+  font-weight: 500;
+}

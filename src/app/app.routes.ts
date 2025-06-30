@@ -16,7 +16,34 @@ export const routes: Routes = [
         path:'ediciones/:id',component:InsertareditarComponent
       }
     ]
+  },
+  {
+    path:'',redirectTo:'articuloinformativo',pathMatch:'full'
+  },
+  {
+    path:'articuloinformativo',component:UsuariosComponent,
+    children:[
+      {
+        path:'formulario',component:InsertareditarComponent
+      },
+      {
+        path:'ediciones/:id',component:InsertareditarComponent
+      }
+    ]
+  },
+  {
+    path:'',redirectTo:'reporteciudadano',pathMatch:'full'
+  },
+  {
+    path:'reporteciudadano',component:UsuariosComponent,
+    children:[
+      {
+        path:'formulario',component:InsertareditarComponent
+      },
+      {
+        path:'ediciones/:id',component:InsertareditarComponent
+      }
+    ]
   }
-
 
 ];
