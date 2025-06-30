@@ -23,4 +23,16 @@
   </button>
 </mat-menu>
 
+<mat-menu #menuTipoEnfermedad="matMenu">
+  <button mat-menu-item routerLink="/tipoenfermedades/listas">Listar</button>
+  <button mat-menu-item routerLink="/tipoenfermedades/listas/formulario">Registrar</button>
+  <button mat-menu-item routerLink="/tipoenfermedades/listas/buscarPorNombre">Buscar por nombre</button>
+</mat-menu>
+
+<mat-menu #menuEnfermedad="matMenu">
+  <button mat-menu-item routerLink="/enfermedades/listas">Listar</button>
+  <button mat-menu-item routerLink="/enfermedades/listas/formulario">Registrar</button>
+  <button mat-menu-item routerLink="/enfermedades/listas/contar-nivel-riesgo">Contador nivel riesgo</button>
+</mat-menu>
+
 
