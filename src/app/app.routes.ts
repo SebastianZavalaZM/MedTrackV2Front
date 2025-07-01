@@ -7,48 +7,75 @@ import { ForosComponent } from './components/foros/foros.component';
 import { ComentarioforosComponent } from './components/comentarioforos/comentarioforos.component';
 import { BuscarforoComponent } from './components/comentarioforos/buscarforo/buscarforo.component';
 import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/buscarporperiodo.component';
+import { LoginComponent } from './components/login/login.component';
+import { seguridadGuard } from './guard/seguridad.guard';
 
 export const routes: Routes = [
-  {
-    path:'',redirectTo:'usuarios',pathMatch:'full'
+ {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
   },
   {
-    path:'usuarios',component:UsuariosComponent,
-    children:[
-      {
-        path:'formulario',component:InsertareditarComponent
-      },
-      {
-        path:'ediciones/:id',component:InsertareditarComponent
-      }
-    ]
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path: 'Foros', component:ForosComponent,
+    path: 'usuarios',
+    component: UsuariosComponent,
+    canActivate: [seguridadGuard],
     children: [
-      { 
-        path: 'formularioforo', component:InsertareditarforosComponent 
-      },
-      { 
-        path: 'edicionesforo/:id', component:InsertareditarforosComponent
+      {
+        path: 'formulario',
+        component: InsertareditarComponent,
       },
       {
-        path: 'buscarporperiodo', component: BuscarporperiodoComponent
-      }
-    ]
+        path: 'ediciones/:id',
+        component: InsertareditarComponent,
+      },
+    ],
   },
   {
-    path: 'Comentarios', component:ComentarioforosComponent,
+    path: 'Foros',
+    component: ForosComponent,
+    canActivate: [seguridadGuard],
     children: [
-      { 
-      path: 'formulariocomentario', component:InsertareditarcomentarioforosComponent
+      {
+        path: 'formularioforo',
+        component: InsertareditarforosComponent,
       },
-      { 
-      path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent
+      {
+        path: 'edicionesforo/:id',
+        component: InsertareditarforosComponent,
       },
-      { 
-      path: 'busquedatituloforo', component:BuscarforoComponent
-      }
-    ]
-  }
+      {
+        path: 'buscarporperiodo',
+        component: BuscarporperiodoComponent,
+      },
+    ],
+  },
+  {
+    path: 'Comentarios',
+    component: ComentarioforosComponent,
+    canActivate: [seguridadGuard],
+    children: [
+      {
+        path: 'formulariocomentario',
+        component: InsertareditarcomentarioforosComponent,
+      },
+      {
+        path: 'edicionescomentario/:id',
+        component: InsertareditarcomentarioforosComponent,
+      },
+      {
+        path: 'busquedatituloforo',
+        component: BuscarforoComponent,
+      },
+    ],
+  },
+  // Ruta para errores o páginas no encontradas (opcional)
+  {
+    path: '**',
+    redirectTo: 'login',
+  },
 ];
