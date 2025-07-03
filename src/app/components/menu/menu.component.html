@@ -1,11 +1,16 @@
-<mat-toolbar class ="custom-toolbar">
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-verde">
-      <mat-icon>account_circle</mat-icon>
-      Usuarios
-    </button>
-  </div>
-
+<mat-toolbar class="custom-toolbar">
+  <button mat-button [matMenuTriggerFor]="menuServer" class="btn-verde">
+    <mat-icon>account_circle</mat-icon>
+    Usuarios
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuTipoSuscripcion" class="btn-verde">
+    <mat-icon>category</mat-icon>
+    Tipos de Suscripción
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuSoporte" class="btn-verde">
+    <mat-icon>support_agent</mat-icon>
+    Soporte
+  </button>
 </mat-toolbar>
 
 <mat-menu #menuServer="matMenu" class="menu-verde">
@@ -17,10 +22,26 @@
     <mat-icon>how_to_reg</mat-icon>
     <span>Registrar</span>
   </button>
-  <button mat-menu-item routerLink="/usuarios/busquedasproveedor" class="item-verde">
-    <mat-icon>search</mat-icon>
-    <span>Buscar por proveedor</span>
+</mat-menu>
+
+<mat-menu #menuTipoSuscripcion="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/tiposuscripcion/listar" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/tiposuscripcion/insertar" class="item-verde">
+    <mat-icon>add</mat-icon>
+    <span>Insertar</span>
   </button>
 </mat-menu>
 
-
+<mat-menu #menuSoporte="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/soporte/listar" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/soporte/insertar" class="item-verde">
+    <mat-icon>add</mat-icon>
+    <span>Insertar</span>
+  </button>
+</mat-menu>

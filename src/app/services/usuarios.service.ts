@@ -11,7 +11,7 @@ export class UsuariosService {
 
   private listaCambio = new Subject<Usuarios[]>()
 
-  private url = `${base_url}/usuarios`
+  private url = `${base_url}/Usuarios`
 
   constructor(private http: HttpClient) { }
 

@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>Nuevo Tipo de Suscripción</h2>
+    
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="codigo" required>
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El código es obligatorio
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion" required>
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+          La descripción es obligatoria
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaInicio')?.hasError('required')">
+          La fecha de inicio es obligatoria
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaFin')?.hasError('required')">
+          La fecha fin es obligatoria
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+          Guardar
+        </button>
+        <button mat-raised-button color="warn" routerLink="/tiposuscripcion/listar">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>

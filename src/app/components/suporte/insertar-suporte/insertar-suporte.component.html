@@ -1,0 +1,40 @@
+<div class="container">
+    <h2>Nuevo Soporte</h2>
+    
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="titulo" required>
+        <mat-error *ngIf="form.get('titulo')?.hasError('required')">
+          El título es obligatorio
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fecha')?.hasError('required')">
+          La fecha es obligatoria
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion" required rows="4"></textarea>
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+          La descripción es obligatoria
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+          Guardar
+        </button>
+        <button mat-raised-button color="warn" routerLink="/soporte/listar">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
