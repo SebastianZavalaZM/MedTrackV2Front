@@ -6,6 +6,20 @@
     </button>
   </div>
 
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuTipoEnfermedad" class="btn-verde">
+      <mat-icon>account_circle</mat-icon>
+      Tipo de Enfermedad
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuEnfermedad" class="btn-verde">
+      <mat-icon>account_circle</mat-icon>
+      Enfermedades
+    </button>
+  </div>
+
 </mat-toolbar>
 
 <mat-menu #menuServer="matMenu" class="menu-verde">
@@ -16,10 +30,6 @@
   <button mat-menu-item routerLink="/usuarios/formulario" class="item-verde">
     <mat-icon>how_to_reg</mat-icon>
     <span>Registrar</span>
-  </button>
-  <button mat-menu-item routerLink="/usuarios/busquedasproveedor" class="item-verde">
-    <mat-icon>search</mat-icon>
-    <span>Buscar por proveedor</span>
   </button>
 </mat-menu>
 

@@ -13,7 +13,7 @@ export class EnfermedadService {
 
   private listaCambio = new Subject<Enfermedad[]>()
 
-  private url = `${base_url}enfermedades`; 
+  private url = `${base_url}/enfermedades`;
 
   constructor(private http: HttpClient) { }
 
@@ -49,7 +49,7 @@ export class EnfermedadService {
 
 
 
-  
+
 }
 
-  
+

@@ -13,7 +13,7 @@ export class TipoenfermedadService {
 
   private listaCambio = new Subject<TipoEnfermedad[]>()
 
-  private url = `${base_url}tipoenfermedades`; 
+  private url = `${base_url}/tipoenfermedades`;
 
   constructor(private http: HttpClient) { }
 
@@ -48,5 +48,5 @@ export class TipoenfermedadService {
     return this.http.get<TipoEnfermedad[]>(`${this.url}/buscarPorNombre`, { params });
   }
 
-  
+
 }
