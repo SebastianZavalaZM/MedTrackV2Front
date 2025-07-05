@@ -6,6 +6,21 @@
     </button>
   </div>
 
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuTipoEnfermedad" class="btn-verde">
+      <mat-icon>account_circle</mat-icon>
+      Tipo Enfermedad
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuEnfermedad" class="btn-verde">
+      <mat-icon>account_circle</mat-icon>
+      Enfermedad
+    </button>
+  </div>
+  
+
 </mat-toolbar>
 
 <mat-menu #menuServer="matMenu" class="menu-verde">
