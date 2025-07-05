@@ -25,7 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class ListartipoenfermedadComponent implements OnInit {
   dataSource: MatTableDataSource<TipoEnfermedad> = new MatTableDataSource()
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5']
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   constructor(private tS: TipoenfermedadService) { }
 
   ngOnInit(): void {

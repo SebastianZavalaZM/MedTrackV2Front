@@ -32,7 +32,15 @@
         </mat-error>
       </mat-form-field>
       <br>
-      
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="users">
+        <mat-error *ngIf="form.get('users')?.hasError('required')">
+          EL codigo del usario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
       <button mat-raised-button color="primary">Aceptar</button>
       <button mat-raised-button color="warn" routerLink="/tipoenfermedades/listas">
         Cancelar

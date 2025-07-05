@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class BuscarteComponent implements OnInit {
   dataSource: MatTableDataSource<TipoEnfermedad> = new MatTableDataSource()
-  displayedColumns: string[] = ['c1', 'c2', 'c3']
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
   form: FormGroup;
 
   mensaje: string = ""
