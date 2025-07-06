@@ -16,12 +16,12 @@ import { SuporteService } from '../../../services/suporte.service';
 })
 export class ListarSuporteComponent implements OnInit {
   dataSource: MatTableDataSource<Suporte> = new MatTableDataSource();
-  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'usuario', 'acciones']; // Cambiado 'users' por 'usuario'
-  
+  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'usuario', 'acciones'];
+
   constructor(private sS: SuporteService) {}
 
   ngOnInit(): void {
-    this.sS.list().subscribe((data: Suporte[]) => {
+    this.sS.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
   }

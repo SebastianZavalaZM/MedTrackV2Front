@@ -37,6 +37,18 @@
           La fecha fin es obligatoria
         </mat-error>
       </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario" required>
+          <mat-option *ngFor="let usuario of listaUsuarios" [value]="usuario">
+            {{usuario.username}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          El usuario es obligatorio
+        </mat-error>
+      </mat-form-field>
   
       <div class="button-row">
         <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">

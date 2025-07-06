@@ -5,5 +5,5 @@ export class Suporte {
   titulo: string = '';
   fecha: string = '';
   descripcion: string = '';
-  users?: Usuarios;
+  usuario: Usuarios; 
 }

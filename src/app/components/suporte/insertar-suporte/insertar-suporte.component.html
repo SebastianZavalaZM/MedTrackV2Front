@@ -20,6 +20,15 @@
         </mat-error>
       </mat-form-field>
   
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="idUsuario" required>
+          <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUsers">
+            {{u.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Descripción</mat-label>
         <textarea matInput formControlName="descripcion" required rows="4"></textarea>

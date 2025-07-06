@@ -16,12 +16,12 @@ import { TipoSuscripcionService } from '../../../services/tipo-suscripcion.servi
 })
 export class ListarTiposuscripcionComponent implements OnInit {
   dataSource: MatTableDataSource<TipoSuscripcion> = new MatTableDataSource();
-  displayedColumns: string[] = ['codigo', 'descripcion', 'fechaInicio', 'fechaFin', 'usuario', 'acciones']; // Cambiado 'users' por 'usuario'
-  
+  displayedColumns: string[] = ['codigo', 'descripcion', 'fechaInicio', 'fechaFin', 'usuario', 'acciones'];
+
   constructor(private tS: TipoSuscripcionService) {}
 
   ngOnInit(): void {
-    this.tS.list().subscribe((data: TipoSuscripcion[]) => {
+    this.tS.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
   }
