@@ -2,42 +2,57 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Articuloinformativo } from '../models/articuloinformativo';
-import { Subject } from 'rxjs';
-const base_url = environment.base
+import { Subject, Observable } from 'rxjs';
+
+const base_url = environment.base;
+
 @Injectable({
   providedIn: 'root'
 })
 export class ArticuloinformativoService {
 
-  private listaCambio = new Subject<Articuloinformativo[]>()
-  
-    private url = `${base_url}/articuloinformativo`
-  
-    constructor(private http: HttpClient) { }
-  
-    list() {
-      return this.http.get<Articuloinformativo[]>(this.url)
-    }
-    insert(u: Articuloinformativo) {
-      return this.http.post(this.url, u)
-    }
-  
-    setList(listaNueva: Articuloinformativo[]) {
-      this.listaCambio.next(listaNueva)
-    }
-    getList() {
-      return this.listaCambio.asObservable()
-    }
-  
-    listId(id: number) {
-      return this.http.get<Articuloinformativo>(`${this.url}/${id}`)
-    }
-  
-    update(u: Articuloinformativo) {
-      return this.http.put(this.url, u)
-    }
-  
-    deleteA(id:number) {
-      return this.http.delete(`${this.url}/${id}`)
-    }
+  private listaCambio = new Subject<Articuloinformativo[]>();
+  private url = `${base_url}/articuloinformativo`;
+
+  constructor(private http: HttpClient) {}
+
+  list(): Observable<Articuloinformativo[]> {
+    return this.http.get<Articuloinformativo[]>(this.url);
+  }
+
+  insert(a: Articuloinformativo): Observable<any> {
+    return this.http.post(this.url, a);
+  }
+
+  setList(listaNueva: Articuloinformativo[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList(): Observable<Articuloinformativo[]> {
+    return this.listaCambio.asObservable();
+  }
+
+  listId(id: number): Observable<Articuloinformativo> {
+    return this.http.get<Articuloinformativo>(`${this.url}/${id}`);
+  }
+
+  update(a: Articuloinformativo): Observable<any> {
+    return this.http.put(this.url, a);
+  }
+
+  deleteA(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  // 🔍 Buscar por título o contenido
+  buscarPorTituloOContenido(keyword: string): Observable<Articuloinformativo[]> {
+    return this.http.get<Articuloinformativo[]>(`${this.url}/buscartitulo`, {
+      params: { keyword }
+    });
+  }
+
+  // 📋 Listar artículos con reportes
+  listarConReportes(): Observable<Articuloinformativo[]> {
+    return this.http.get<Articuloinformativo[]>(`${this.url}/listarreportes`);
+  }
 }

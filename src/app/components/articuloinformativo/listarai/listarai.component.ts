@@ -19,7 +19,7 @@ import {ArticuloinformativoService} from '../../../services/articuloinformativo.
   templateUrl: './listarai.component.html',
   styleUrl: './listarai.component.css'
 })
-export class ListarusuariosComponent implements OnInit {
+export class ListaraiComponent implements OnInit {
   dataSource: MatTableDataSource<Articuloinformativo> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
   constructor(private aS: ArticuloinformativoService) { }

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="titulo-busqueda">
+    <h1>Buscar Reportes Ciudadanos</h1>
+  </div>
+
+  <div class="form-busqueda">
+    <input [(ngModel)]="cuidad" placeholder="cuidad" class="input-estilo" />
+    <input [(ngModel)]="enfermedad" placeholder="Enfermedad" class="input-estilo" />
+    <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-ovalada" *ngIf="dataSource">
+    <ng-container matColumnDef="cuidad">
+      <th mat-header-cell *matHeaderCellDef>cuidad</th>
+      <td mat-cell *matCellDef="let element">{{element.cuidad}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="enfermedad">
+      <th mat-header-cell *matHeaderCellDef>Enfermedad</th>
+      <td mat-cell *matCellDef="let element">{{element.enfermedad?.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let element">{{element.fecha}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

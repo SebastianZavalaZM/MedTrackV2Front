@@ -1,14 +1,27 @@
-<mat-toolbar class ="custom-toolbar">
+<mat-toolbar class="custom-toolbar">
   <div>
-    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-verde">
+    <button mat-button [matMenuTriggerFor]="menuUsuarios" class="btn-verde">
       <mat-icon>account_circle</mat-icon>
       Usuarios
     </button>
   </div>
 
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuReporteCiudadano" class="btn-verde">
+      <mat-icon>report_problem</mat-icon>
+      Reporte Ciudadano
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuArticuloInformativo" class="btn-verde">
+      <mat-icon>article</mat-icon>
+      Artículo Informativo
+    </button>
+  </div>
 </mat-toolbar>
 
-<mat-menu #menuServer="matMenu" class="menu-verde">
+<mat-menu #menuUsuarios="matMenu" class="menu-verde">
   <button mat-menu-item routerLink="/usuarios" class="item-verde">
     <mat-icon>list</mat-icon>
     <span>Listar</span>
@@ -17,10 +30,38 @@
     <mat-icon>how_to_reg</mat-icon>
     <span>Registrar</span>
   </button>
-  <button mat-menu-item routerLink="/usuarios/busquedasproveedor" class="item-verde">
+</mat-menu>
+
+<mat-menu #menuReporteCiudadano="matMenu">
+  <button mat-menu-item routerLink="/reporteciudadano/listas">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/reporteciudadano/listas/formulario">
+    <mat-icon>add</mat-icon>
+    <span>Registrar</span>
+  </button>
+  <button mat-menu-item routerLink="/reporteciudadano/listas/buscarPorCiudadOEnfermedad">
     <mat-icon>search</mat-icon>
-    <span>Buscar por proveedor</span>
+    <span>Buscar por ciudad o enfermedad</span>
   </button>
 </mat-menu>
 
-
+<mat-menu #menuArticuloInformativo="matMenu">
+  <button mat-menu-item routerLink="/articuloinformativo/listas">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/articuloinformativo/listas/formulario">
+    <mat-icon>add</mat-icon>
+    <span>Registrar</span>
+  </button>
+  <button mat-menu-item routerLink="/articuloinformativo/listas/buscartitulo">
+    <mat-icon>search</mat-icon>
+    <span>Buscar por título o contenido</span>
+  </button>
+  <button mat-menu-item routerLink="/articuloinformativo/listas/conreportes">
+    <mat-icon>list_alt</mat-icon>
+    <span>Artículos con reportes</span>
+  </button>
+</mat-menu>
