@@ -1,4 +1,6 @@
 <mat-toolbar class="custom-toolbar">
+
+  <!-- Botón: Usuarios -->
   <div>
     <button mat-button [matMenuTriggerFor]="menuUsuarios" class="btn-verde">
       <mat-icon>account_circle</mat-icon>
@@ -6,6 +8,7 @@
     </button>
   </div>
 
+  <!-- Botón: Reporte Ciudadano -->
   <div>
     <button mat-button [matMenuTriggerFor]="menuReporteCiudadano" class="btn-verde">
       <mat-icon>report_problem</mat-icon>
@@ -13,14 +16,27 @@
     </button>
   </div>
 
+  <!-- Botón: Artículo Informativo -->
   <div>
     <button mat-button [matMenuTriggerFor]="menuArticuloInformativo" class="btn-verde">
       <mat-icon>article</mat-icon>
       Artículo Informativo
     </button>
   </div>
+
+  <!-- Nuevo Botón: Landing Page -->
+  <div>
+    <a mat-button class="btn-verde"
+       href="https://sites.google.com/view/enfermedades-por-calor/inicio-sesi%C3%B3n?authuser=0"
+       target="_blank" rel="noopener">
+      <mat-icon>launch</mat-icon>
+      Landing Page
+    </a>
+  </div>
+
 </mat-toolbar>
 
+<!-- Menú: Usuarios -->
 <mat-menu #menuUsuarios="matMenu" class="menu-verde">
   <button mat-menu-item routerLink="/usuarios" class="item-verde">
     <mat-icon>list</mat-icon>
@@ -32,6 +48,7 @@
   </button>
 </mat-menu>
 
+<!-- Menú: Reporte Ciudadano -->
 <mat-menu #menuReporteCiudadano="matMenu">
   <button mat-menu-item routerLink="/reporteciudadano/listas">
     <mat-icon>list</mat-icon>
@@ -47,6 +64,7 @@
   </button>
 </mat-menu>
 
+<!-- Menú: Artículo Informativo -->
 <mat-menu #menuArticuloInformativo="matMenu">
   <button mat-menu-item routerLink="/articuloinformativo/listas">
     <mat-icon>list</mat-icon>
@@ -60,7 +78,7 @@
     <mat-icon>search</mat-icon>
     <span>Buscar por título o contenido</span>
   </button>
-  <button mat-menu-item routerLink="/articuloinformativo/listas/conreportes">
+  <button mat-menu-item routerLink="/articuloinformativo/listas/buscarPorCiudadOEnfermedad
     <mat-icon>list_alt</mat-icon>
     <span>Artículos con reportes</span>
   </button>
