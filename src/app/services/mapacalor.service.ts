@@ -16,11 +16,11 @@ export class MapacalorService {
   constructor(private http: HttpClient) { }
 
   list() {
-    return this.http.get<Mapacalor[]>(`${this.url}/listasmapacalor`);
+    return this.http.get<Mapacalor[]>(`${this.url}/listas`);
   }
 
   insert(m: Mapacalor) {
-    return this.http.post(`${this.url}/registramapacalor`, m);
+    return this.http.post(`${this.url}/registra`, m);
   }
 
   setList(listaNueva: Mapacalor[]) {
@@ -38,7 +38,7 @@ export class MapacalorService {
     return this.http.put(this.url, m)
   }
 
-  deleteA(id:number) {
+  deleteM(id:number) {
     return this.http.delete(`${this.url}/${id}`)
   }
 

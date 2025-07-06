@@ -1,0 +1,95 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de Mapas de Calor</h1>
+  </div>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigomc">
+
+        <mat-error *ngIf="form.get('codigomc')?.hasError('required')">
+          El codigo del mapa es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Lat.</mat-label>
+        <input matInput formControlName="latitudmc">
+
+        <mat-error *ngIf="form.get('latitudmc')?.hasError('required')">
+          La latitud es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Lon.</mat-label>
+        <input matInput formControlName="longitudmc">
+
+        <mat-error *ngIf="form.get('longitudmc')?.hasError('required')">
+          La longitud es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Nivel de Riesgo</mat-label>
+        <mat-select formControlName="nivelriesgomc">
+          @for (food of niveles; track food) {
+            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaactualizacionmc">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaactualizacionmc')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Concentración</mat-label>
+        <input matInput formControlName="concentraciondecalormc">
+
+        <mat-error *ngIf="form.get('concentraciondecalormc')?.hasError('required')">
+          El nivel de concentración es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <!-- Name Column
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="users">
+        <mat-error *ngIf="form.get('users')?.hasError('required')">
+          EL codigo del usario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+    -->
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="users">
+          @for (food of listausers; track food) {
+            <mat-option [value]="food.idUsers">{{food.username}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" routerLink="/tipoenfermedades/listas">
+        Cancelar
+      </button>
+
+    </form>
+  </div>
+</div>

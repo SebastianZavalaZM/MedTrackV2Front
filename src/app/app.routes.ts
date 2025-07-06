@@ -7,6 +7,10 @@ import { BuscarteComponent } from './components/tipoenfermedad/buscar/buscar.com
 import { EnfermedadComponent } from './components/enfermedad/enfermedad.component';
 import { InsertareditareComponent } from './components/enfermedad/insertareditar/insertareditar.component';
 import { ContadornvlriesgoComponent } from './components/enfermedad/contadornvlriesgo/contadornvlriesgo.component';
+import {MapacalorComponent} from './components/mapacalor/mapacalor.component';
+import {InsertareditarmcComponent} from './components/mapacalor/insertareditarmc/insertareditarmc.component';
+import {NotificacionComponent} from './components/notificacion/notificacion.component';
+import {InsertareditarnotComponent} from './components/notificacion/insertareditarnot/insertareditarnot.component';
 
 
 export const routes: Routes = [
@@ -36,7 +40,7 @@ export const routes: Routes = [
       {
         path:'buscarPorNombre',component:BuscarteComponent
       }
-   
+
     ]
   },
   {
@@ -53,8 +57,29 @@ export const routes: Routes = [
       }
 
     ]
-
   },
+  {
+    path: 'mapacalor/listas', component: MapacalorComponent,
+    children:[
+      {
+        path:'formulario',component:InsertareditarmcComponent,
+      },
+      {
+        path:'ediciones/:id',component:InsertareditarmcComponent
+      }
+    ]
+  },
+  {
+    path: 'notification/listas', component: NotificacionComponent,
+    children:[
+      {
+        path:'formulario',component:InsertareditarnotComponent,
+      },
+      {
+        path:'ediciones/:id',component:InsertareditarnotComponent
+      }
+    ]
+  }
 
 
 

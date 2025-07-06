@@ -1,6 +1,6 @@
 <mat-toolbar class ="custom-toolbar">
   <div>
-    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-verde">
+    <button mat-button [matMenuTriggerFor]="menuUsuarios" class="btn-verde">
       <mat-icon>account_circle</mat-icon>
       Usuarios
     </button>
@@ -20,9 +20,23 @@
     </button>
   </div>
 
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuMapa" class="btn-verde">
+      <mat-icon>map icon</mat-icon>
+      Mapas de Calor
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuNotificaciones" class="btn-verde">
+      <mat-icon>more</mat-icon>
+      Notificaciones
+    </button>
+  </div>
+
 </mat-toolbar>
 
-<mat-menu #menuServer="matMenu" class="menu-verde">
+<mat-menu #menuUsuarios="matMenu" class="menu-verde">
   <button mat-menu-item routerLink="/usuarios" class="item-verde">
     <mat-icon>list</mat-icon>
     <span>Listar</span>
@@ -43,6 +57,28 @@
   <button mat-menu-item routerLink="/enfermedades/listas">Listar</button>
   <button mat-menu-item routerLink="/enfermedades/listas/formulario">Registrar</button>
   <button mat-menu-item routerLink="/enfermedades/listas/contar-nivel-riesgo">Contador nivel riesgo</button>
+</mat-menu>
+
+<mat-menu #menuMapa="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/mapacalor/listas" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/mapacalor/listas/formulario" class="item-verde">
+    <mat-icon>local_parking</mat-icon>
+    <span>Registrar</span>
+  </button>
+</mat-menu>
+
+<mat-menu #menuNotificaciones="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/notification/listas" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/notification/listas/formulario" class="item-verde">
+    <mat-icon>power</mat-icon>
+    <span>Registrar</span>
+  </button>
 </mat-menu>
 
 

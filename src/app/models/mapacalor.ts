@@ -7,5 +7,5 @@ export class Mapacalor{
   nivelriesgo :string=""
   fechaactualizacion :Date=new Date()
   concentraciondecalor :number=0
-  usuarios:Usuarios = new Usuarios()
+  users:Usuarios = new Usuarios()
 }

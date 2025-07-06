@@ -1,1 +1,77 @@
-<p>listarmapacalor works!</p>
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Lista de mapas de calor</h1>
+  </div>
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-ovalada">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.idmapacalor}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef> Lat. </th>
+        <td mat-cell *matCellDef="let element"> {{element.latitud}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef> Lon. </th>
+        <td mat-cell *matCellDef="let element"> {{element.longitud}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef> Nivel de Riesgo </th>
+        <td mat-cell *matCellDef="let element"> {{element.nivelriesgo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechaactualizacion|date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef> Concentracion de Calor </th>
+        <td mat-cell *matCellDef="let element"> {{element.concentraciondecalor}} </td>
+      </ng-container>
+
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.users.username}} </td>
+      </ng-container>
+
+
+      <!-- Update Column -->
+      <ng-container matColumnDef="c8">
+        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton [routerLink]="['ediciones',element.idmapacalor]"
+          >
+            <mat-icon style="">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c9">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton
+                  (click)="eliminar(element.idmapacalor)">
+            <mat-icon style="">delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+  </div>
+</div>

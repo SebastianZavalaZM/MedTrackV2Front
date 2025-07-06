@@ -1,0 +1,84 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de Notificaciones</h1>
+  </div>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigonot">
+
+        <mat-error *ngIf="form.get('codigonot')?.hasError('required')">
+          El codigo de la notificacion es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Mensaje</mat-label>
+        <input matInput formControlName="mensajenot">
+
+        <mat-error *ngIf="form.get('mensajenot')?.hasError('required')">
+          El mensaje es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Fecha de Envío</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaenvionot">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaenvionot')?.hasError('required')">
+          La fecha es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="tiponot">
+          @for (food of tiposnot; track food) {
+            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Origen</mat-label>
+        <mat-select formControlName="origennot">
+          @for (food of origenes; track food) {
+            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <!-- Name Column
+      <mat-form-field>
+        <mat-label>Mapa asignado</mat-label>
+        <input matInput formControlName="mapacalor">
+        <mat-error *ngIf="form.get('mapacalor')?.hasError('required')">
+          EL codigo del mapa es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+    -->
+      <mat-form-field>
+        <mat-label>Mapa asignado</mat-label>
+        <mat-select formControlName="mapacalor">
+          @for (food of listamapas; track food) {
+            <mat-option [value]="food.idmapacalor">{{food.idmapacalor}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" routerLink="/tipoenfermedades/listas">
+        Cancelar
+      </button>
+
+    </form>
+  </div>
+</div>
