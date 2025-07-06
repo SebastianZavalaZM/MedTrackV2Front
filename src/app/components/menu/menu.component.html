@@ -38,16 +38,16 @@
   </button>
 </mat-menu>
 
-<mat-menu #menuTipoEnfermedad="matMenu">
-  <button mat-menu-item routerLink="/tipoenfermedades/listas">Listar</button>
-  <button mat-menu-item routerLink="/tipoenfermedades/listas/formulario">Registrar</button>
-  <button mat-menu-item routerLink="/tipoenfermedades/listas/buscarPorNombre">Buscar por nombre</button>
+<mat-menu #menuTipoEnfermedad="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/tipoenfermedades/listas" class="item-verde"><mat-icon>list</mat-icon><span>Listar</span></button>
+  <button mat-menu-item routerLink="/tipoenfermedades/listas/formulario" class="item-verde"><mat-icon>how_to_reg</mat-icon><span>Registrar</span></button>
+  <button mat-menu-item routerLink="/tipoenfermedades/listas/buscarPorNombre" class="item-verde"><mat-icon>search</mat-icon><span>Buscar por nombre</span></button>
 </mat-menu>
 
-<mat-menu #menuEnfermedad="matMenu">
-  <button mat-menu-item routerLink="/enfermedades/listas">Listar</button>
-  <button mat-menu-item routerLink="/enfermedades/listas/formulario">Registrar</button>
-  <button mat-menu-item routerLink="/enfermedades/listas/contar-nivel-riesgo">Contador nivel riesgo</button>
+<mat-menu #menuEnfermedad="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/enfermedades/listas" class="item-verde"><mat-icon>list</mat-icon><span>Listar</span></button>
+  <button mat-menu-item routerLink="/enfermedades/listas/formulario"class="item-verde"><mat-icon>how_to_reg</mat-icon><span>Registrar</span></button>
+  <button mat-menu-item routerLink="/enfermedades/listas/contar-nivel-riesgo" class="item-verde"><mat-icon>dangerous</mat-icon><span>Contador nivel riesgo</span></button>
 </mat-menu>
 
 

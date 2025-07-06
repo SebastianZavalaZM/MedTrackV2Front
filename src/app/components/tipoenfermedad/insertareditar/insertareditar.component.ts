@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Usuarios } from '../../../models/Usuarios';
+import { UsuariosService } from '../../../services/usuarios.service';
 
 
 @Component({
@@ -37,10 +38,13 @@ export class InsertareditarteComponent implements OnInit {
   id: number = 0
   edicion: boolean = false
 
+  listausers: Usuarios[] = []
+
   constructor(private sS: TipoenfermedadService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uS: UsuariosService
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +64,9 @@ export class InsertareditarteComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       users: ['', Validators.required]
+    })
+     this.uS.list().subscribe(data => {
+      this.listausers = data;
     })
   }
 
