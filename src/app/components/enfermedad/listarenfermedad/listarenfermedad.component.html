@@ -27,13 +27,8 @@
     <th mat-header-cell *matHeaderCellDef> Nivel de riesgo </th>
     <td mat-cell *matCellDef="let element"> {{element.nivelRiesgo}} </td>
   </ng-container>
-  <!-- ID TIPO ENFERMEDAD -->
-  <ng-container matColumnDef="c5">
-    <th mat-header-cell *matHeaderCellDef> Tipo enfermedad </th>
-    <td mat-cell *matCellDef="let element"> {{element.tipoEnfermedad.idTipo}} </td>
-  </ng-container>
   <!-- ACTUALIZAR -->
-      <ng-container matColumnDef="c6">
+      <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef> Actualizar </th>
         <td mat-cell *matCellDef="let element">
           <button matButton [routerLink]="['ediciones',element.idEnfermedad]"
@@ -44,7 +39,7 @@
       </ng-container>
 
       <!-- ELIMINAR -->
-      <ng-container matColumnDef="c7">
+      <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef> Eliminar </th>
         <td mat-cell *matCellDef="let element">
           <button matButton

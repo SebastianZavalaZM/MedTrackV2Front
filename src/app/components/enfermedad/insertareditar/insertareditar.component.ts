@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { TipoEnfermedad } from '../../../models/tipoenfermedad';
+import { TipoenfermedadService } from '../../../services/tipoenfermedad.service';
 
 
 @Component({
@@ -37,6 +38,8 @@ export class InsertareditareComponent implements OnInit {
   id: number = 0
   edicion: boolean = false
 
+  listatenfermedad: TipoEnfermedad[] = []
+
   nivelr:{value:string;viewValue:string}[]=[
     {value:'Alto',viewValue:'Alto'},
     {value:'Medio',viewValue:'Medio'},
@@ -50,7 +53,8 @@ export class InsertareditareComponent implements OnInit {
   constructor(private eS: EnfermedadService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uS: TipoenfermedadService
   ) { }
 
   ngOnInit(): void {
@@ -71,6 +75,9 @@ export class InsertareditareComponent implements OnInit {
       sintomas: ['', Validators.required],
       nivelRiesgo: ['', Validators.required],
       tipoEnfermedad: ['', Validators.required]
+    })
+     this.uS.list().subscribe(data => {
+      this.listatenfermedad = data;
     })
   }
 

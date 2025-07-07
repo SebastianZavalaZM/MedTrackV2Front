@@ -51,11 +51,12 @@
 
       <br>
       <mat-form-field>
-        <mat-label>Tipo Enfermedad</mat-label>
-        <input matInput formControlName="tipoEnfermedad">
-        <mat-error *ngIf="form.get('tipoEnfermedad')?.hasError('required')">
-          EL codigo del tipo de enfermedad es obligatorio!!
-        </mat-error>
+        <mat-label>Tipo enfermedad</mat-label>
+        <mat-select formControlName="tipoEnfermedad">
+          @for (food of listatenfermedad; track food) {
+            <mat-option [value]="food.idTipo">{{food.nombre}}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
       <br>
 
