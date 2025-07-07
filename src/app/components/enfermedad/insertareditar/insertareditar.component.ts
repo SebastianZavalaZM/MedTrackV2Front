@@ -10,6 +10,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { TipoEnfermedad } from '../../../models/tipoenfermedad';
+import { TipoenfermedadService } from '../../../services/tipoenfermedad.service';
 
 
 @Component({
@@ -36,10 +38,23 @@ export class InsertareditareComponent implements OnInit {
   id: number = 0
   edicion: boolean = false
 
+  listatenfermedad: TipoEnfermedad[] = []
+
+  nivelr:{value:string;viewValue:string}[]=[
+    {value:'Alto',viewValue:'Alto'},
+    {value:'Medio',viewValue:'Medio'},
+    {value:'Bajo',viewValue:'Bajo'}
+  ]
+
+
+
+
+
   constructor(private eS: EnfermedadService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uS: TipoenfermedadService
   ) { }
 
   ngOnInit(): void {
@@ -59,6 +74,10 @@ export class InsertareditareComponent implements OnInit {
       name: ['', Validators.required],
       sintomas: ['', Validators.required],
       nivelRiesgo: ['', Validators.required],
+      tipoEnfermedad: ['', Validators.required]
+    })
+     this.uS.list().subscribe(data => {
+      this.listatenfermedad = data;
     })
   }
 
@@ -68,6 +87,7 @@ export class InsertareditareComponent implements OnInit {
       this.enfermedad.nombre = this.form.value.name
       this.enfermedad.sintomas = this.form.value.sintomas
       this.enfermedad.nivelRiesgo = this.form.value.nivelRiesgo
+      this.enfermedad.tipoEnfermedad = { idTipo: this.form.value.tipoEnfermedad } as TipoEnfermedad;
 
 
       if (this.edicion) {
@@ -95,7 +115,8 @@ export class InsertareditareComponent implements OnInit {
           codigo: new FormControl(data.idEnfermedad),
           name: new FormControl(data.nombre),
           sintomas: new FormControl(data.sintomas),
-          nivelRiesgo: new FormControl(data.nivelRiesgo)
+          nivelRiesgo: new FormControl(data.nivelRiesgo),
+          tipoEnfermedad: new FormControl(data.tipoEnfermedad?.idTipo)
           
         })
       })

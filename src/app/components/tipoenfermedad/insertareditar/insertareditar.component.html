@@ -15,7 +15,7 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Nombre enfermedad</mat-label>
+        <mat-label>Tipo de enfermedad</mat-label>
         <input matInput formControlName="name">
 
         <mat-error *ngIf="form.get('name')?.hasError('required')">
@@ -32,7 +32,24 @@
         </mat-error>
       </mat-form-field>
       <br>
-      
+
+
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="users">
+          @for (food of listausers; track food) {
+            <mat-option [value]="food.idUsers">{{food.username}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+
+
+
+
+      <br>
+
       <button mat-raised-button color="primary">Aceptar</button>
       <button mat-raised-button color="warn" routerLink="/tipoenfermedades/listas">
         Cancelar

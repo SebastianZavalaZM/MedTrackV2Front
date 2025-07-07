@@ -32,15 +32,34 @@
         </mat-error>
       </mat-form-field>
       <br>
-      <mat-form-field>
-        <mat-label>Nivel de riesgo</mat-label>
-        <input matInput formControlName="nivelRiesgo">
 
-        <mat-error *ngIf="form.get('nivelRiesgo')?.hasError('required')">
-          El nivel de riesgo de la enfermedad es obligatorio!!
-        </mat-error>
+
+      <mat-form-field>
+        <mat-label>Nivel de Riesgo</mat-label>
+        <mat-select formControlName="nivelRiesgo">
+          @for (food of nivelr; track food) {
+            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+
+
+
+
+
+
+      <br>
+      <mat-form-field>
+        <mat-label>Tipo enfermedad</mat-label>
+        <mat-select formControlName="tipoEnfermedad">
+          @for (food of listatenfermedad; track food) {
+            <mat-option [value]="food.idTipo">{{food.nombre}}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
       <br>
+
       
       <button mat-raised-button color="primary">Aceptar</button>
       <button mat-raised-button color="warn" routerLink="/enfermedades/listas">
