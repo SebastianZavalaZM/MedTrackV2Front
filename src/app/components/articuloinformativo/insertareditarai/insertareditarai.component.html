@@ -1,0 +1,62 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de Articulo Informativo</h1>
+  </div>
+  <div style="text-align: center;">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo">
+
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El codigo del articulo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="titulo">
+
+        <mat-error *ngIf="form.get('titulo')?.hasError('required')">
+          El titulo del articulo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Contenido</mat-label>
+        <input matInput formControlName="contenido">
+
+        <mat-error *ngIf="form.get('contenido')?.hasError('required')">
+          El contenido del articulo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Fecha de Publicación</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaPublicacion">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error *ngIf="form.get('fechaPublicacion')?.hasError('required')">
+          La fecha de publicación es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fuente</mat-label>
+        <input matInput formControlName="fuente">
+
+        <mat-error *ngIf="form.get('fuente')?.hasError('required')">
+          La fuente del articulo es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      
+      <button mat-raised-button color="primary">Aceptar</button>
+      <button mat-raised-button color="warn" routerLink="/articuloinformativo/listas">
+        Cancelar
+      </button>
+
+    </form>
+  </div>
+</div>

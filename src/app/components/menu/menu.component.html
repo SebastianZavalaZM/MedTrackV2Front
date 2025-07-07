@@ -47,6 +47,32 @@
     </button>
   </div>
 
+  <!-- Botón: Reporte Ciudadano -->
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuReporteCiudadano" class="btn-verde">
+      <mat-icon>report_problem</mat-icon>
+      Reporte Ciudadano
+    </button>
+  </div>
+
+  <!-- Botón: Artículo Informativo -->
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuArticuloInformativo" class="btn-verde">
+      <mat-icon>article</mat-icon>
+      Artículo Informativo
+    </button>
+  </div>
+
+  <!-- Nuevo Botón: Landing Page -->
+  <div>
+    <a mat-button class="btn-verde"
+       href="https://sites.google.com/view/enfermedades-por-calor/inicio-sesi%C3%B3n?authuser=0"
+       target="_blank" rel="noopener">
+      <mat-icon>launch</mat-icon>
+      Landing Page
+    </a>
+  </div>
+
 
 </mat-toolbar>
 
@@ -58,10 +84,6 @@
   <button mat-menu-item routerLink="/usuarios/formulario" class="item-verde">
     <mat-icon>how_to_reg</mat-icon>
     <span>Registrar</span>
-  </button>
-  <button mat-menu-item routerLink="/usuarios/busquedasproveedor" class="item-verde">
-    <mat-icon>search</mat-icon>
-    <span>Buscar por proveedor</span>
   </button>
 </mat-menu>
 
@@ -120,4 +142,44 @@
     <span>Insertar</span>
   </button>
 </mat-menu>
+
+<!-- Menú: Reporte Ciudadano -->
+<mat-menu #menuReporteCiudadano="matMenu">
+  <button mat-menu-item routerLink="/reporteciudadano/listas">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/reporteciudadano/listas/formulario">
+    <mat-icon>add</mat-icon>
+    <span>Registrar</span>
+  </button>
+  <button mat-menu-item routerLink="/reporteciudadano/listas/buscarPorCiudadOEnfermedad">
+    <mat-icon>search</mat-icon>
+    <span>Buscar por ciudad o enfermedad</span>
+  </button>
+</mat-menu>
+
+<!-- Menú: Artículo Informativo -->
+<mat-menu #menuArticuloInformativo="matMenu">
+  <button mat-menu-item routerLink="/articuloinformativo/listas">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/articuloinformativo/listas/formulario">
+    <mat-icon>add</mat-icon>
+    <span>Registrar</span>
+  </button>
+  <button mat-menu-item routerLink="/articuloinformativo/listas/buscartitulo">
+    <mat-icon>search</mat-icon>
+    <span>Buscar por título o contenido</span>
+  </button>
+  <button mat-menu-item routerLink="/articuloinformativo/listas/listarreportes">
+    <mat-icon>list_alt</mat-icon>
+    <span>Artículos con reportes</span>
+  </button>
+</mat-menu>
+
+
+
+
 
