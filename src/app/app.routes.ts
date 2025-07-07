@@ -22,6 +22,7 @@ export const routes: Routes = [
     children: [
       { path: 'listar', component: ListarTiposuscripcionComponent },
       { path: 'insertar', component: InsertarTiposuscripcionComponent },
+      { path: 'editar/:id', component: InsertarTiposuscripcionComponent },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
     ]
   },
@@ -30,6 +31,7 @@ export const routes: Routes = [
     children: [
       { path: 'listar', component: ListarSuporteComponent },
       { path: 'insertar', component: InsertarSuporteComponent },
+      { path: 'editar/:id', component: InsertarSuporteComponent },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
     ]
   }

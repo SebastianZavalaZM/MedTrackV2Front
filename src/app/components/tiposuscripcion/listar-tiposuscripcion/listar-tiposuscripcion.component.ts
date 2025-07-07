@@ -24,5 +24,20 @@ export class ListarTiposuscripcionComponent implements OnInit {
     this.tS.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
+    this.tS.getList().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+  }
+
+  eliminar(id: number): void {
+    if (id && id > 0) {
+      this.tS.delete(id).subscribe(() => {
+        this.tS.list().subscribe(data => {
+          this.tS.setList(data);
+        });
+      });
+    } else {
+      console.error('ID no válido para eliminar:', id);
+    }
   }
 }

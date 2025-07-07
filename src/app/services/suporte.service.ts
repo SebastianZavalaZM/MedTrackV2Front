@@ -14,11 +14,23 @@ export class SuporteService {
   constructor(private http: HttpClient) {}
 
   list(): Observable<Suporte[]> {
-    return this.http.get<Suporte[]>(`${this.url}/listas`); 
+    return this.http.get<Suporte[]>(`${this.url}/listas`);
   }
 
   insert(suporte: Suporte): Observable<void> {
-    return this.http.post<void>(`${this.url}/registra`, suporte);
+    return this.http.post<void>(`${this.url}/registra`, suporte); 
+  }
+
+  listId(id: number): Observable<Suporte> {
+    return this.http.get<Suporte>(`${this.url}/${id}`);
+  }
+
+  update(suporte: Suporte): Observable<void> {
+    return this.http.put<void>(this.url, suporte); 
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`); 
   }
 
   setList(listaNueva: Suporte[]) {

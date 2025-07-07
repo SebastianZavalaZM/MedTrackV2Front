@@ -10,7 +10,7 @@ import { SuporteService } from '../../../services/suporte.service';
 @Component({
   selector: 'app-listar-suporte',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [CommonModule, MatTableModule, MatButtonModule, RouterLink, MatIconModule],
   templateUrl: './listar-suporte.component.html',
   styleUrls: ['./listar-suporte.component.css']
 })
@@ -21,8 +21,20 @@ export class ListarSuporteComponent implements OnInit {
   constructor(private sS: SuporteService) {}
 
   ngOnInit(): void {
-    this.sS.list().subscribe(data => {
+    this.cargarDatos();
+  }
+
+  cargarDatos(): void {
+    this.sS.list().subscribe((data: Suporte[]) => {
       this.dataSource = new MatTableDataSource(data);
     });
+  }
+
+  eliminar(id: number): void {
+    if (id && confirm('¿Eliminar este soporte?')) {
+      this.sS.delete(id).subscribe(() => {
+        this.cargarDatos();
+      });
+    }
   }
 }
