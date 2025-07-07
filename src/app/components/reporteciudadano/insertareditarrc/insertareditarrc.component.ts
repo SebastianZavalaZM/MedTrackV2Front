@@ -55,7 +55,7 @@ export class InsertareditarrcComponent implements OnInit {
     this.form = this.formBuilder.group({
       codigo: [''],
       fechaReporte: [new Date(), Validators.required],
-      ciudad: ['', Validators.required]
+      cuidad: ['', Validators.required]
     })
   }
 
@@ -63,7 +63,7 @@ export class InsertareditarrcComponent implements OnInit {
     if (this.form.valid) {
       this.reporteciudadano.idReporte = this.form.value.codigo;
       this.reporteciudadano.fechaReporte = this.form.value.fechaReporte;
-      this.reporteciudadano.ciudad = this.form.value.ciudad;
+      this.reporteciudadano.cuidad = this.form.value.cuidad;
 
 
       if (this.edicion) {
@@ -90,7 +90,7 @@ export class InsertareditarrcComponent implements OnInit {
         this.form = new FormGroup({
           id: new FormControl(data.idReporte),
           fechaReporte: new FormControl(data.fechaReporte),
-          ciudad: new FormControl(data.ciudad),
+          cuidad: new FormControl(data.cuidad),
 
         })
       })

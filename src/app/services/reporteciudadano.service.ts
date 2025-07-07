@@ -45,10 +45,10 @@ export class ReporteciudadanoService {
   }
 
   // 🔍 Buscar por ciudad o enfermedad (según controller)
-  buscarPorCiudadOEnfermedad(ciudad: string, enfermedad: string): Observable<Reporteciudadano[]> {
+  buscarPorCiudadOEnfermedad(cuidad: string, enfermedad: string): Observable<Reporteciudadano[]> {
     return this.http.get<Reporteciudadano[]>(`${this.url}/buscarPorCiudadOEnfermedad`, {
       params: {
-        ciudad: ciudad, // cuidado: el param en backend es "ciudad"
+        cuidad: cuidad, // cuidad: el param en backend es "cuidad"
         enfermedad: enfermedad
       }
     });
