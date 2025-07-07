@@ -7,8 +7,6 @@ import { ForosComponent } from './components/foros/foros.component';
 import { ComentarioforosComponent } from './components/comentarioforos/comentarioforos.component';
 import { BuscarforoComponent } from './components/comentarioforos/buscarforo/buscarforo.component';
 import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/buscarporperiodo.component';
-import { LoginComponent } from './components/login/login.component';
-import { seguridadGuard } from './guard/seguridad.guard';
 
 export const routes: Routes = [
  {
@@ -44,15 +42,13 @@ export const routes: Routes = [
         path: 'formularioforo',
         component: InsertareditarforosComponent,
       },
-      {
-        path: 'edicionesforo/:id',
-        component: InsertareditarforosComponent,
+      { 
+        path: 'edicionesforo/:id', component:InsertareditarforosComponent
       },
       {
-        path: 'buscarporperiodo',
-        component: BuscarporperiodoComponent,
-      },
-    ],
+        path: 'buscarporperiodo', component: BuscarporperiodoComponent
+      }
+    ]
   },
   {
     path: 'Comentarios',

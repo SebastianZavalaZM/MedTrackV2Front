@@ -43,7 +43,7 @@ export class ForosService {
     return this.http.delete(`${this.url}/${id}`)
   }
 
-  searchDateRange(fechaInicio: string, fechaFin: string) {
+  buscarPorPeriodo(fechaInicio: string, fechaFin: string) {
     return this.http.get<Foros[]>(`${this.url}/ListarPorPeriodo`, {
       params: {
         fechaInicio: fechaInicio,
