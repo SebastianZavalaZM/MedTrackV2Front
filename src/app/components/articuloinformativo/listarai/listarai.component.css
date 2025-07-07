@@ -39,7 +39,7 @@ table.mat-table {
   color: white;
   font-weight: bold;
   font-size: 1rem;
-  border-bottom: 2px solid #43cea2;
+  border-bottom: 2px solid #16162b;
   text-align: center;
 }
 
@@ -56,18 +56,18 @@ table.mat-table {
 }
 
 button[matButton] {
-  background: linear-gradient(135deg, #2f8040, #0d240b);
+  background: linear-gradient(135deg, #0e1b55, #0d240b);
   color: white;
   border-radius: 8px;
   padding: 4px;
   margin: 0 4px;
-  box-shadow: 0 2px 6px rgba(67, 206, 162, 0.3);
+  box-shadow: 0 2px 6px rgba(8, 13, 41, 0.3);
   transition: all 0.2s ease-in-out;
   border: none; /* <-- QUITA BORDE */
 }
 
 button[matButton]:hover {
-  background: linear-gradient(135deg, #135e19, #43cea2);
+  background: linear-gradient(135deg, #1b0c3d, #141e57);
   transform: scale(1.1);
 }
 

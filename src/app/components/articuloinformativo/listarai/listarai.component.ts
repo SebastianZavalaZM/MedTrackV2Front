@@ -6,6 +6,7 @@ import {RouterLink} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {Articuloinformativo} from '../../../models/articuloinformativo';
 import {ArticuloinformativoService} from '../../../services/articuloinformativo.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-listarai',
@@ -14,14 +15,15 @@ import {ArticuloinformativoService} from '../../../services/articuloinformativo.
     CommonModule,
     MatButtonModule,
     RouterLink,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   templateUrl: './listarai.component.html',
   styleUrl: './listarai.component.css'
 })
 export class ListaraiComponent implements OnInit {
-  dataSource: MatTableDataSource<Articuloinformativo> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  dataSource: MatTableDataSource<Articuloinformativo> = new MatTableDataSource()
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
   constructor(private aS: ArticuloinformativoService) { }
 
   ngOnInit(): void {
