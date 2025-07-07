@@ -74,12 +74,12 @@ export const routes: Routes = [
   },
   {
     path: 'notification/listas', component: NotificacionComponent,
-    children:[
+    children: [
       {
-        path:'formulario',component:InsertareditarnotComponent,
+        path: 'formulario', component: InsertareditarnotComponent,
       },
       {
-        path:'ediciones/:id',component:InsertareditarnotComponent
+        path: 'ediciones/:id', component: InsertareditarnotComponent
       }
     ]
   },
