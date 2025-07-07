@@ -12,7 +12,7 @@ const base_url = environment.base;
 export class ArticuloinformativoService {
 
   private listaCambio = new Subject<Articuloinformativo[]>();
-  private url = `${base_url}/articuloinformativo/listas`;
+  private url = `${base_url}/articuloinformativo`;
 
   constructor(private http: HttpClient) {}
 

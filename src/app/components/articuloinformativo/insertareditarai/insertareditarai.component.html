@@ -3,12 +3,12 @@
     <h1>Registro de Articulo Informativo</h1>
   </div>
   <div style="text-align: center;">
-    <form [formGroup]="form" (submit)="aceptar()">
+<form [formGroup]="form" (ngSubmit)="aceptar()">
       <mat-form-field *ngIf="edicion">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo">
+        <input matInput formControlName="idArticulo">
 
-        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+        <mat-error *ngIf="form.get('idArticulo')?.hasError('required')">
           El codigo del articulo es obligatorio!!
         </mat-error>
       </mat-form-field>
@@ -52,11 +52,8 @@
       </mat-form-field>
       <br>
       
-      <button mat-raised-button color="primary">Aceptar</button>
-      <button mat-raised-button color="warn" routerLink="/articuloinformativo/listas">
-        Cancelar
-      </button>
-
+        <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button mat-raised-button color="warn" routerLink="/articuloinformativo/listas">Cancelar</button>
     </form>
   </div>
 </div>

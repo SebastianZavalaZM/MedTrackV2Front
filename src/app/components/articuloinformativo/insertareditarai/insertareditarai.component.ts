@@ -55,7 +55,7 @@ export class InsertareditaraiComponent implements OnInit {
 
 
     this.form = this.formBuilder.group({
-      codigo: [''],
+      idArticulo: [''],
       titulo: ['', Validators.required],
       contenido: ['', Validators.required],
       fechaPublicacion: [new Date(), Validators.required],
@@ -65,7 +65,7 @@ export class InsertareditaraiComponent implements OnInit {
 
   aceptar() {
     if (this.form.valid) {
-      this.articulo.idArticulo = this.form.value.codigo
+      this.articulo.idArticulo = this.form.value.idArticulo
       this.articulo.titulo = this.form.value.titulo
       this.articulo.contenido = this.form.value.contenido
       this.articulo.fechaPublicacion = this.form.value.fechaPublicacion
@@ -94,7 +94,7 @@ export class InsertareditaraiComponent implements OnInit {
     if (this.edicion) {
       this.aS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          codigo: new FormControl(data.idArticulo),
+          idArticulo: new FormControl(data.idArticulo),
           titulo: new FormControl(data.titulo),
           contenido: new FormControl(data.contenido),
           fechaPublicacion: new FormControl(data.fechaPublicacion),
