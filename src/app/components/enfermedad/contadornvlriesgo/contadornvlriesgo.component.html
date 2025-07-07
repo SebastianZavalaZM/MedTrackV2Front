@@ -1,24 +1,47 @@
 <div class="container">
-  <div style="text-align: center;margin: 5%;">
-    <h1>Contador por nivel de riesgo</h1>
+  <div class="title-container">
+    <h1>Contador por Nivel de Riesgo</h1>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-ovalada" *ngIf="dataSource">
 
+  <!-- Tabla -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-ovalada" *ngIf="dataSource.data.length > 0">
 
+    <!-- Nivel de Riesgo -->
     <ng-container matColumnDef="nivelRiesgo">
-  <th mat-header-cell *matHeaderCellDef>
-    Nivel de riesgo
-    <mat-icon style="vertical-align: middle; margin-left: 6px; color: #d21919;">dangerous</mat-icon>
-  </th>
-  <td mat-cell *matCellDef="let element"> {{element.nivelRiesgo}} </td>
-</ng-container>
-
-
-    <ng-container matColumnDef="cantidad">
-      <th mat-header-cell *matHeaderCellDef> Cantidad de enfermedades</th>
-      <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+      <th mat-header-cell *matHeaderCellDef>
+        Nivel de Riesgo
+        <mat-icon class="icon-alert">dangerous</mat-icon>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{ element.nivelRiesgo }} </td>
     </ng-container>
+
+    <!-- Cantidad -->
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef> Cantidad de Enfermedades </th>
+      <td mat-cell *matCellDef="let element"> {{ element.cantidad }} </td>
+    </ng-container>
+
+    <!-- Header y filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <p *ngIf="dataSource.data.length === 0" class="no-data">
+    No hay datos disponibles.
+  </p>
+
+  <!-- Botón y gráfico -->
+  <div *ngIf="isBrowser" class="chart-section">
+    <button mat-raised-button color="primary" (click)="mostrarGrafico = !mostrarGrafico" style="margin-top: 24px;">
+      {{ mostrarGrafico ? 'Ocultar Gráfico' : 'Ver Gráfico' }}
+    </button>
+
+<div *ngIf="mostrarGrafico" style="margin-top: 20px;">
+  <div style="max-width: 350px; margin: 0 auto;">
+    <canvas baseChart
+      [data]="pieChartData"
+      [type]="pieChartType"
+      [options]="pieChartOptions">
+    </canvas>
+  </div>
 </div>

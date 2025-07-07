@@ -56,9 +56,6 @@ export class InsertareditarteComponent implements OnInit {
       this.init()
     }
     )
-
-
-
     this.form = this.formBuilder.group({
       codigo: [''],
       name: ['', Validators.required],
@@ -69,7 +66,6 @@ export class InsertareditarteComponent implements OnInit {
       this.listausers = data;
     })
   }
-
   aceptar() {
     if (this.form.valid) {
       this.tipoenfermedad.idTipo = this.form.value.codigo

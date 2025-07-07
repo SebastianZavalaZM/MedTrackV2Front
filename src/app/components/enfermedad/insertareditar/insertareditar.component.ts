@@ -45,11 +45,6 @@ export class InsertareditareComponent implements OnInit {
     {value:'Medio',viewValue:'Medio'},
     {value:'Bajo',viewValue:'Bajo'}
   ]
-
-
-
-
-
   constructor(private eS: EnfermedadService,
     private router: Router,
     private formBuilder: FormBuilder,
@@ -66,9 +61,6 @@ export class InsertareditareComponent implements OnInit {
       this.init()
     }
     )
-
-
-
     this.form = this.formBuilder.group({
       codigo: [''],
       name: ['', Validators.required],
@@ -80,7 +72,6 @@ export class InsertareditareComponent implements OnInit {
       this.listatenfermedad = data;
     })
   }
-
   aceptar() {
     if (this.form.valid) {
       this.enfermedad.idEnfermedad = this.form.value.codigo
@@ -88,8 +79,6 @@ export class InsertareditareComponent implements OnInit {
       this.enfermedad.sintomas = this.form.value.sintomas
       this.enfermedad.nivelRiesgo = this.form.value.nivelRiesgo
       this.enfermedad.tipoEnfermedad = { idTipo: this.form.value.tipoEnfermedad } as TipoEnfermedad;
-
-
       if (this.edicion) {
         //actualizar
         this.eS.update(this.enfermedad).subscribe(data => {
