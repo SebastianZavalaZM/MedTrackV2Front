@@ -12,7 +12,7 @@ const base_url = environment.base;
 export class ReporteciudadanoService {
 
   private listaCambio = new Subject<Reporteciudadano[]>();
-  private url = `${base_url}/reporteciudadano`;
+  private url = `${base_url}/reporteciudadano/listas`;
 
   constructor(private http: HttpClient) {}
 
