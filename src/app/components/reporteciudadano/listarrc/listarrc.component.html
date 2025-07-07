@@ -8,7 +8,7 @@
       <!-- ID -->
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef> ID. </th>
-        <td mat-cell *matCellDef="let element"> {{element.idReporte}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.id_reporte_ciudadano}} </td>
       </ng-container>
 
       <!-- Registro -->
@@ -27,7 +27,7 @@
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef> Actualizar </th>
         <td mat-cell *matCellDef="let element">
-          <button matButton [routerLink]="['ediciones',element.idReporte]"
+          <button matButton [routerLink]="['ediciones',element.id_reporte_ciudadano]"
           >
             <mat-icon>edit</mat-icon>
           </button>
@@ -39,7 +39,7 @@
         <th mat-header-cell *matHeaderCellDef> Eliminar </th>
         <td mat-cell *matCellDef="let element">
           <button matButton
-                  (click)="eliminar(element.idReporte)"
+                  (click)="eliminar(element.id_reporte_ciudadano)"
           >
             <mat-icon>delete_forever</mat-icon>
           </button>
