@@ -5,10 +5,25 @@
       Usuarios
     </button>
   </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menuTipoEnfermedad" class="btn-verde">
       <mat-icon>account_circle</mat-icon>
       Tipo Enfermedad
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuForo" class="btn-verde">
+      <mat-icon>forum</mat-icon>
+      Foros
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuComentarioForo" class="btn-verde">
+      <mat-icon>comment</mat-icon>
+      Comentarios
     </button>
   </div>
 
@@ -72,6 +87,8 @@
       Landing Page
     </a>
   </div>
+
+
 
 
 </mat-toolbar>
@@ -178,8 +195,35 @@
     <span>Artículos con reportes</span>
   </button>
 </mat-menu>
+<mat-menu #menuForo="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/Foros" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar Foros</span>
+  </button>
+  <button mat-menu-item routerLink="/Foros/formularioforo" class="item-verde">
+    <mat-icon>how_to_reg</mat-icon>
+    <span>Registrar Foros</span>
+  </button>
+  <button mat-menu-item routerLink="/Foros/buscarporperiodo" class="item-verde">
+    <mat-icon>search</mat-icon>
+    <span>Buscar foro por periodo</span>
+  </button>
+</mat-menu>
 
-
+<mat-menu #menuComentarioForo="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/Comentarios" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar Comentarios de Foro</span>
+  </button>
+  <button mat-menu-item routerLink="/Comentarios/formulariocomentario" class="item-verde">
+    <mat-icon>how_to_reg</mat-icon>
+    <span>Registrar Comentario</span>
+  </button>
+  <button mat-menu-item routerLink="/Comentarios/busquedatituloforo" class="item-verde">
+    <mat-icon>search</mat-icon>
+    <span>Buscar Comentario por Foro </span>
+  </button>
+</mat-menu>
 
 
 

@@ -21,6 +21,14 @@ import { ReporteciudadanoComponent } from './components/reporteciudadano/reporte
 import { ArticuloinformativoComponent } from './components/articuloinformativo/articuloinformativo.component';
 import { InsertareditaraiComponent } from './components/articuloinformativo/insertareditarai/insertareditarai.component';
 import { BuscartituloComponent } from './components/articuloinformativo/buscartitulo/buscartitulo.component';
+import { InsertareditarforosComponent } from './components/foros/insertareditarforos/insertareditarforos.component';
+import { InsertareditarcomentarioforosComponent } from './components/comentarioforos/insertareditarcomentarioforos/insertareditarcomentarioforos.component';
+import { ForosComponent } from './components/foros/foros.component';
+import { ComentarioforosComponent } from './components/comentarioforos/comentarioforos.component';
+import { BuscarforoComponent } from './components/comentarioforos/buscarforo/buscarforo.component';
+import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/buscarporperiodo.component';
+
+
 export const routes: Routes = [
   {
     path:'',redirectTo:'usuarios',pathMatch:'full'
@@ -135,7 +143,37 @@ export const routes: Routes = [
       }
 
     ]
+  },
+  {
+    path: 'Foros', component:ForosComponent,
+    children: [
+      {
+        path: 'formularioforo', component:InsertareditarforosComponent
+      },
+      {
+        path: 'edicionesforo/:id', component:InsertareditarforosComponent
+      },
+      {
+        path: 'buscarporperiodo', component: BuscarporperiodoComponent
+      }
+    ]
+  },
+  {
+    path: 'Comentarios', component:ComentarioforosComponent,
+    children: [
+      {
+        path: 'formulariocomentario', component:InsertareditarcomentarioforosComponent
+      },
+      {
+        path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent
+      },
+      {
+        path: 'busquedatituloforo', component:BuscarforoComponent
+      }
+    ]
   }
+
+
 
 
 ];

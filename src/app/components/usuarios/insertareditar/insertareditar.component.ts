@@ -95,10 +95,11 @@ export class InsertareditarComponent implements OnInit {
             this.uS.setList(data)
          })
        })
-     }
+      }
       this.router.navigate(['usuarios'])
     }
   }
+  
   init(){
     if(this.edicion) {
       this.uS.listId(this.id).subscribe(data => {

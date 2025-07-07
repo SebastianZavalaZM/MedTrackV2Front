@@ -1,0 +1,68 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Buscar Foros por Periodo</h1>
+  </div>
+
+  <div>
+    <div class="record-count">
+      Total de Foros: {{ dataSource.data.length }}  
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="buscar()">
+      <mat-form-field>
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" placeholder="Seleccione fecha de inicio">
+        <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" placeholder="Seleccione fecha de fin">
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Buscar</button>
+
+    </form>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+  <!-- Position Column -->
+  <ng-container matColumnDef="c1">
+    <th mat-header-cell *matHeaderCellDef> Codigo </th>
+    <td mat-cell *matCellDef="let element"> {{element.idforum}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="c2">
+    <th mat-header-cell *matHeaderCellDef> Titulo </th>
+    <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="c3">
+    <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+    <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="c4">
+    <th mat-header-cell *matHeaderCellDef> Fecha de Creacion </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechacreacion|date:'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <!-- User Column -->
+  <ng-container matColumnDef="c5">
+    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+    <td mat-cell *matCellDef="let element"> {{element.users.idUsers}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+  </div>
+</div>
