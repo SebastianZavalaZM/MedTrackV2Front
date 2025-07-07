@@ -1,10 +1,10 @@
 import { Usuarios } from './Usuarios';
 
 export class TipoSuscripcion {
-  id?: number;
-  codigo: string = '';
-  descripcion: string = '';
-  fechaInicio: string = '';
-  fechaFin: string = '';
+  idSuscription?: number;
+  nameSuscription: string = '';
+  descriptionSuscription: string = '';
+  startDateSuscription: string = '';
+  endDateSuscription: string = '';
   users: Usuarios = new Usuarios();
 }

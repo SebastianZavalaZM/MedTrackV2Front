@@ -1,7 +1,7 @@
 import { Usuarios } from './Usuarios';
 
 export class Suporte {
-  idsuporte?: number;
+  idSuporte?: number;
   titulo: string = '';
   fecha: string = '';
   descripcion: string = '';

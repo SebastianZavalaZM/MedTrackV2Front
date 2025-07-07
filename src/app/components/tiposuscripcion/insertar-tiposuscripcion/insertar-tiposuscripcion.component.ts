@@ -6,16 +6,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select'; // Agregar este
+import { MatSelectModule } from '@angular/material/select';
 import { RouterLink, Router } from '@angular/router';
 import { TipoSuscripcion } from '../../../models/TipoSuscripcion';
 import { TipoSuscripcionService } from '../../../services/tipo-suscripcion.service';
-import { Usuarios } from '../../../models/Usuarios'; // Agregar modelo Usuarios
-import { UsuariosService } from '../../../services/usuarios.service'; // Agregar servicio de usuarios
+import { Usuarios } from '../../../models/Usuarios';
+import { UsuariosService } from '../../../services/usuarios.service';
 
 @Component({
   selector: 'app-insertar-tiposuscripcion',
   templateUrl: './insertar-tiposuscripcion.component.html',
+  styleUrls: ['./insertar-tiposuscripcion.component.css'],
   standalone: true,
   imports: [
     CommonModule,
@@ -25,31 +26,30 @@ import { UsuariosService } from '../../../services/usuarios.service'; // Agregar
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule, // Agregar este
+    MatSelectModule,
     RouterLink
   ]
 })
 export class InsertarTiposuscripcionComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
-  listaUsuarios: Usuarios[] = []; // Agregar lista de usuarios
+  form: FormGroup;
+  listaUsuarios: Usuarios[] = [];
 
   constructor(
     private tS: TipoSuscripcionService,
-    private uS: UsuariosService, // Agregar servicio de usuarios
+    private uS: UsuariosService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.form = this.formBuilder.group({
-      codigo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
+      nameSuscription: ['', Validators.required],
+      descriptionSuscription: ['', Validators.required],
+      startDateSuscription: ['', Validators.required],
+      endDateSuscription: ['', Validators.required],
       users: ['', Validators.required]
     });
+  }
 
-    // Cargar lista de usuarios
+  ngOnInit(): void {
     this.uS.list().subscribe(data => {
       this.listaUsuarios = data;
     });
@@ -58,10 +58,10 @@ export class InsertarTiposuscripcionComponent implements OnInit {
   aceptar(): void {
     if (this.form.valid) {
       const tiposuscripcion = new TipoSuscripcion();
-      tiposuscripcion.codigo = this.form.value.codigo;
-      tiposuscripcion.descripcion = this.form.value.descripcion;
-      tiposuscripcion.fechaInicio = this.form.value.fechaInicio;
-      tiposuscripcion.fechaFin = this.form.value.fechaFin;
+      tiposuscripcion.nameSuscription = this.form.value.nameSuscription;
+      tiposuscripcion.descriptionSuscription = this.form.value.descriptionSuscription;
+      tiposuscripcion.startDateSuscription = this.form.value.startDateSuscription;
+      tiposuscripcion.endDateSuscription = this.form.value.endDateSuscription;
       tiposuscripcion.users = this.form.value.users;
 
       this.tS.insert(tiposuscripcion).subscribe(() => {

@@ -16,7 +16,7 @@ import { TipoSuscripcionService } from '../../../services/tipo-suscripcion.servi
 })
 export class ListarTiposuscripcionComponent implements OnInit {
   dataSource: MatTableDataSource<TipoSuscripcion> = new MatTableDataSource();
-  displayedColumns: string[] = ['codigo', 'descripcion', 'fechaInicio', 'fechaFin', 'users', 'acciones']; // ✅ Cambiar 'usuario' por 'users'
+  displayedColumns: string[] = ['nameSuscription', 'descriptionSuscription', 'startDateSuscription', 'endDateSuscription', 'users', 'acciones'];
 
   constructor(private tS: TipoSuscripcionService) {}
 
