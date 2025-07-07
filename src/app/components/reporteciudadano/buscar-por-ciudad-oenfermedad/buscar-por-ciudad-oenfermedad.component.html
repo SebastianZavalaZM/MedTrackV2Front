@@ -3,29 +3,36 @@
     <h1>Buscar Reportes Ciudadanos</h1>
   </div>
 
-  <div class="form-busqueda">
+  <div class="form-busqueda" style="margin-bottom: 20px;">
     <input [(ngModel)]="cuidad" placeholder="Ciudad" class="input-estilo" />
     <input [(ngModel)]="enfermedad" placeholder="Enfermedad" class="input-estilo" />
     <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-ovalada" *ngIf="dataSource">
-    <ng-container matColumnDef="cuidad">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.data.length > 0">
+    <!-- Ciudad -->
+    <ng-container matColumnDef="c1">
       <th mat-header-cell *matHeaderCellDef>Ciudad</th>
       <td mat-cell *matCellDef="let element">{{element.cuidad}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="enfermedad">
+    <!-- Enfermedad -->
+    <ng-container matColumnDef="c2">
       <th mat-header-cell *matHeaderCellDef>Enfermedad</th>
       <td mat-cell *matCellDef="let element">{{element.enfermedad?.nombre}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="fecha">
+    <!-- Fecha -->
+    <ng-container matColumnDef="c3">
       <th mat-header-cell *matHeaderCellDef>Fecha</th>
-      <td mat-cell *matCellDef="let element">{{element.fecha}}</td>
+      <td mat-cell *matCellDef="let element">{{element.fechaReporte | date:'shortDate'}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <div *ngIf="dataSource.data.length === 0">
+    <p>No se encontraron resultados para los criterios de búsqueda.</p>
+  </div>
 </div>

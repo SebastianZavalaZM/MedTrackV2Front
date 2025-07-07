@@ -3,8 +3,7 @@
     <h1>Registro de Foros</h1>
   </div>
   <div style="text-align: center;">
-    <form [formGroup]="form" (Submit)="aceptar()">
-
+    <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field *ngIf="edicion">
         <mat-label>ID</mat-label>
         <input matInput formControlName="idforum">
@@ -53,11 +52,16 @@
 
       <mat-form-field>
         <mat-label>Usuario</mat-label>
-        <input matInput formControlName="users">
+        <mat-select formControlName="users">
+          @for (food of listausers; track food) {
+            <mat-option [value]="food.idUsers">{{food.username}}</mat-option>
+          }
+        </mat-select>
         <mat-error *ngIf="form.get('users')?.hasError('required')">
           EL codigo del usario es obligatorio!!
         </mat-error>
       </mat-form-field>
+
       <br>
 
       <button mat-raised-button color="primary" type="submit" (click)="openSnackBar('Registro Exitoso','OK')">Aceptar</button>

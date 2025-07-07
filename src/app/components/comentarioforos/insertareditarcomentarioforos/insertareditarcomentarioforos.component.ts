@@ -11,6 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComenarioForos } from '../../../models/ComentarioForos';
 import { ComentarioforosService } from '../../../services/comentarioforos.service';
+import { Usuarios } from '../../../models/Usuarios';
+import { Foros } from '../../../models/Foros';
+import { ForosService } from '../../../services/foros.service';
+import { UsuariosService } from '../../../services/usuarios.service';
 
 @Component({
   selector: 'app-insertareditar',
@@ -36,6 +40,9 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
   id: number = 0
   edicion: boolean = false
 
+  listausers: Usuarios[] = []
+  listaforos: Foros[] = []
+
   private snackBar = inject(MatSnackBar);
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action);
@@ -45,7 +52,9 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
     private cfS: ComentarioforosService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uS: UsuariosService,
+    private fS: ForosService
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +72,12 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
       forums: ['', Validators.required],
       users: ['', Validators.required],
     })
+     this.uS.list().subscribe(data => {
+      this.listausers = data;
+    })
+     this.fS.list().subscribe(data => {
+      this.listaforos = data;
+    })
   }
 
   aceptar() {
@@ -70,8 +85,8 @@ export class InsertareditarcomentarioforosComponent implements OnInit {
       this.comentarioforos.id = this.form.value.id
       this.comentarioforos.contenido = this.form.value.contenido
       this.comentarioforos.fechaComentario = this.form.value.fechaComentario
-      this.comentarioforos.forums = this.form.value.forums
-      this.comentarioforos.users = this.form.value.users
+      this.comentarioforos.forums = { idforum: this.form.value.forums } as Foros;
+      this.comentarioforos.users = { idUsers: this.form.value.users } as Usuarios;
 
       if (this.edicion) {
         //actualizar

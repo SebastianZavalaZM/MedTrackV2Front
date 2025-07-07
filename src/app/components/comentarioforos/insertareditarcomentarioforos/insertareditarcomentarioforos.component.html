@@ -16,7 +16,7 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Titulo</mat-label>
+        <mat-label>Contenido</mat-label>
         <input matInput formControlName="contenido">
         <mat-error *ngIf="form.get('contenido')?.hasError('required')">
           El Titulo del foro es obligatorio!!
@@ -43,8 +43,12 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Foro</mat-label>
-        <input matInput formControlName="forums">
+        <mat-label>Foro</mat-label> 
+        <mat-select formControlName="forums">
+          @for (food of listaforos; track food) {
+            <mat-option [value]="food.idforum">{{food.titulo}}</mat-option>
+          }
+        </mat-select>
         <mat-error *ngIf="form.get('forums')?.hasError('required')">
           EL codigo del foro es obligatorio!!
         </mat-error>
@@ -54,9 +58,13 @@
 
       <mat-form-field>
         <mat-label>Usuario</mat-label>
-        <input matInput formControlName="users">
+        <mat-select formControlName="users">
+          @for (food of listausers; track food) {
+            <mat-option [value]="food.idUsers">{{food.username}}</mat-option>
+          }
+        </mat-select>
         <mat-error *ngIf="form.get('users')?.hasError('required')">
-          EL codigo del usuario es obligatorio!!
+          EL codigo del usario es obligatorio!!
         </mat-error>
       </mat-form-field>
 

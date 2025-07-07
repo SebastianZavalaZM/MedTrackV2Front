@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Foros } from '../../../models/Foros';
 import { ForosService } from '../../../services/foros.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Usuarios } from '../../../models/Usuarios';
+import { UsuariosService } from '../../../services/usuarios.service';
 
 @Component({
   selector: 'app-insertareditar',
@@ -36,6 +38,9 @@ export class InsertareditarforosComponent implements OnInit {
   id: number = 0
   edicion: boolean = false
 
+  listausers: Usuarios[] = []
+  
+
   private snackBar = inject(MatSnackBar);
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action);
@@ -45,7 +50,8 @@ export class InsertareditarforosComponent implements OnInit {
     private fS: ForosService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private uS: UsuariosService
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +69,10 @@ export class InsertareditarforosComponent implements OnInit {
       fechacreacion: ['', Validators.required],
       users: ['', Validators.required]
     })
+     this.uS.list().subscribe(data => {
+      this.listausers = data;
+    })
+    
 
   }
 
@@ -72,7 +82,7 @@ export class InsertareditarforosComponent implements OnInit {
       this.foros.titulo = this.form.value.titulo
       this.foros.descripcion = this.form.value.descripcion
       this.foros.fechacreacion = this.form.value.fechacreacion
-      this.foros.users = this.form.value.users
+      this.foros.users = { idUsers: this.form.value.users } as Usuarios;
 
       if (this.edicion) {
         //actualizar

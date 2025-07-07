@@ -11,6 +11,10 @@ import {ActivatedRoute, Params, RouterLink} from '@angular/router';
 import {Reporteciudadano} from '../../../models/reporteciudadano';
 import {ReporteciudadanoService} from '../../../services/reporteciudadano.service';
 import {Router} from '@angular/router';
+import { Usuarios } from '../../../models/Usuarios';
+import { Enfermedad } from '../../../models/enfermedad';
+import { UsuariosService } from '../../../services/usuarios.service';
+import { EnfermedadService } from '../../../services/enfermedad.service';
 
 @Component({
   selector: 'app-insertareditarrc',
@@ -37,10 +41,16 @@ export class InsertareditarrcComponent implements OnInit {
   id: number = 0
   edicion: boolean = false
 
+  listarusers: any[] = []
+  listarenfermedades: any[] = []
+
   constructor(private rS: ReporteciudadanoService,
               private router:Router,
               private formBuilder: FormBuilder,
-              private route: ActivatedRoute)
+              private route: ActivatedRoute,
+              private uS: UsuariosService,
+              private eS: EnfermedadService
+            )
   {}
 
   ngOnInit():void {
@@ -53,17 +63,27 @@ export class InsertareditarrcComponent implements OnInit {
     )
 
     this.form = this.formBuilder.group({
-      codigo: [''],
+      id_reporte_ciudadano: [''],
       fechaReporte: [new Date(), Validators.required],
-      cuidad: ['', Validators.required]
+      cuidad: ['', Validators.required],
+      enfermedad: ['', Validators.required],
+      users: ['', Validators.required],
+    })
+    this.uS.list().subscribe(data => {
+      this.listarusers = data;
+    })
+     this.eS.list().subscribe(data => {
+      this.listarenfermedades = data;
     })
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.reporteciudadano.idReporte = this.form.value.codigo;
-      this.reporteciudadano.fechaReporte = this.form.value.fechaReporte;
-      this.reporteciudadano.cuidad = this.form.value.cuidad;
+      this.reporteciudadano.id_reporte_ciudadano = this.form.value.id_reporte_ciudadano
+      this.reporteciudadano.fechaReporte = this.form.value.fechaReporte
+      this.reporteciudadano.cuidad = this.form.value.cuidad
+      this.reporteciudadano.enfermedad = { idEnfermedad: this.form.value.enfermedad } as Enfermedad
+      this.reporteciudadano.users = { idUsers: this.form.value.users } as Usuarios
 
 
       if (this.edicion) {
@@ -88,9 +108,11 @@ export class InsertareditarrcComponent implements OnInit {
     if(this.edicion) {
       this.rS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          id: new FormControl(data.idReporte),
+          id_reporte_ciudadano: new FormControl(data.id_reporte_ciudadano),
           fechaReporte: new FormControl(data.fechaReporte),
           cuidad: new FormControl(data.cuidad),
+          enfermedad: new FormControl(data.enfermedad?.idEnfermedad),
+          users: new FormControl(data.users?.idUsers),
 
         })
       })

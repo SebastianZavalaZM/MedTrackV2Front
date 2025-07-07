@@ -23,8 +23,20 @@
         <td mat-cell *matCellDef="let element"> {{element.cuidad}} </td>
       </ng-container>
 
-      <!-- Actualizar -->
+            <!-- Ciudad -->
       <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.users?.username}} </td>
+      </ng-container>
+
+            <!-- Ciudad -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Enfermedad </th>
+        <td mat-cell *matCellDef="let element"> {{element.enfermedad?.nombre}} </td>
+      </ng-container>
+
+      <!-- Actualizar -->
+      <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef> Actualizar </th>
         <td mat-cell *matCellDef="let element">
           <button matButton [routerLink]="['ediciones',element.id_reporte_ciudadano]"
@@ -35,7 +47,7 @@
       </ng-container>
 
       <!-- Eliminar -->
-      <ng-container matColumnDef="c5">
+      <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef> Eliminar </th>
         <td mat-cell *matCellDef="let element">
           <button matButton

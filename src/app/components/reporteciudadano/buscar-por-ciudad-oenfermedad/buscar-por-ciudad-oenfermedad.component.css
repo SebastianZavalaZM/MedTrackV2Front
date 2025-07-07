@@ -1,45 +1,112 @@
 .container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #e6f5fb;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(24, 90, 157, 0.1);
+  padding: 32px;
+  margin: 32px auto;
+  max-width: 1200px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #185a9d;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+table.mat-table {
+  background: #fff;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 60, 90, 0.2);
-}
-
-.input-box {
-  width: 80%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #007b9e;
-  border-radius: 6px;
-  outline: none;
-}
-
-.btn-buscar {
-  margin-top: 10px;
-  padding: 10px 25px;
-  background-color: #007b9e;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-buscar:hover {
-  background-color: #005f7a;
-}
-
-.tabla-ovalada {
-  border-radius: 18px;
   overflow: hidden;
-  width: 100%;
-  background-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(67, 206, 162, 0.12);
+  animation: tableFade 0.5s ease-in;
 }
 
-/* Centrar columnas importantes */
-td.mat-column-ciudad, th.mat-column-ciudad,
-td.mat-column-enfermedad, th.mat-column-enfermedad,
-td.mat-column-fechaReporte, th.mat-column-fechaReporte {
+@keyframes tableFade {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.mat-header-cell {
+  background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-bottom: 2px solid #43cea2;
   text-align: center;
 }
+
+.mat-cell {
+  color: #185a9d;
+  font-size: 0.95rem;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mat-row:hover {
+  background: #e3f2fd;
+  transition: background 0.3s ease;
+}
+
+button[matButton] {
+  background: linear-gradient(135deg, #43cea2, #1e88e5);
+  color: white;
+  border-radius: 8px;
+  padding: 4px;
+  margin: 0 4px;
+  box-shadow: 0 2px 6px rgba(67, 206, 162, 0.3);
+  transition: all 0.2s ease-in-out;
+  border: none; /* <-- QUITA BORDE */
+}
+
+button[matButton]:hover {
+  background: linear-gradient(135deg, #1e88e5, #43cea2);
+  transform: scale(1.1);
+}
+
+mat-icon {
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.form-busqueda {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.input-estilo {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #3f51b5; /* color azul material */
+  border-radius: 6px;
+  outline: none;
+  width: 220px;
+  transition: border-color 0.3s ease;
+}
+
+.input-estilo:focus {
+  border-color: #303f9f; /* azul más oscuro */
+  box-shadow: 0 0 8px rgba(48, 63, 159, 0.5);
+}
+
+button[mat-raised-button] {
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  /* El botón usa el estilo de Angular Material, solo para asegurar consistencia */
+}
+
+
+

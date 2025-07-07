@@ -20,17 +20,32 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./buscar-por-ciudad-oenfermedad.component.css']
 })
 export class BuscarPorCiudadOenfermedadComponent implements OnInit {
+
+  dataSource = new MatTableDataSource<Reporteciudadano>();
+  dataOriginal: Reporteciudadano[] = [];
+
+  displayedColumns: string[] = ['c1', 'c2', 'c3'];
+
   cuidad: string = '';
   enfermedad: string = '';
-  displayedColumns: string[] = ['fechaReporte', 'cuidad', 'usuario', 'enfermedad'];
-  dataSource = new MatTableDataSource<Reporteciudadano>();
 
   constructor(private reporteService: ReporteciudadanoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reporteService.list().subscribe(data => {
+      this.dataOriginal = data;
+      this.dataSource.data = [...data];
+    });
+  }
 
   buscar(): void {
-    this.reporteService.buscarPorCiudadOEnfermedad(this.cuidad, this.enfermedad)
-      .subscribe(data => this.dataSource.data = data);
+    const cuidadFiltro = this.cuidad.toLowerCase().trim();
+    const enfermedadFiltro = this.enfermedad.toLowerCase().trim();
+
+    this.dataSource.data = this.dataOriginal.filter(item => {
+      const ciudadMatch = item.cuidad?.toLowerCase().includes(cuidadFiltro) || !cuidadFiltro;
+      const enfermedadMatch = item.enfermedad?.nombre?.toLowerCase().includes(enfermedadFiltro) || !enfermedadFiltro;
+      return ciudadMatch && enfermedadMatch;
+    });
   }
 }

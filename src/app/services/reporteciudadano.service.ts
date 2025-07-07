@@ -12,12 +12,12 @@ const base_url = environment.base;
 export class ReporteciudadanoService {
 
   private listaCambio = new Subject<Reporteciudadano[]>();
-  private url = `${base_url}/reporteciudadano/listas`;
+  private url = `${base_url}/reporteciudadano`;
 
   constructor(private http: HttpClient) {}
 
   list(): Observable<Reporteciudadano[]> {
-    return this.http.get<Reporteciudadano[]>(this.url);
+    return this.http.get<Reporteciudadano[]>(`${this.url}/listas`);
   }
 
   insert(u: Reporteciudadano): Observable<any> {
@@ -44,11 +44,10 @@ export class ReporteciudadanoService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // 🔍 Buscar por ciudad o enfermedad (según controller)
   buscarPorCiudadOEnfermedad(cuidad: string, enfermedad: string): Observable<Reporteciudadano[]> {
     return this.http.get<Reporteciudadano[]>(`${this.url}/buscarPorCiudadOEnfermedad`, {
       params: {
-        cuidad: cuidad, // cuidad: el param en backend es "cuidad"
+        cuidad: cuidad, 
         enfermedad: enfermedad
       }
     });
