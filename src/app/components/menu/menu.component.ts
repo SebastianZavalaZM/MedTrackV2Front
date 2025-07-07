@@ -24,7 +24,7 @@ export class MenuComponent {
   role: string = '';
   constructor(private loginService: LoginService) {}
   cerrar() {
-    
+
     sessionStorage.clear();
   }
 
@@ -38,6 +38,18 @@ export class MenuComponent {
 
   isTester() {
     return this.role === 'TESTER';
+  }
+
+  isAdmin() {
+    return this.role === 'ADMIN';
+  }
+
+  isPremium() {
+    return this.role === 'PREMIUM';
+  }
+
+  isFree() {
+    return this.role === 'FREE';
   }
 }
 

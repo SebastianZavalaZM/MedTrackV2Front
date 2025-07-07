@@ -9,9 +9,11 @@ export const seguridadGuard= (
     const lService=inject(LoginService)
     const router=inject(Router)
     const rpta=lService.verificar();
+    const allowedRoles = route.data['roles'] || []
     if(!rpta){
       router.navigate(['/login']);
       return false;
     }
+  // Si hay roles definidos y el rol del usuario no está incluido
     return rpta;
 };
