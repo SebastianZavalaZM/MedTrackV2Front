@@ -81,7 +81,7 @@ export class InsertareditarrcComponent implements OnInit {
          })
        })
      }
-      this.router.navigate(['reporteciudadano'])
+      this.router.navigate(['reporteciudadano/listas'])
     }
   }
   init(){
