@@ -6,7 +6,6 @@ import { InsertareditarcomentarioforosComponent } from './components/comentariof
 import { ForosComponent } from './components/foros/foros.component';
 import { ComentarioforosComponent } from './components/comentarioforos/comentarioforos.component';
 import { BuscarforoComponent } from './components/comentarioforos/buscarforo/buscarforo.component';
-import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/buscarporperiodo.component';
 
 export const routes: Routes = [
  {
@@ -44,9 +43,6 @@ export const routes: Routes = [
       },
       { 
         path: 'edicionesforo/:id', component:InsertareditarforosComponent
-      },
-      {
-        path: 'buscarporperiodo', component: BuscarporperiodoComponent
       }
     ]
   },
