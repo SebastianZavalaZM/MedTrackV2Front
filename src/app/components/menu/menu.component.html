@@ -4,21 +4,18 @@
       <mat-icon>account_circle</mat-icon>
       Usuarios
     </button>
-    <button mat-button [matMenuTriggerFor]="menuForo" class="btn-verde" *ngIf="isTester()">
+    <button mat-button [matMenuTriggerFor]="menuForo" class="btn-verde" *ngIf="isDeveloper()">
       <mat-icon>forum</mat-icon>
       Foros
     </button>
-    <button mat-button [matMenuTriggerFor]="menuComentarioForo" class="btn-verde" *ngIf="isTester()">
+    <button mat-button [matMenuTriggerFor]="menuComentarioForo" class="btn-verde" *ngIf="isDeveloper()">
       <mat-icon>comment</mat-icon>
       Comentarios
     </button>
-  </div>
-  <span class="toolbar-spacer"></span>
-   <div class="item-verde">
-    <button  mat-button [matMenuTriggerFor]="menuSalir" >
+    <button  mat-button [matMenuTriggerFor]="menuSalir" class="btn-verde">
       <mat-icon>person</mat-icon>Usuario
     </button>
- </div>
+  </div>
 </mat-toolbar>
 
 <mat-menu #menuUsuario="matMenu" class="menu-verde">

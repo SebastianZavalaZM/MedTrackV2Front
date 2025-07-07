@@ -21,9 +21,9 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'usuarios',
+     path: 'usuarios',
     component: UsuariosComponent,
-    canActivate: [seguridadGuard],
+    canActivate: [seguridadGuard],  // Protegido
     children: [
       {
         path: 'formulario',
@@ -38,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'Foros',
     component: ForosComponent,
-    canActivate: [seguridadGuard],
+    canActivate: [seguridadGuard],  // Protegido
     children: [
       {
         path: 'formularioforo',
@@ -57,7 +57,7 @@ export const routes: Routes = [
   {
     path: 'Comentarios',
     component: ComentarioforosComponent,
-    canActivate: [seguridadGuard],
+    canActivate: [seguridadGuard],  // Protegido
     children: [
       {
         path: 'formulariocomentario',
@@ -73,7 +73,6 @@ export const routes: Routes = [
       },
     ],
   },
-  // Ruta para errores o páginas no encontradas (opcional)
   {
     path: '**',
     redirectTo: 'login',
