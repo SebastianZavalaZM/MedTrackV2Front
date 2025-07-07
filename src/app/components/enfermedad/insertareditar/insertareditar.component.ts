@@ -45,8 +45,8 @@ export class InsertareditareComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
 
-      this.id = data['id']
-      this.edicion = data['id'] != null
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
       //actualizar
       this.init()
     }
