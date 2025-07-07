@@ -61,9 +61,9 @@ export class InsertareditarrcComponent implements OnInit {
 
   aceptar(): void {
     if (this.form.valid) {
-      this.reporteciudadano.id = this.form.value.codigo;
+      this.reporteciudadano.idReporte = this.form.value.codigo;
       this.reporteciudadano.fechaReporte = this.form.value.fechaReporte;
-      this.reporteciudadano.cuidad = this.form.value.ciudad;
+      this.reporteciudadano.ciudad = this.form.value.ciudad;
 
 
       if (this.edicion) {
@@ -88,9 +88,9 @@ export class InsertareditarrcComponent implements OnInit {
     if(this.edicion) {
       this.rS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          id: new FormControl(data.id),
+          id: new FormControl(data.idReporte),
           fechaReporte: new FormControl(data.fechaReporte),
-          ciudad: new FormControl(data.cuidad),
+          ciudad: new FormControl(data.ciudad),
 
         })
       })

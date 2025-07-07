@@ -1,5 +1,5 @@
 export class Reporteciudadano {
-    id: number = 0;
+    idReporte: number = 0;
     fechaReporte: Date = new Date();
-    cuidad: string = '';
+    ciudad: string = '';
 }

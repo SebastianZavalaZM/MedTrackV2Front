@@ -20,9 +20,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./buscar-por-ciudad-oenfermedad.component.css']
 })
 export class BuscarPorCiudadOenfermedadComponent implements OnInit {
-  cuidad: string = '';
+  ciudad: string = '';
   enfermedad: string = '';
-  displayedColumns: string[] = ['fechaReporte', 'cuidad', 'usuario', 'enfermedad'];
+  displayedColumns: string[] = ['fechaReporte', 'ciudad', 'usuario', 'enfermedad'];
   dataSource = new MatTableDataSource<Reporteciudadano>();
 
   constructor(private reporteService: ReporteciudadanoService) {}
@@ -30,7 +30,7 @@ export class BuscarPorCiudadOenfermedadComponent implements OnInit {
   ngOnInit(): void {}
 
   buscar(): void {
-    this.reporteService.buscarPorCiudadOEnfermedad(this.cuidad, this.enfermedad)
+    this.reporteService.buscarPorCiudadOEnfermedad(this.ciudad, this.enfermedad)
       .subscribe(data => this.dataSource.data = data);
   }
 }
