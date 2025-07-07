@@ -1,21 +1,25 @@
 .custom-toolbar {
   display: flex;
   justify-content: flex-start;
-  gap: 12px; /* Espacio entre botones (ajustable) */
-  flex-wrap: wrap; /* Opcional: para que se acomoden si se reduce el ancho */
+  gap: 20px;
+  flex-wrap: wrap;
   background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
   color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border-radius: 0px;
   margin-bottom: 16px;
-  
+
+  padding: 20px 30px;         /* Aumenta espacio interno */
+  min-height: 150px;          /* Aumenta altura mínima */
+  font-size: 1.1rem;          /* Texto más grande */
 }
 
 .custom-toolbar > div {
   display: flex;
   flex-direction: row;
-  gap: 12px; 
+  gap: 16px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /*.btn-verde {*/

@@ -27,11 +27,20 @@ import { ForosComponent } from './components/foros/foros.component';
 import { ComentarioforosComponent } from './components/comentarioforos/comentarioforos.component';
 import { BuscarforoComponent } from './components/comentarioforos/buscarforo/buscarforo.component';
 import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/buscarporperiodo.component';
+import { LoginComponent } from './components/login/login.component';
+import { seguridadGuard } from './guard/seguridad.guard';
+import { HomeComponent } from './components/home/home.component';
 
 
 export const routes: Routes = [
+{
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   {
-    path:'',redirectTo:'usuarios',pathMatch:'full'
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path:'usuarios',component:UsuariosComponent,
@@ -42,7 +51,8 @@ export const routes: Routes = [
       {
         path:'ediciones/:id',component:InsertareditarComponent
       }
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path:'tipoenfermedades/listas',component:TipoEnfermedadComponent,
@@ -57,7 +67,8 @@ export const routes: Routes = [
         path:'buscarPorNombre',component:BuscarteComponent
       }
 
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'enfermedades/listas', component: EnfermedadComponent,
@@ -72,7 +83,8 @@ export const routes: Routes = [
         path:'contar-nivel-riesgo',component:ContadornvlriesgoComponent
       }
 
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'mapacalor/listas', component: MapacalorComponent,
@@ -83,7 +95,8 @@ export const routes: Routes = [
       {
         path:'ediciones/:id',component:InsertareditarmcComponent
       }
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'notification/listas', component: NotificacionComponent,
@@ -94,7 +107,8 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id', component: InsertareditarnotComponent
       }
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'tiposuscripcion',
@@ -103,7 +117,8 @@ export const routes: Routes = [
       { path: 'insertar', component: InsertarTiposuscripcionComponent },
       { path: 'editar/:id', component: InsertarTiposuscripcionComponent },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'soporte',
@@ -112,7 +127,8 @@ export const routes: Routes = [
       { path: 'insertar', component: InsertarSuporteComponent },
       { path: 'editar/:id', component: InsertarSuporteComponent },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'articuloinformativo/listas', component: ArticuloinformativoComponent,
@@ -127,7 +143,8 @@ export const routes: Routes = [
         path:'buscartitulo',component:BuscartituloComponent
       }
 
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'reporteciudadano/listas', component: ReporteciudadanoComponent,
@@ -142,7 +159,8 @@ export const routes: Routes = [
         path:'buscarPorCiudadOEnfermedad',component:BuscarPorCiudadOenfermedadComponent
       }
 
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'Foros', component:ForosComponent,
@@ -156,7 +174,8 @@ export const routes: Routes = [
       {
         path: 'buscarporperiodo', component: BuscarporperiodoComponent
       }
-    ]
+    ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'Comentarios', component:ComentarioforosComponent,
@@ -171,9 +190,12 @@ export const routes: Routes = [
         path: 'busquedatituloforo', component:BuscarforoComponent
       }
     ]
-  }
+  },
+  {
+    path: 'homes',
+    component: HomeComponent,
+        canActivate: [seguridadGuard],
 
-
-
+  },
 
 ];
