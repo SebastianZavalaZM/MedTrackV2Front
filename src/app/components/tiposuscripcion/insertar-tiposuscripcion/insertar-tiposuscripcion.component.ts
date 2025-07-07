@@ -46,7 +46,7 @@ export class InsertarTiposuscripcionComponent implements OnInit {
       descripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
-      usuario: ['', Validators.required] // Agregar campo usuario
+      users: ['', Validators.required]
     });
 
     // Cargar lista de usuarios
@@ -62,7 +62,7 @@ export class InsertarTiposuscripcionComponent implements OnInit {
       tiposuscripcion.descripcion = this.form.value.descripcion;
       tiposuscripcion.fechaInicio = this.form.value.fechaInicio;
       tiposuscripcion.fechaFin = this.form.value.fechaFin;
-      tiposuscripcion.usuario = this.form.value.usuario; // Asignar usuario seleccionado
+      tiposuscripcion.users = this.form.value.users;
 
       this.tS.insert(tiposuscripcion).subscribe(() => {
         this.router.navigate(['/tiposuscripcion/listar']);

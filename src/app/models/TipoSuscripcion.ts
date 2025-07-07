@@ -5,6 +5,6 @@ export class TipoSuscripcion {
   codigo: string = '';
   descripcion: string = '';
   fechaInicio: string = '';
-  fechaFin: string = ''; 
-  usuario: Usuarios;
+  fechaFin: string = '';
+  users: Usuarios = new Usuarios();
 }

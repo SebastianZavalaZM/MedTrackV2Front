@@ -16,7 +16,7 @@ import { SuporteService } from '../../../services/suporte.service';
 })
 export class ListarSuporteComponent implements OnInit {
   dataSource: MatTableDataSource<Suporte> = new MatTableDataSource();
-  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'usuario', 'acciones'];
+  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'users', 'acciones'];
 
   constructor(private sS: SuporteService) {}
 

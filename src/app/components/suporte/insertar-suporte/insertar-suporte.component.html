@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Nuevo Soporte</h2>
     
-    <form [formGroup]="form" (submit)="aceptar()">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Título</mat-label>
         <input matInput formControlName="titulo" required>
@@ -22,8 +22,8 @@
   
       <mat-form-field>
         <mat-label>Usuario</mat-label>
-        <mat-select formControlName="idUsuario" required>
-          <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUsers">
+        <mat-select formControlName="users" required>
+          <mat-option *ngFor="let u of listaUsuarios" [value]="u">
             {{u.username}}
           </mat-option>
         </mat-select>
@@ -38,7 +38,7 @@
       </mat-form-field>
   
       <div class="button-row">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+        <button mat-raised-button color="primary" type="submit">
           Guardar
         </button>
         <button mat-raised-button color="warn" routerLink="/soporte/listar">

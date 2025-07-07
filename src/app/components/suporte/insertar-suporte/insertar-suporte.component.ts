@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,19 +31,22 @@ import { UsuariosService } from '../../../services/usuarios.service';
   styleUrls: ['./insertar-suporte.component.css']
 })
 export class InsertarSuporteComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    titulo: new FormControl('', Validators.required),
-    fecha: new FormControl('', Validators.required),
-    descripcion: new FormControl('', Validators.required),
-    idUsuario: new FormControl('', Validators.required)
-  });
+  form: FormGroup;
   listaUsuarios: Usuarios[] = [];
 
   constructor(
     private sS: SuporteService,
     private uS: UsuariosService, 
-    private router: Router
-  ) {}
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.form = this.formBuilder.group({
+      titulo: ['', Validators.required],
+      fecha: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      users: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.uS.list().subscribe(data => {
@@ -57,7 +60,7 @@ export class InsertarSuporteComponent implements OnInit {
       suporte.titulo = this.form.value.titulo;
       suporte.fecha = this.form.value.fecha;
       suporte.descripcion = this.form.value.descripcion;
-      suporte.users = this.form.value.idUsuario;
+      suporte.users = this.form.value.users;
 
       this.sS.insert(suporte).subscribe(() => {
         this.router.navigate(['/soporte/listar']);

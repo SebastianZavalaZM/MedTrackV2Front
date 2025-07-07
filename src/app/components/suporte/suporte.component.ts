@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SuporteComponent implements OnInit {
   suportes: Suporte[] = [];
-  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'usuario'];
+  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'users'];
 
   constructor(private suporteService: SuporteService) {}
 

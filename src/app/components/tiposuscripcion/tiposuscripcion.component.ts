@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class TiposuscripcionComponent implements OnInit {
   tipos: TipoSuscripcion[] = [];
-  displayedColumns: string[] = ['codigo', 'descripcion', 'fechaInicio', 'fechaFin', 'usuario'];
+  displayedColumns: string[] = ['codigo', 'descripcion', 'fechaInicio', 'fechaFin', 'users'];
 
   constructor(private tipoService: TipoSuscripcionService) {}
 
