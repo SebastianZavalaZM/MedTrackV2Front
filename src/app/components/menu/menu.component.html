@@ -1,6 +1,6 @@
 <mat-toolbar class ="custom-toolbar">
   <div>
-    <button mat-button [matMenuTriggerFor]="menuUsuarios" class="btn-verde">
+    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-verde">
       <mat-icon>account_circle</mat-icon>
       Usuarios
     </button>
@@ -21,6 +21,20 @@
   </div>
 
   <div>
+    <button mat-button [matMenuTriggerFor]="menuTipoSuscripcion" class="btn-verde">
+      <mat-icon>category</mat-icon>
+      Tipos de Suscripción
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuSoporte" class="btn-verde">
+      <mat-icon>support_agent</mat-icon>
+      Soporte
+    </button>
+  </div>
+
+  <div>
     <button mat-button [matMenuTriggerFor]="menuMapa" class="btn-verde">
       <mat-icon>map icon</mat-icon>
       Mapas de Calor
@@ -33,6 +47,8 @@
       Notificaciones
     </button>
   </div>
+
+
 
 </mat-toolbar>
 
@@ -80,5 +96,28 @@
     <span>Registrar</span>
   </button>
 </mat-menu>
+
+<mat-menu #menuTipoSuscripcion="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/tiposuscripcion/listar" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/tiposuscripcion/insertar" class="item-verde">
+    <mat-icon>add</mat-icon>
+    <span>Insertar</span>
+  </button>
+</mat-menu>
+
+<mat-menu #menuSoporte="matMenu" class="menu-verde">
+  <button mat-menu-item routerLink="/soporte/listar" class="item-verde">
+    <mat-icon>list</mat-icon>
+    <span>Listar</span>
+  </button>
+  <button mat-menu-item routerLink="/soporte/insertar" class="item-verde">
+    <mat-icon>add</mat-icon>
+    <span>Insertar</span>
+  </button>
+</mat-menu>
+
 
 

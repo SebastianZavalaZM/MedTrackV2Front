@@ -11,7 +11,10 @@ import {MapacalorComponent} from './components/mapacalor/mapacalor.component';
 import {InsertareditarmcComponent} from './components/mapacalor/insertareditarmc/insertareditarmc.component';
 import {NotificacionComponent} from './components/notificacion/notificacion.component';
 import {InsertareditarnotComponent} from './components/notificacion/insertareditarnot/insertareditarnot.component';
-
+import { ListarTiposuscripcionComponent } from './components/tiposuscripcion/listar-tiposuscripcion/listar-tiposuscripcion.component';
+import { InsertarTiposuscripcionComponent } from './components/tiposuscripcion/insertar-tiposuscripcion/insertar-tiposuscripcion.component';
+import { ListarSuporteComponent } from './components/suporte/listar-suporte/listar-suporte.component';
+import { InsertarSuporteComponent } from './components/suporte/insertar-suporte/insertar-suporte.component';
 
 export const routes: Routes = [
   {
@@ -52,7 +55,7 @@ export const routes: Routes = [
       {
         path:'ediciones/:id',component:InsertareditareComponent
       },
-       {
+      {
         path:'contar-nivel-riesgo',component:ContadornvlriesgoComponent
       }
 
@@ -79,8 +82,25 @@ export const routes: Routes = [
         path:'ediciones/:id',component:InsertareditarnotComponent
       }
     ]
+  },
+  {
+    path: 'tiposuscripcion',
+    children: [
+      { path: 'listar', component: ListarTiposuscripcionComponent },
+      { path: 'insertar', component: InsertarTiposuscripcionComponent },
+      { path: 'editar/:id', component: InsertarTiposuscripcionComponent },
+      { path: '', redirectTo: 'listar', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'soporte',
+    children: [
+      { path: 'listar', component: ListarSuporteComponent },
+      { path: 'insertar', component: InsertarSuporteComponent },
+      { path: 'editar/:id', component: InsertarSuporteComponent },
+      { path: '', redirectTo: 'listar', pathMatch: 'full' }
+    ]
   }
-
 
 
 ];

@@ -1,0 +1,31 @@
+/* suporte.component.css */
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(24, 90, 157, 0.1);
+  padding: 32px;
+  margin: 32px auto;
+  max-width: 1200px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mat-cell {
+  text-align: center;
+}
+
+h1 {
+  color: #185a9d;
+  font-weight: 700;
+  margin-bottom: 32px;
+}

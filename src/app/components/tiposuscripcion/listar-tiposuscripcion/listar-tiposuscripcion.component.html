@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Lista de Tipos de Suscripción</h2>
+  
+  <div class="button-row">
+    <button mat-raised-button color="primary" routerLink="../insertar">
+      <mat-icon>add</mat-icon>
+      Nuevo Tipo de Suscripción
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="nameSuscription">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nameSuscription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descriptionSuscription">
+      <th mat-header-cell *matHeaderCellDef> Descripción </th>
+      <td mat-cell *matCellDef="let element"> {{element.descriptionSuscription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startDateSuscription">
+      <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+      <td mat-cell *matCellDef="let element"> {{element.startDateSuscription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endDateSuscription">
+      <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+      <td mat-cell *matCellDef="let element"> {{element.endDateSuscription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="users">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let element"> {{element.users?.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button [routerLink]="['../editar', element.idSuscription]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="eliminar(element.idSuscription)" *ngIf="element.idSuscription">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

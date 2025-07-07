@@ -1,0 +1,62 @@
+<div class="container">
+  <h2>Nuevo Tipo de Suscripción</h2>
+  
+  <form [formGroup]="form" (ngSubmit)="aceptar()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nameSuscription" required>
+      <mat-error *ngIf="form.get('nameSuscription')?.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descriptionSuscription" required>
+      <mat-error *ngIf="form.get('descriptionSuscription')?.hasError('required')">
+        La descripción es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="pickerInicio" formControlName="startDateSuscription" required>
+      <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+      <mat-error *ngIf="form.get('startDateSuscription')?.hasError('required')">
+        La fecha de inicio es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" formControlName="endDateSuscription" required>
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+      <mat-error *ngIf="form.get('endDateSuscription')?.hasError('required')">
+        La fecha fin es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="users" required>
+        <mat-option *ngFor="let usuario of listaUsuarios" [value]="usuario">
+          {{usuario.username}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('users')?.hasError('required')">
+        El usuario es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+        Guardar
+      </button>
+      <button mat-raised-button color="warn" routerLink="/tiposuscripcion/listar">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
