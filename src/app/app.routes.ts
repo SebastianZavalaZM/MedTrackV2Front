@@ -76,6 +76,8 @@ export const routes: Routes = [
   },
   {
     path: 'enfermedades/listas', component: EnfermedadComponent,
+    canActivate: [seguridadGuard],
+    data: { roles: ['ADMIN'] },
     children: [
       {
         path:'formulario',component:InsertareditareComponent
@@ -88,7 +90,7 @@ export const routes: Routes = [
       }
 
     ],
-    canActivate: [seguridadGuard],
+
   },
   {
     path: 'mapacalor/listas', component: MapacalorComponent,
