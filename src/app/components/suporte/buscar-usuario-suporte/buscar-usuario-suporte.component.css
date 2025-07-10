@@ -1,0 +1,64 @@
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #e6f5fb;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 60, 90, 0.2);
+  }
+  
+  h1 {
+    color: #185a9d;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .btn-buscar {
+    margin-top: 10px;
+    padding: 10px 25px;
+    background-color: #007b9e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-buscar:hover {
+    background-color: #005f7a;
+  }
+  
+  .tabla-ovalada {
+    border-radius: 18px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .tabla-ovalada .mat-header-cell {
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .tabla-ovalada .mat-cell {
+    text-align: center;
+    color: #185a9d;
+    font-size: 0.95rem;
+  }
+  
+  .tabla-ovalada .mat-row:hover {
+    background: #e3f2fd;
+    transition: background 0.3s ease;
+  }
+  
+  mat-form-field {
+    background: white;
+    border-radius: 8px;
+  }
+  
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background: transparent;
+  }

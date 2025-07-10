@@ -1,29 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { SuporteService } from '../../services/suporte.service';
-import { Suporte } from '../../models/Suporte';
-import { MatTableModule } from '@angular/material/table';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { Component } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ListarSuporteComponent } from './listar-suporte/listar-suporte.component';
 
 @Component({
   selector: 'app-suporte',
+  standalone: true,
+  imports: [RouterOutlet, ListarSuporteComponent],
   templateUrl: './suporte.component.html',
-  styleUrls: ['./suporte.component.css'],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule
-  ]
+  styleUrls: ['./suporte.component.css']
 })
-export class SuporteComponent implements OnInit {
-  suportes: Suporte[] = [];
-  displayedColumns: string[] = ['titulo', 'fecha', 'descripcion', 'users'];
-
-  constructor(private suporteService: SuporteService) {}
-
-  ngOnInit() {
-    this.suporteService.list().subscribe(data => this.suportes = data);
-  }
+export class SuporteComponent {
+  constructor(public route: ActivatedRoute) {}
 }
