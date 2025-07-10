@@ -53,40 +53,47 @@
       </mat-form-field>
       <br>
 
-      <!-- 🆕 SECCIÓN GPS MEJORADA CON MAPA -->
+      <!-- 🖥️ SECCIÓN GPS PARA ORDENADOR -->
       <div class="gps-section">
         <h3>📍 Ubicación</h3>
         
-        <!-- GPS CARGANDO -->
+        <!-- CARGANDO DESDE ORDENADOR -->
         <div *ngIf="cargandoGPS" class="gps-loading">
           <mat-spinner diameter="30"></mat-spinner>
-          <span>Obteniendo ubicación GPS...</span>
+          <span>Obteniendo ubicación desde ordenador...</span>
+          <div class="gps-tips-pc">
+            <small>🖥️ En ordenador la ubicación es aproximada (WiFi/IP)</small>
+            <small>📍 Precisión típica: ±500m - 2km</small>
+          </div>
         </div>
         
-        <!-- GPS EXITOSO -->
+        <!-- ÉXITO CON INFORMACIÓN -->
         <div *ngIf="gpsCompletado && !cargandoGPS" class="gps-success">
           <mat-icon>check_circle</mat-icon>
           <span>Ubicación obtenida correctamente</span>
+          <small style="display: block; color: #666; margin-top: 5px;">
+            🖥️ Ubicación aproximada desde ordenador
+          </small>
         </div>
         
-        <!-- GPS FALLIDO - OPCIONES MANUALES -->
+        <!-- FALLO - ACTIVAR MAPA MANUAL -->
         <div *ngIf="gpsFallo && !cargandoGPS" class="gps-opciones">
-          <div class="gps-error">
-            <mat-icon>error</mat-icon>
-            <span>GPS no disponible</span>
+          <div class="gps-info">
+            <mat-icon>info</mat-icon>
+            <span>Selección manual activada</span>
           </div>
           
           <div class="opciones-manuales">
-            <p>Elige una opción:</p>
+            <p>🗺️ Usa el mapa para seleccionar tu ubicación exacta:</p>
             
             <button type="button" mat-raised-button color="primary" (click)="reintentarGPS()" class="opcion-btn">
-              <mat-icon>gps_fixed</mat-icon>
-              Reintentar GPS
+              <mat-icon>my_location</mat-icon>
+              Detectar ubicación automática
             </button>
             
             <button type="button" mat-raised-button color="accent" (click)="abrirMapaSeleccion()" class="opcion-btn">
               <mat-icon>map</mat-icon>
-              Seleccionar en Mapa
+              Seleccionar en mapa
             </button>
           </div>
         </div>
@@ -116,7 +123,6 @@
         </mat-form-field>
       </div>
       
-      <!-- 🆕 BOTÓN PARA ABRIR MAPA (SIEMPRE VISIBLE) -->
       <div class="mapa-manual-section" *ngIf="gpsCompletado || gpsFallo">
         <button type="button" mat-stroked-button color="primary" (click)="abrirMapaSeleccion()" class="btn-mapa">
           <mat-icon>edit_location</mat-icon>

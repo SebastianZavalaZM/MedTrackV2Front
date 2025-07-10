@@ -1,4 +1,4 @@
-// usuarios.service.ts - CORREGIR MÉTODO PÚBLICO
+// usuarios.service.ts - SOLO OpenStreetMap
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
@@ -17,7 +17,7 @@ export class UsuariosService {
 
   constructor(private http: HttpClient) { }
 
-  // MÉTODOS CRUD BÁSICOS
+ 
   list(): Observable<Usuarios[]> {
     return this.http.get<Usuarios[]>(this.url);
   }
@@ -46,7 +46,7 @@ export class UsuariosService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // GPS CON PRECISIÓN
+  // 🆕 GPS CON PRECISIÓN - SOLO OpenStreetMap
   obtenerUbicacionConPrecision(): Promise<{
     latitude: number, 
     longitude: number, 
@@ -85,6 +85,7 @@ export class UsuariosService {
             });
             
           } catch (error) {
+            console.warn('No se pudo obtener dirección, usando coordenadas:', error);
             resolve({
               latitude: lat,
               longitude: lng,
@@ -102,10 +103,76 @@ export class UsuariosService {
     });
   }
 
-  // 🆕 MÉTODO PÚBLICO PARA OBTENER DIRECCIÓN
+  obtenerUbicacionGPS(): Promise<{latitude: number, longitude: number, direccion: string}> {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject('Geolocalización no disponible en este navegador');
+        return;
+      }
+
+      const opciones = {
+        enableHighAccuracy: false,  
+        timeout: 10000,             
+        maximumAge: 900000          
+      };
+
+      console.log('🖥️ Obteniendo ubicación aproximada desde ordenador...');
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const precision = position.coords.accuracy;
+          
+          console.log(`📍 Ubicación obtenida - Precisión: ±${precision.toFixed(0)}m (vía WiFi/IP)`);
+          
+          try {
+            const direccion = await this.obtenerDireccionDesdeCoordendas(lat, lng);
+            
+            resolve({
+              latitude: lat,
+              longitude: lng,
+              direccion: direccion
+            });
+            
+          } catch (error) {
+            resolve({
+              latitude: lat,
+              longitude: lng,
+              direccion: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+            });
+          }
+        },
+        (error) => {
+          console.warn('🖥️ Geolocalización falló, usando mapa manual');
+          
+          let mensaje = '';
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              mensaje = 'Ubicación bloqueada. Permite ubicación en el navegador o selecciona manualmente.';
+              break;
+            case error.POSITION_UNAVAILABLE:
+              mensaje = 'Ubicación no disponible. Selecciona tu ubicación en el mapa.';
+              break;
+            case error.TIMEOUT:
+              mensaje = 'Tiempo agotado. Selecciona tu ubicación manualmente.';
+              break;
+            default:
+              mensaje = 'Error de ubicación. Usa el mapa para seleccionar.';
+          }
+          
+          reject(mensaje);
+        },
+        opciones
+      );
+    });
+  }
+
   async obtenerDireccionDesdeCoordendas(lat: number, lng: number): Promise<string> {
     try {
-      // Usando la API gratuita de OpenStreetMap Nominatim
+      console.log('🌍 Usando OpenStreetMap Nominatim');
+      
+      // api openstreetmap
       const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
       
       const response = await fetch(url, {
@@ -122,9 +189,6 @@ export class UsuariosService {
       
       if (data && data.display_name) {
         // Formatear la dirección para que sea más legible
-        const direccionCompleta = data.display_name;
-        
-        // Intentar extraer partes importantes de la dirección
         const address = data.address || {};
         
         let direccionFormateada = '';
@@ -149,115 +213,20 @@ export class UsuariosService {
         }
         
         // Si no se pudo formatear bien, usar la dirección completa
-        return direccionFormateada.length > 10 ? direccionFormateada : direccionCompleta;
+        return direccionFormateada.length > 10 ? direccionFormateada : data.display_name;
       }
       
       // Si no hay respuesta válida, devolver coordenadas
       return `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
       
     } catch (error) {
-      console.warn('Error en geocodificación inversa:', error);
+      console.warn('Error en OpenStreetMap Nominatim:', error);
       
-      // Como fallback, intentar con una API alternativa
-      try {
-        return await this.geocodificacionAlternativa(lat, lng);
-      } catch (errorAlternativo) {
-        console.warn('Error en API alternativa también:', errorAlternativo);
-        return `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-      }
+      // Sin API de respaldo - directamente coordenadas
+      return `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
     }
   }
 
-  // 🆕 MÉTODO PÚBLICO SIMPLE PARA OBTENER GPS
-  obtenerUbicacionGPS(): Promise<{latitude: number, longitude: number, direccion: string}> {
-    return new Promise((resolve, reject) => {
-      if (!navigator.geolocation) {
-        reject('Geolocalización no soportada por este navegador');
-        return;
-      }
-
-      const opciones = {
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 300000
-      };
-
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          
-          console.log(`📍 GPS obtenido - Lat: ${lat}, Lng: ${lng}`);
-          
-          try {
-            const direccion = await this.obtenerDireccionDesdeCoordendas(lat, lng);
-            
-            resolve({
-              latitude: lat,
-              longitude: lng,
-              direccion: direccion
-            });
-            
-          } catch (error) {
-            console.warn('No se pudo obtener la dirección, usando coordenadas:', error);
-            resolve({
-              latitude: lat,
-              longitude: lng,
-              direccion: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
-            });
-          }
-        },
-        (error) => {
-          console.error('Error GPS:', error);
-          
-          let mensaje = 'Error desconocido obteniendo ubicación';
-          
-          switch(error.code) {
-            case error.PERMISSION_DENIED:
-              mensaje = 'Permiso de ubicación denegado por el usuario';
-              break;
-            case error.POSITION_UNAVAILABLE:
-              mensaje = 'Información de ubicación no disponible';
-              break;
-            case error.TIMEOUT:
-              mensaje = 'Tiempo de espera agotado obteniendo ubicación';
-              break;
-          }
-          
-          reject(mensaje);
-        },
-        opciones
-      );
-    });
-  }
-
-  // MÉTODO PRIVADO PARA API ALTERNATIVA
-  private async geocodificacionAlternativa(lat: number, lng: number): Promise<string> {
-    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=es`;
-    
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    if (data && data.locality) {
-      let direccion = '';
-      
-      if (data.locality) direccion += data.locality;
-      if (data.city && data.city !== data.locality) direccion += ', ' + data.city;
-      if (data.principalSubdivision) direccion += ', ' + data.principalSubdivision;
-      if (data.countryName) direccion += ', ' + data.countryName;
-      
-      return direccion || `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-    }
-    
-    return `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-  }
-
-  // VERIFICAR SI GPS ESTÁ DISPONIBLE
   esGPSDisponible(): boolean {
     return 'geolocation' in navigator;
   }

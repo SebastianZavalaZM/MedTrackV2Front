@@ -90,59 +90,54 @@ export class InsertareditarComponent implements OnInit {
   }
 
   // obtener mediante gps automatico
-  async obtenerUbicacionAutomatica(): Promise<void> {
-    this.cargandoGPS = true;
-    this.gpsFallo = false;
-    this.mostrarMensaje('🛰️ Obteniendo tu ubicación GPS...', 'info');
+async obtenerUbicacionAutomatica(): Promise<void> {
+  this.cargandoGPS = true;
+  this.gpsFallo = false;
+  this.mostrarMensaje('Obteniendo ubicación espere porfavor..', 'info');
+  
+  try {
+    const ubicacion = await this.uS.obtenerUbicacionGPS();
     
-    try {
-      const ubicacion = await this.uS.obtenerUbicacionConPrecision();
-      
-      this.actualizarUbicacion(
-        ubicacion.latitude,
-        ubicacion.longitude,
-        ubicacion.direccion
-      );
-      
-      this.gpsCompletado = true;
-      
-      const precision = ubicacion.precision;
-      let mensajePrecision = '';
-      
-      if (precision <= 10) {
-        mensajePrecision = '🎯 Ubicación muy precisa';
-      } else if (precision <= 100) {
-        mensajePrecision = '📍 Ubicación precisa';
-      } else {
-        mensajePrecision = '📱 Ubicación aproximada';
-      }
-      
-      this.mostrarMensaje(`✅ ${mensajePrecision} (±${precision.toFixed(0)}m)`, 'success');
-      
-    } catch (error) {
-      console.error('Error GPS:', error);
-      this.gpsFallo = true;
-      this.gpsCompletado = false;
-      this.mostrarMensaje('❌ GPS no disponible. Puedes seleccionar manualmente en el mapa', 'error');
-      this.habilitarSeleccionManual();
-    } finally {
-      this.cargandoGPS = false;
-    }
+    this.actualizarUbicacion(
+      ubicacion.latitude,
+      ubicacion.longitude,
+      ubicacion.direccion
+    );
+    
+    this.gpsCompletado = true;
+    this.mostrarMensaje('✅ Ubicación aproximada obtenida', 'success');
+    
+    console.log('Ubicación desde ordenador:', ubicacion);
+    
+  } catch (error) {
+    console.log('Geolocalización automática falló, activando mapa manual');
+    this.gpsFallo = true;
+    this.gpsCompletado = false;
+    this.mostrarMensaje('📍 Selecciona tu ubicación en el mapa', 'info');
+    this.habilitarSeleccionManual();
+  } finally {
+    this.cargandoGPS = false;
   }
+}
 
-  // seleccion manual
-  habilitarSeleccionManual(): void {
-    this.mostrarMapaManual = true;
-    this.form.get('ubicacion')?.enable();
-    this.form.get('latitudUsuario')?.enable();
-    this.form.get('longitudUsuario')?.enable();
-    
-    this.form.patchValue({
-      ubicacion: 'Haz clic en el mapa para seleccionar tu ubicación',
-      latitudUsuario: -12.0464, // lima
-      longitudUsuario: -77.0428
-    });
-  }
+habilitarSeleccionManual(): void {
+  this.mostrarMapaManual = true;
+  this.form.get('ubicacion')?.enable();
+  this.form.get('latitudUsuario')?.enable();
+  this.form.get('longitudUsuario')?.enable();
+  
+  // Coordenadas por defecto (cambia por tu ciudad)
+  this.form.patchValue({
+    ubicacion: 'Haz clic en el mapa para seleccionar tu ubicación',
+    latitudUsuario: -12.0464,
+    longitudUsuario: -77.0428
+  });
+  
+  // Auto-abrir mapa si es la primera vez
+  setTimeout(() => {
+    this.abrirMapaSeleccion();
+  }, 1000);
+}
 
   // ACTUALIZAR UBICACIÓN (GPS O MANUAL)
   actualizarUbicacion(lat: number, lng: number, direccion: string): void {
