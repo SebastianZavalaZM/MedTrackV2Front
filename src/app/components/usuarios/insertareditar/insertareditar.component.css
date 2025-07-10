@@ -4,7 +4,7 @@
   box-shadow: 0 4px 24px rgba(67, 206, 162, 0.12);
   padding: 32px 24px;
   margin: 32px auto;
-  max-width: 600px;
+  max-width: 700px;
 }
 
 h1 {
@@ -29,8 +29,135 @@ mat-form-field {
   margin-bottom: 8px;
 }
 
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  background: transparent;
+/* SECCIÓN GPS MEJORADA */
+.gps-section {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border-radius: 12px;
+  border: 2px solid #4caf50;
+}
+
+.gps-section h3 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.gps-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.gps-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4caf50;
+  font-weight: 600;
+  animation: fadeIn 0.5s ease;
+}
+
+.gps-success mat-icon {
+  color: #4caf50;
+  font-size: 28px;
+}
+
+/* 🆕 OPCIONES MANUALES */
+.gps-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.gps-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f44336;
+  font-weight: 600;
+}
+
+.gps-error mat-icon {
+  color: #f44336;
+  font-size: 28px;
+}
+
+.opciones-manuales {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.opciones-manuales p {
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.opcion-btn {
+  margin: 0 8px 8px 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 🆕 SECCIÓN MAPA MANUAL */
+.mapa-manual-section {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.btn-mapa {
+  background: linear-gradient(135deg, #2196f3, #64b5f6) !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 24px;
+  font-weight: 600;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+}
+
+.btn-mapa:hover {
+  background: linear-gradient(135deg, #1976d2, #2196f3) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.coordenadas-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.coordenadas-row mat-form-field {
+  flex: 1;
+}
+
+mat-form-field input:disabled {
+  background: #f5f5f5;
+  color: #666;
+  font-style: italic;
 }
 
 mat-radio-group {
@@ -40,11 +167,6 @@ mat-radio-group {
   background: #f1f8e9;
   border-radius: 8px;
   padding: 8px 16px;
-}
-
-mat-radio-button {
-  color: #185a9d;
-  font-weight: 500;
 }
 
 button[mat-raised-button] {
@@ -61,8 +183,44 @@ button[mat-raised-button]:hover {
   background: #2ecc71;
 }
 
-.mat-error {
-  color: #e53935;
-  font-size: 0.95em;
-  font-weight: 500;
+button[mat-raised-button]:disabled {
+  background: #ccc !important;
+  color: #666 !important;
+}
+
+/* ESTILOS SNACKBAR */
+::ng-deep .snack-success {
+  background: #4caf50 !important;
+  color: white !important;
+}
+
+::ng-deep .snack-error {
+  background: #f44336 !important;
+  color: white !important;
+}
+
+::ng-deep .snack-info {
+  background: #2196f3 !important;
+  color: white !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .coordenadas-row {
+    flex-direction: column;
+  }
+  
+  .gps-section {
+    margin: 15px 0;
+    padding: 15px;
+  }
+  
+  .opciones-manuales {
+    padding: 10px;
+  }
+  
+  .opcion-btn {
+    width: 100%;
+    margin: 4px 0;
+  }
 }
