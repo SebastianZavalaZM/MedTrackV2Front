@@ -1,0 +1,59 @@
+.title-container {
+  text-align: center;
+  margin: 4rem auto 2rem;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  color: #2c3e50;
+}
+
+.chart-container {
+  max-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 1rem;
+  }
+}
+
+/* Estilo para cuando no hay datos */
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 400px;
+  border: 2px dashed #e0e0e0;
+  background-color: #fff8f0;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.no-data-icon {
+  color: #ff7043;
+  font-size: 3rem;
+}
+
+.no-data-message {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #555;
+}
