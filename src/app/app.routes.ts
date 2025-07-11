@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import {UsuariosComponent} from './components/usuarios/usuarios.component';
-import {InsertareditarComponent} from './components/usuarios/insertareditar/insertareditar.component';
+import { UsuariosComponent} from './components/usuarios/usuarios.component';
+import { InsertareditarComponent} from './components/usuarios/insertareditar/insertareditar.component';
 import { TipoEnfermedadComponent } from './components/tipoenfermedad/tipoenfermedad.component';
 import { InsertareditarteComponent } from './components/tipoenfermedad/insertareditar/insertareditar.component';
 import { BuscarteComponent } from './components/tipoenfermedad/buscar/buscar.component';
@@ -30,14 +30,13 @@ import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/b
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
-import {ReportesComponent} from './components/reportes/reportes.component';
-import {Reporte1Component} from './components/reportes/reporte1/reporte1.component';
-import {Reporte2Component} from './components/reportes/reporte2/reporte2.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
 import { BuscarUsuarioSuporteComponent } from './components/suporte/buscar-usuario-suporte/buscar-usuario-suporte.component';
 import { BuscarFechaSuporteComponent } from './components/suporte/buscar-fecha-suporte/buscar-fecha-suporte.component';
-
-
+import { ReportesComponent} from './components/reportes/reportes.component';
+import { Reporte1Component} from './components/reportes/reporte1/reporte1.component';
+import { Reporte2Component} from './components/reportes/reporte2/reporte2.component';
+import {MapasdecalorComponent} from './components/mapacalor/mapasdecalor/mapasdecalor.component';
 
 export const routes: Routes = [
 {
@@ -224,5 +223,9 @@ export const routes: Routes = [
         canActivate: [seguridadGuard],
 
   },
-
+  {
+    path: 'mapacalor/mapasdecalor',
+    component: MapasdecalorComponent,
+    canActivate: [seguridadGuard]
+  },
 ];

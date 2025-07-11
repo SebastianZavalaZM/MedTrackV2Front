@@ -9,7 +9,7 @@
 
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuUsuarios" class="btn-verde" *ngIf="isDeveloper()">
+    <button mat-button [matMenuTriggerFor]="menuUsuarios" class="btn-verde" *ngIf="isDeveloper() || isAdmin()">
       <mat-icon>account_circle</mat-icon>
       Usuarios
     </button>
@@ -23,7 +23,7 @@
   </div>
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuForo" class="btn-verde" *ngIf="isDeveloper()">
+    <button mat-button [matMenuTriggerFor]="menuForo" class="btn-verde"  >
       <mat-icon>forum</mat-icon>
       Foros
     </button>
@@ -44,7 +44,7 @@
   </div>
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuTipoSuscripcion" class="btn-verde">
+    <button mat-button [matMenuTriggerFor]="menuTipoSuscripcion" class="btn-verde" *ngIf="isDeveloper() || isAdmin()">
       <mat-icon>category</mat-icon>
       Tipos de Suscripción
     </button>
@@ -58,7 +58,7 @@
   </div>
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuMapa" class="btn-verde">
+    <button mat-button [matMenuTriggerFor]="menuMapa" class="btn-verde" *ngIf="isDeveloper() || isAdmin() || isPremium()">
       <mat-icon>map icon</mat-icon>
       Mapas de Calor
     </button>
@@ -88,7 +88,7 @@
   </div>
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuRepo" class="btn-verde">
+    <button mat-button [matMenuTriggerFor]="menuRepo" class="btn-verde" *ngIf="isDeveloper() || isAdmin() || isPremium()">
       <mat-icon>dns</mat-icon>
       Reportes
     </button>

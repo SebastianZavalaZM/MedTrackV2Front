@@ -20,13 +20,17 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-            "assets": [ "src/assets"     
+            "assets": [ "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/libs/heatmap.min.js",
+              "src/assets/libs/leaflet-heatmap.js"
+            ],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -88,9 +92,13 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/libs/heatmap.min.js",
+              "src/assets/libs/leaflet-heatmap.js"
+            ]
           }
         }
       }
