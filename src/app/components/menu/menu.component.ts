@@ -28,10 +28,13 @@ export class MenuComponent {
     sessionStorage.clear();
   }
 
-  verificar() {
-    this.role = this.loginService.showRole();
+   verificar() {
+  if (typeof window !== 'undefined') {
+    this.role = this.loginService.showRole() || '';
     return this.loginService.verificar();
   }
+  return false;
+}
   isDeveloper() {
     return this.role === 'DEVELOPER';
   }

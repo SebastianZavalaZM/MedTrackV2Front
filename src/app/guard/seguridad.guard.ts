@@ -1,19 +1,27 @@
-import { ActivatedRouteSnapshot,  Router, RouterStateSnapshot } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { inject } from '@angular/core';
+import { LoginService } from '../services/login.service';
 
-export const seguridadGuard= (
+export const seguridadGuard = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
-    const lService=inject(LoginService)
-    const router=inject(Router)
-    const rpta=lService.verificar();
-    const allowedRoles = route.data['roles'] || []
-    if(!rpta){
-      router.navigate(['/login']);
-      return false;
-    }
-  // Si hay roles definidos y el rol del usuario no está incluido
-    return rpta;
+  const lService = inject(LoginService);
+  const router = inject(Router);
+  const isAuthenticated = lService.verificar();
+
+  if (!isAuthenticated) {
+    router.navigate(['/login']);
+    return false;
+  }
+
+  const allowedRoles = route.data['roles'] || [];
+  const userRole = lService.showRole();
+
+  if (allowedRoles.length > 0 && (!userRole || !allowedRoles.includes(userRole))) {
+    router.navigate(['/homes']);
+    return false;
+  }
+
+  return true;
 };

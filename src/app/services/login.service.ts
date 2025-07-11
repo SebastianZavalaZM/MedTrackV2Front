@@ -7,30 +7,29 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class LoginService {
-
   constructor(private http: HttpClient) {}
 
   login(request: JwtRequest) {
     return this.http.post('http://localhost:8080/login', request);
   }
 
-  verificar() {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      let token = sessionStorage.getItem('token');
-      return token != null;
-    }
-    return false;
-  }
+showRole(): string | null {
+  if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+    let token = sessionStorage.getItem('token');
+    if (!token) return null;
 
-  showRole() {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      let token = sessionStorage.getItem('token');
-      if (!token) return null;
-
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      return decodedToken?.role || null;
-    }
-    return null;
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    return decodedToken?.role || null;
   }
+  return null;
+}
+
+verificar(): boolean {
+  if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+    let token = sessionStorage.getItem('token');
+    return token != null;
+  }
+  return false;
+}
 }

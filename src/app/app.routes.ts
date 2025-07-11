@@ -50,46 +50,60 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path:'usuarios',component:UsuariosComponent,
-    children:[
-      {
-        path:'formulario',component:InsertareditarComponent
-      },
-      {
-        path:'ediciones/:id',component:InsertareditarComponent
-      }
-    ],
-    canActivate: [seguridadGuard],
-  },
+  path: 'usuarios',
+  component: UsuariosComponent,
+  canActivate: [seguridadGuard],
+  data: { roles: ['ADMIN', 'DEVELOPER'] }, 
+  children: [
+    {
+      path: 'formulario',
+      component: InsertareditarComponent,
+      canActivate: [seguridadGuard],
+      data: { roles: ['ADMIN', 'DEVELOPER'] }  
+    },
+    {
+      path: 'ediciones/:id',
+      component: InsertareditarComponent,
+      canActivate: [seguridadGuard],
+      data: { roles: ['ADMIN', 'DEVELOPER'] } 
+    }
+  ]
+}
+,
   {
     path:'tipoenfermedades/listas',component:TipoEnfermedadComponent,
     children:[
       {
-        path:'formulario',component:InsertareditarteComponent
+        path:'formulario',component:InsertareditarteComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'ediciones/:id',component:InsertareditarteComponent
+        path:'ediciones/:id',component:InsertareditarteComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'buscarPorNombre',component:BuscarteComponent
+        path:'buscarPorNombre',component:BuscarteComponent,
+        canActivate: [seguridadGuard],
       }
 
     ],
-    canActivate: [seguridadGuard],
+    
   },
   {
     path: 'enfermedades/listas', component: EnfermedadComponent,
     canActivate: [seguridadGuard],
-    data: { roles: ['ADMIN'] },
     children: [
       {
-        path:'formulario',component:InsertareditareComponent
+        path:'formulario',component:InsertareditareComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'ediciones/:id',component:InsertareditareComponent
+        path:'ediciones/:id',component:InsertareditareComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'contar-nivel-riesgo',component:ContadornvlriesgoComponent
+        path:'contar-nivel-riesgo',component:ContadornvlriesgoComponent,
+        canActivate: [seguridadGuard],
       }
 
     ],
@@ -97,47 +111,80 @@ export const routes: Routes = [
   },
   {
     path: 'mapacalor/listas', component: MapacalorComponent,
+    canActivate: [seguridadGuard],
+    data: { roles: ['DEVELOPER', 'ADMIN', 'PREMIUM'] },
     children:[
       {
         path:'formulario',component:InsertareditarmcComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'ediciones/:id',component:InsertareditarmcComponent
+        path:'ediciones/:id',component:InsertareditarmcComponent,
+        canActivate: [seguridadGuard],
       }
     ],
-    canActivate: [seguridadGuard],
+    
   },
   {
     path: 'notification/listas', component: NotificacionComponent,
     children: [
       {
         path: 'formulario', component: InsertareditarnotComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path: 'ediciones/:id', component: InsertareditarnotComponent
+        path: 'ediciones/:id', component: InsertareditarnotComponent,
+        canActivate: [seguridadGuard],
       }
     ],
-    canActivate: [seguridadGuard],
+    
   },
-  {
-    path: 'tiposuscripcion',
-    children: [
-      { path: 'listar', component: ListarTiposuscripcionComponent },
-      { path: 'insertar', component: InsertarTiposuscripcionComponent },
-      { path: 'editar/:id', component: InsertarTiposuscripcionComponent },
-      { path: '', redirectTo: 'listar', pathMatch: 'full' }
-    ],
-    canActivate: [seguridadGuard],
-  },
+{
+  path: 'tiposuscripcion',
+  canActivate: [seguridadGuard],
+  data: { roles: ['ADMIN', 'DEVELOPER'] },
+  children: [
+    {
+      path: 'listar',
+      component: ListarTiposuscripcionComponent,
+      canActivate: [seguridadGuard]
+    },
+    {
+      path: 'insertar',
+      component: InsertarTiposuscripcionComponent,
+      canActivate: [seguridadGuard]
+    },
+    {
+      path: 'editar/:id',
+      component: InsertarTiposuscripcionComponent,
+      canActivate: [seguridadGuard]
+    },
+    {
+      path: '',
+      redirectTo: 'listar',
+      pathMatch: 'full'
+    }
+  ]
+},
   {
     path: 'soporte',
     component: SuporteComponent,
     children: [
-      { path: 'listar', component: ListarSuporteComponent },
-      { path: 'insertar', component: InsertarSuporteComponent },
-      { path: 'editar/:id', component: InsertarSuporteComponent },
-      { path: 'buscar-usuario', component: BuscarUsuarioSuporteComponent },
-      { path: 'buscar-fecha', component: BuscarFechaSuporteComponent },
+      { path: 'listar', component: ListarSuporteComponent,
+        canActivate: [seguridadGuard],
+       },
+      { path: 'insertar', component: InsertarSuporteComponent,
+        canActivate: [seguridadGuard],
+       },
+      { path: 'editar/:id', component: InsertarSuporteComponent,
+        canActivate: [seguridadGuard],
+       },
+      { path: 'buscar-usuario', component: BuscarUsuarioSuporteComponent,
+        canActivate: [seguridadGuard],
+       },
+      { path: 'buscar-fecha', component: BuscarFechaSuporteComponent,
+        canActivate: [seguridadGuard],
+       },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
     ],
     canActivate: [seguridadGuard]
@@ -146,78 +193,94 @@ export const routes: Routes = [
     path: 'articuloinformativo/listas', component: ArticuloinformativoComponent,
     children: [
       {
-        path:'formulario',component:InsertareditaraiComponent
+        path:'formulario',component:InsertareditaraiComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'ediciones/:id',component:InsertareditaraiComponent
+        path:'ediciones/:id',component:InsertareditaraiComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'buscartitulo',component:BuscartituloComponent
+        path:'buscartitulo',component:BuscartituloComponent,
+        canActivate: [seguridadGuard],
       }
 
     ],
-    canActivate: [seguridadGuard],
+    
   },
   {
     path: 'reporteciudadano/listas', component: ReporteciudadanoComponent,
     children: [
       {
-        path:'formulario',component:InsertareditarrcComponent
+        path:'formulario',component:InsertareditarrcComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'ediciones/:id',component:InsertareditarrcComponent
+        path:'ediciones/:id',component:InsertareditarrcComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path:'buscarPorCiudadOEnfermedad',component:BuscarPorCiudadOenfermedadComponent
+        path:'buscarPorCiudadOEnfermedad',component:BuscarPorCiudadOenfermedadComponent,
+        canActivate: [seguridadGuard],
       }
 
     ],
-    canActivate: [seguridadGuard],
+
   },
   {
     path: 'Foros', component:ForosComponent,
     children: [
       {
-        path: 'formularioforo', component:InsertareditarforosComponent
+        path: 'formularioforo', component:InsertareditarforosComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path: 'edicionesforo/:id', component:InsertareditarforosComponent
+        path: 'edicionesforo/:id', component:InsertareditarforosComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path: 'buscarporperiodo', component: BuscarporperiodoComponent
+        path: 'buscarporperiodo', component: BuscarporperiodoComponent,
+        canActivate: [seguridadGuard],
       }
     ],
-    canActivate: [seguridadGuard],
+    
   },
   {
     path: 'Comentarios', component:ComentarioforosComponent,
     children: [
       {
-        path: 'formulariocomentario', component:InsertareditarcomentarioforosComponent
+        path: 'formulariocomentario', component:InsertareditarcomentarioforosComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent
+        path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent,
+        canActivate: [seguridadGuard],
       },
       {
-        path: 'busquedatituloforo', component:BuscarforoComponent
+        path: 'busquedatituloforo', component:BuscarforoComponent,
+        canActivate: [seguridadGuard],
       }
     ]
   },
   {
     path: 'reportes',
     component: ReportesComponent,
+    data: { roles: ['ADMIN', 'DEVELOPER', 'PREMIUM'] },
     children: [
       {
         path: 'estadisticas',
         component:Reporte1Component,
+        canActivate: [seguridadGuard],
       },
       {
         path: 'estadisticas2',
         component:Reporte2Component,
+        canActivate: [seguridadGuard],
       },
       {
         path: 'tipoenfermedad',
         component:Reporte3Component,
+        canActivate: [seguridadGuard],
       }
       ],
 
@@ -231,6 +294,7 @@ export const routes: Routes = [
   {
     path: 'mapacalor/mapasdecalor',
     component: MapasdecalorComponent,
-    canActivate: [seguridadGuard]
+    canActivate: [seguridadGuard],
+    data: { roles: ['ADMIN', 'DEVELOPER', 'PREMIUM'] }
   },
 ];
