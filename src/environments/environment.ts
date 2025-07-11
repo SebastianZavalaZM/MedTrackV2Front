@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  base: "http://localhost:8080"
+  base: "https://medtrack-1ubn.onrender.com"
 }
