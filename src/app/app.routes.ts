@@ -36,6 +36,7 @@ import { BuscarFechaSuporteComponent } from './components/suporte/buscar-fecha-s
 import { ReportesComponent} from './components/reportes/reportes.component';
 import { Reporte1Component} from './components/reportes/reporte1/reporte1.component';
 import { Reporte2Component} from './components/reportes/reporte2/reporte2.component';
+import { Reporte3Component} from './components/reportes/reporte3/reporte3.component';
 import {MapasdecalorComponent} from './components/mapacalor/mapasdecalor/mapasdecalor.component';
 
 export const routes: Routes = [
@@ -213,6 +214,10 @@ export const routes: Routes = [
       {
         path: 'estadisticas2',
         component:Reporte2Component,
+      },
+      {
+        path: 'tipoenfermedad',
+        component:Reporte3Component,
       }
       ],
 
