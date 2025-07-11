@@ -1,68 +1,321 @@
 .container {
-  background: #e8f5e9;
+  background: linear-gradient(135deg, #ffffff, #f3f3f3);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(67, 206, 162, 0.12);
-  padding: 32px 24px;
-  margin: 32px auto;
-  max-width: 600px;
+  box-shadow: 0 4px 24px rgba(255, 152, 0, 0.12);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
 }
 
 h1 {
   color: #185a9d;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   letter-spacing: 1px;
 }
 
-form {
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 30px;
+}
+
+.mapa-section {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.mapa-section h3 {
+  color: #185a9d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.controles-mapa {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 8px;
+  border-left: 4px solid #4285f4; /* Color Google */
+}
+
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-group label {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.mapa-leaflet {
+  height: 450px;
+  width: 100%;
+  border-radius: 8px;
+  border: 3px solid #4285f4; /* Borde Google azul */
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.2);
+}
+
+.botones-mapa {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.estado-mapa {
+  text-align: center;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.cargando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #4285f4;
+  font-weight: 600;
+}
+
+.ubicacion-ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #4caf50;
+  font-weight: 600;
+  animation: fadeIn 0.5s ease;
+}
+
+.ubicacion-ok mat-icon {
+  color: #4caf50;
+}
+
+.instrucciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #4285f4;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+.instrucciones mat-icon {
+  color: #4285f4;
+}
+
+/* 🎨 LEYENDA DE CALOR */
+.leyenda-calor {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #185a9d;
+}
+
+.leyenda-calor h4 {
+  color: #185a9d;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.leyenda-items {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 8px;
+}
+
+.leyenda-item {
+  display: flex;
   align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.color-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* 📝 SLIDERS PERSONALIZADOS */
+.custom-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #e0e0e0, #4285f4);
+  outline: none;
+  -webkit-appearance: none;
+  margin: 10px 0;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #4285f4;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.4);
+  border: 3px solid white;
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #4285f4;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.4);
+}
+
+.intensidad-slider {
+  background: linear-gradient(to right, #4caf50, #ff9800, #f44336);
+}
+
+.intensidad-slider::-webkit-slider-thumb {
+  background: #ff5722;
+}
+
+.intensidad-slider::-moz-range-thumb {
+  background: #ff5722;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: -5px;
+  font-weight: 500;
+}
+
+/* ANIMACIONES */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 📝 FORMULARIO */
+.formulario-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.formulario-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.coordenadas-grupo h4 {
+  color: #185a9d;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.coordenadas-row {
+  display: flex;
+  gap: 15px;
+}
+
+.coordenadas-row mat-form-field {
+  flex: 1;
 }
 
 mat-form-field {
   width: 100%;
-  max-width: 400px;
-  background: #fff;
+  background: #fafafa;
   border-radius: 8px;
-  margin-bottom: 8px;
 }
 
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  background: transparent;
+mat-form-field input:disabled,
+mat-form-field input[readonly] {
+  background: #f0f0f0;
+  color: #666;
+  font-style: italic;
 }
 
-mat-radio-group {
+.botones-form {
   display: flex;
-  gap: 24px;
-  margin: 16px 0;
-  background: #f1f8e9;
-  border-radius: 8px;
-  padding: 8px 16px;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-mat-radio-button {
-  color: #185a9d;
-  font-weight: 500;
-}
-
-button[mat-raised-button] {
-  background: #43cea2;
-  color: #fff;
-  border-radius: 8px;
-  min-width: 120px;
-  margin: 0 8px;
+.botones-form button {
+  min-width: 150px;
   font-weight: bold;
-  transition: background 0.2s;
+  border-radius: 25px;
 }
 
-button[mat-raised-button]:hover {
-  background: #2ecc71;
+/* ESTILOS SNACKBAR */
+::ng-deep .snack-success {
+  background: #4caf50 !important;
+  color: white !important;
 }
 
-.mat-error {
-  color: #e53935;
-  font-size: 0.95em;
-  font-weight: 500;
+::ng-deep .snack-error {
+  background: #f44336 !important;
+  color: white !important;
+}
+
+::ng-deep .snack-info {
+  background: #4285f4 !important;
+  color: white !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .mapa-leaflet {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .coordenadas-row {
+    flex-direction: column;
+  }
+  
+  .botones-form {
+    flex-direction: column;
+  }
+  
+  .mapa-leaflet {
+    height: 350px;
+  }
+  
+  .leyenda-items {
+    gap: 6px;
+  }
+  
+  .leyenda-item {
+    font-size: 0.8rem;
+  }
 }

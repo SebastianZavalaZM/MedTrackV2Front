@@ -1,0 +1,64 @@
+<div class="container">
+    <div style="text-align: center;margin: 5%;">
+      <h1>Visualización de Mapas de Calor</h1>
+    </div>
+    
+    <div class="content">
+      <!-- Header con controles -->
+      <div class="header-controls">
+        <div class="controls-left">
+          <h2>Mapa de Calor Interactivo</h2>
+          <p>Total de zonas registradas: <strong>{{ mapasCalor.length }}</strong></p>
+        </div>
+        <div class="controls-right">
+          <button mat-raised-button color="primary" (click)="recargarMapa()">
+            <mat-icon>refresh</mat-icon>
+            Recargar Datos
+          </button>
+        </div>
+      </div>
+  
+      <!-- Leyenda -->
+      <div class="leyenda-container">
+        <h3>Leyenda de Intensidad</h3>
+        <div class="leyenda-items">
+          <div class="leyenda-item">
+            <div class="color-indicator alto"></div>
+            <span>Alto Riesgo</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="color-indicator medio"></div>
+            <span>Medio Riesgo</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="color-indicator bajo"></div>
+            <span>Bajo Riesgo</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Mapa -->
+      <div class="mapa-container">
+        <div id="mapaCalor" class="mapa"></div>
+      </div>
+  
+      <!-- Información adicional -->
+      <div class="info-container">
+        <h3>Información del Sistema</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <strong>Mapas Registrados:</strong>
+            <span>{{ mapasCalor.length }}</span>
+          </div>
+          <div class="info-item">
+            <strong>Tecnología:</strong>
+            <span>Google Maps + Leaflet</span>
+          </div>
+          <div class="info-item">
+            <strong>Interacción:</strong>
+            <span>Haz clic en las zonas para ver detalles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
