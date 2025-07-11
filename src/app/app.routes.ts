@@ -33,6 +33,10 @@ import { HomeComponent } from './components/home/home.component';
 import {ReportesComponent} from './components/reportes/reportes.component';
 import {Reporte1Component} from './components/reportes/reporte1/reporte1.component';
 import {Reporte2Component} from './components/reportes/reporte2/reporte2.component';
+import { SuporteComponent } from './components/suporte/suporte.component';
+import { BuscarUsuarioSuporteComponent } from './components/suporte/buscar-usuario-suporte/buscar-usuario-suporte.component';
+import { BuscarFechaSuporteComponent } from './components/suporte/buscar-fecha-suporte/buscar-fecha-suporte.component';
+
 
 
 export const routes: Routes = [
@@ -127,13 +131,16 @@ export const routes: Routes = [
   },
   {
     path: 'soporte',
+    component: SuporteComponent,
     children: [
       { path: 'listar', component: ListarSuporteComponent },
       { path: 'insertar', component: InsertarSuporteComponent },
       { path: 'editar/:id', component: InsertarSuporteComponent },
+      { path: 'buscar-usuario', component: BuscarUsuarioSuporteComponent },
+      { path: 'buscar-fecha', component: BuscarFechaSuporteComponent },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
     ],
-    canActivate: [seguridadGuard],
+    canActivate: [seguridadGuard]
   },
   {
     path: 'articuloinformativo/listas', component: ArticuloinformativoComponent,

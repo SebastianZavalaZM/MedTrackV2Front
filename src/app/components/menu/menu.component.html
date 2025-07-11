@@ -107,7 +107,7 @@
    <span class="toolbar-spacer"></span>
  <div class="right-menu">
     <button mat-button [matMenuTriggerFor]="menuSalir" class="btn-verde" >
-      <mat-icon>person</mat-icon>Usuario
+      <mat-icon>person</mat-icon>Perfil
     </button>
  </div>
 
@@ -186,11 +186,19 @@
 <mat-menu #menuSoporte="matMenu" class="menu-verde">
   <button mat-menu-item routerLink="/soporte/listar" class="item-verde">
     <mat-icon>list</mat-icon>
-    <span>Listar</span>
+    <span>Listar Soportes</span>
   </button>
   <button mat-menu-item routerLink="/soporte/insertar" class="item-verde">
     <mat-icon>add</mat-icon>
-    <span>Insertar</span>
+    <span>Crear Soporte</span>
+  </button>
+  <button mat-menu-item routerLink="/soporte/buscar-usuario" class="item-verde">
+    <mat-icon>person_search</mat-icon>
+    <span>Buscar por Usuario</span>
+  </button>
+  <button mat-menu-item routerLink="/soporte/buscar-fecha" class="item-verde">
+    <mat-icon>date_range</mat-icon>
+    <span>Buscar por Fecha</span>
   </button>
 </mat-menu>
 

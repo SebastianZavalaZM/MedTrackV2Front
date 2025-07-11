@@ -3,7 +3,7 @@ export class Usuarios {
   username: string = '';
   correo: string = '';
   password: string = '';
-  fecharegistro: string = '';
+  fecharegistro: Date = new Date();
   ubicacion: string = '';
   longitudUsuario: number = 0;
   latitudUsuario: number = 0;

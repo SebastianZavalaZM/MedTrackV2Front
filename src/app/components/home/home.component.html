@@ -1,116 +1,158 @@
 <!-- home.component.html -->
 <div class="home-container">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1 class="hero-title">
-            Bienvenido a <span class="brand-name">MedTrack</span>
-          </h1>
-          <p class="hero-subtitle">
-            Tu sistema integral de seguimiento médico y salud comunitaria
-          </p>
-          <p class="hero-description">
-            Monitorea enfermedades, gestiona reportes ciudadanos y mantente informado
-            sobre la salud de tu comunidad en tiempo real.
-          </p>
-          <div class="hero-buttons">
-            <button mat-raised-button class="btn-primary" routerLink="/usuarios">
-              <mat-icon>people</mat-icon>
-              Gestionar Usuarios
-            </button>
-            <button mat-raised-button class="btn-secondary" routerLink="/usuarios/formulario">
-              <mat-icon>report</mat-icon>
-              Registrar Usuarios
-            </button>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="assets/dashboardMedTrack.png" alt="Dashboard MedTrack" />
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Bienvenido a <span class="brand-name">MedTrack</span>
+        </h1>
+        <p class="hero-subtitle">
+          Tu sistema integral de seguimiento médico y salud comunitaria
+        </p>
+        <p class="hero-description">
+          Monitorea enfermedades, gestiona reportes ciudadanos y mantente informado 
+          sobre la salud de tu comunidad en tiempo real.
+        </p>
+        <div class="hero-buttons">
+          <button mat-raised-button class="btn-primary" routerLink="/usuarios">
+            <mat-icon>people</mat-icon>
+            Gestionar Usuarios
+          </button>
+          <button mat-raised-button class="btn-secondary" routerLink="/reporteciudadano">
+            <mat-icon>report</mat-icon>
+            Ver Reportes
+          </button>
         </div>
       </div>
-    </section>
+      <div class="hero-image">
+        <img src="assets/dashboardMedTrack.png" alt="Dashboard MedTrack" />
+      </div>
+    </div>
+  </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
-      <div class="container">
-        <h2 class="section-title">¿Qué puedes hacer con MedTrack?</h2>
-        <div class="features-grid">
-
-          <div class="feature-card" routerLink="/enfermedades">
-            <div class="feature-icon">
-              <mat-icon>coronavirus</mat-icon>
-            </div>
-            <h3>Gestión de Enfermedades</h3>
-            <p>Registra y monitorea diferentes tipos de enfermedades con sus niveles de riesgo</p>
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">¿Qué puedes hacer con MedTrack?</h2>
+      <div class="features-grid">
+        
+        <!-- 1. USUARIOS -->
+        <div class="feature-card" (click)="navigateTo('/usuarios')">
+          <div class="feature-icon">
+            <mat-icon>people</mat-icon>
           </div>
+          <h3>Gestión de Usuarios</h3>
+          <p>Administra usuarios del sistema y sus permisos</p>
+        </div>
 
-          <div class="feature-card" routerLink="/mapacalor">
-            <div class="feature-icon">
-              <mat-icon>map</mat-icon>
-            </div>
-            <h3>Mapas de Calor</h3>
-            <p>Visualiza zonas de riesgo y concentración de casos en tiempo real</p>
+        <!-- 2. TIPO ENFERMEDAD -->
+        <div class="feature-card" (click)="navigateTo('/tipoenfermedades/listas')">
+          <div class="feature-icon">
+            <mat-icon>category</mat-icon>
           </div>
+          <h3>Tipos de Enfermedad</h3>
+          <p>Clasifica y organiza los diferentes tipos de enfermedades</p>
+        </div>
 
-          <div class="feature-card" routerLink="/Foros">
-            <div class="feature-icon">
-              <mat-icon>forum</mat-icon>
-            </div>
-            <h3>Foros Comunitarios</h3>
-            <p>Participa en discusiones sobre salud y bienestar comunitario</p>
+        <!-- 3. TIPO SUSCRIPCION -->
+        <div class="feature-card" (click)="navigateTo('/tiposuscripcion/listar')">
+          <div class="feature-icon">
+            <mat-icon>subscription</mat-icon>
           </div>
+          <h3>Tipos de Suscripción</h3>
+          <p>Gestiona diferentes planes y tipos de suscripciones</p>
+        </div>
 
-          <div class="feature-card" routerLink="/notificacion">
-            <div class="feature-icon">
-              <mat-icon>notifications</mat-icon>
-            </div>
-            <h3>Notificaciones</h3>
-            <p>Recibe alertas importantes sobre salud pública y emergencias</p>
+        <!-- 4. SUPORTE -->
+        <div class="feature-card" (click)="navigateTo('/soporte')">
+          <div class="feature-icon">
+            <mat-icon>support</mat-icon>
           </div>
+          <h3>Soporte Técnico</h3>
+          <p>Gestiona tickets de soporte con búsquedas avanzadas por fecha y usuario</p>
+        </div>
 
-          <div class="feature-card" routerLink="/articuloinformativo">
-            <div class="feature-icon">
-              <mat-icon>article</mat-icon>
-            </div>
-            <h3>Artículos Informativos</h3>
-            <p>Accede a información confiable sobre salud y prevención</p>
+        <!-- 5. REPORTE CIUDADANO -->
+        <div class="feature-card" (click)="navigateTo('/reporteciudadano/listas')">
+          <div class="feature-icon">
+            <mat-icon>report</mat-icon>
           </div>
+          <h3>Reportes Ciudadanos</h3>
+          <p>Reporta casos y situaciones de salud en tu comunidad</p>
+        </div>
 
-          <div class="feature-card" routerLink="/Foros/formularioforo">
-            <div class="feature-icon">
-              <mat-icon>support</mat-icon>
-            </div>
-            <h3>Registrar Foros</h3>
-            <p>Registra los Foros</p>
+        <!-- 6. NOTIFICACION -->
+        <div class="feature-card" (click)="navigateTo('/notification/listas')">
+          <div class="feature-icon">
+            <mat-icon>notifications</mat-icon>
           </div>
+          <h3>Notificaciones</h3>
+          <p>Recibe alertas importantes sobre salud pública y emergencias</p>
+        </div>
 
+        <!-- 7. MAPA CALOR -->
+        <div class="feature-card" (click)="navigateTo('/mapacalor/listas')">
+          <div class="feature-icon">
+            <mat-icon>map</mat-icon>
+          </div>
+          <h3>Mapas de Calor</h3>
+          <p>Visualiza zonas de riesgo y concentración de casos en tiempo real</p>
+        </div>
+
+        <!-- 8. FOROS -->
+        <div class="feature-card" (click)="navigateTo('/Foros/formularioforo')">
+          <div class="feature-icon">
+            <mat-icon>forum</mat-icon>
+          </div>
+          <h3>Foros Comunitarios</h3>
+          <p>Participa en discusiones sobre salud y bienestar comunitario</p>
+        </div>
+
+        <!-- 9. ENFERMEDADES -->
+        <div class="feature-card" (click)="navigateTo('/enfermedades/listas')">
+          <div class="feature-icon">
+            <mat-icon>coronavirus</mat-icon>
+          </div>
+          <h3>Gestión de Enfermedades</h3>
+          <p>Registra y monitorea diferentes tipos de enfermedades con sus niveles de riesgo</p>
+        </div>
+
+        <!-- 10. COMENTARIOS FOROS -->
+        <div class="feature-card" (click)="navigateTo('/Foros')">
+          <div class="feature-icon">
+            <mat-icon>comment</mat-icon>
+          </div>
+          <h3>Comentarios de Foros</h3>
+          <p>Comenta y participa en foros de discusión sobre salud</p>
+        </div>
+
+        <!-- 11. ARTICULOS INFORMATIVOS -->
+        <div class="feature-card" (click)="navigateTo('/articuloinformativo/listas')">
+          <div class="feature-icon">
+            <mat-icon>article</mat-icon>
+          </div>
+          <h3>Artículos Informativos</h3>
+          <p>Accede a información confiable sobre salud y prevención</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-      <div class="container">
-        <h2 class="section-title-white">MedTrack en Números</h2>
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-number">1,000+</div>
-            <div class="stat-label">Usuarios Activos</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Reportes Procesados</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Enfermedades Monitoreadas</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Monitoreo Continuo</div>
-          </div>
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <h2 class="section-title-white">MedTrack en Números</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">1,000+</div>
+          <div class="stat-label">Usuarios Activos</div>
         </div>
-      </div>
-    </section>
-  </div>
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Reportes Procesados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Tipos de Enfermedades</div>
+        </div>

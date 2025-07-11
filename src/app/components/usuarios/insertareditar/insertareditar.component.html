@@ -1,19 +1,15 @@
-<div class = "container">
+<div class="container">
   <div style="text-align: center;margin: 5%;">
-      <h1>Registro de Usuarios</h1>
+      <h1>{{ edicion ? 'Editar' : 'Registrar' }} Usuario</h1>
   </div>
   <div style="text-align: center;">
     <form [formGroup]="form" (submit)="aceptar()">
 
       <mat-form-field *ngIf="edicion">
         <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo">
-        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
-          El codigo del servidor es obligatorio!!
-        </mat-error>
+        <input matInput formControlName="codigo" readonly>
       </mat-form-field>
       <br>
-
 
       <mat-form-field>
         <mat-label>Usuario</mat-label>
@@ -30,12 +26,15 @@
         <mat-error *ngIf="form.get('correo')?.hasError('required')">
           El correo es obligatorio!!
         </mat-error>
+        <mat-error *ngIf="form.get('correo')?.hasError('email')">
+          El correo debe tener un formato válido!!
+        </mat-error>
       </mat-form-field>
       <br>
 
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="password">
+        <input matInput type="password" formControlName="password">
         <mat-error *ngIf="form.get('password')?.hasError('required')">
           La contraseña es obligatoria!!
         </mat-error>
@@ -54,44 +53,94 @@
       </mat-form-field>
       <br>
 
+      <!-- 🖥️ SECCIÓN GPS PARA ORDENADOR -->
+      <div class="gps-section">
+        <h3>📍 Ubicación</h3>
+        
+        <!-- CARGANDO DESDE ORDENADOR -->
+        <div *ngIf="cargandoGPS" class="gps-loading">
+          <mat-spinner diameter="30"></mat-spinner>
+          <span>Obteniendo ubicación desde ordenador...</span>
+          <div class="gps-tips-pc">
+            <small>🖥️ En ordenador la ubicación es aproximada (WiFi/IP)</small>
+            <small>📍 Precisión típica: ±500m - 2km</small>
+          </div>
+        </div>
+        
+        <!-- ÉXITO CON INFORMACIÓN -->
+        <div *ngIf="gpsCompletado && !cargandoGPS" class="gps-success">
+          <mat-icon>check_circle</mat-icon>
+          <span>Ubicación obtenida correctamente</span>
+          <small style="display: block; color: #666; margin-top: 5px;">
+            🖥️ Ubicación aproximada desde ordenador
+          </small>
+        </div>
+        
+        <!-- FALLO - ACTIVAR MAPA MANUAL -->
+        <div *ngIf="gpsFallo && !cargandoGPS" class="gps-opciones">
+          <div class="gps-info">
+            <mat-icon>info</mat-icon>
+            <span>Selección manual activada</span>
+          </div>
+          
+          <div class="opciones-manuales">
+            <p>🗺️ Usa el mapa para seleccionar tu ubicación exacta:</p>
+            
+            <button type="button" mat-raised-button color="primary" (click)="reintentarGPS()" class="opcion-btn">
+              <mat-icon>my_location</mat-icon>
+              Detectar ubicación automática
+            </button>
+            
+            <button type="button" mat-raised-button color="accent" (click)="abrirMapaSeleccion()" class="opcion-btn">
+              <mat-icon>map</mat-icon>
+              Seleccionar en mapa
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAMPOS DE UBICACIÓN -->
       <mat-form-field>
-        <mat-label>Ubicación</mat-label>
+        <mat-label>📍 Ubicación</mat-label>
         <input matInput formControlName="ubicacion">
-        <mat-error *ngIf="form.get('ubicacion')?.hasError('required')">
-          La ubicación es obligatoria!!
-        </mat-error>
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-hint *ngIf="!mostrarMapaManual">Se completa automáticamente</mat-hint>
+        <mat-hint *ngIf="mostrarMapaManual">Selecciona en el mapa</mat-hint>
       </mat-form-field>
       <br>
 
-      <mat-form-field>
-        <mat-label>Longitud Coordenada</mat-label>
-        <input matInput formControlName="longitudUsuario">
-        <mat-error *ngIf="form.get('longitudUsuario')?.hasError('required')">
-          La Longitud es obligatoria!!
-        </mat-error>
-      </mat-form-field>
+      <div class="coordenadas-row">
+        <mat-form-field>
+          <mat-label>Latitud</mat-label>
+          <input matInput formControlName="latitudUsuario" step="any">
+          <mat-icon matSuffix>room</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Longitud</mat-label>
+          <input matInput formControlName="longitudUsuario" step="any">
+          <mat-icon matSuffix>room</mat-icon>
+        </mat-form-field>
+      </div>
+      
+      <div class="mapa-manual-section" *ngIf="gpsCompletado || gpsFallo">
+        <button type="button" mat-stroked-button color="primary" (click)="abrirMapaSeleccion()" class="btn-mapa">
+          <mat-icon>edit_location</mat-icon>
+          Cambiar ubicación en mapa
+        </button>
+      </div>
       <br>
 
-      <mat-form-field>
-        <mat-label>Latitud Coordenada</mat-label>
-        <input matInput formControlName="latitudUsuario">
-        <mat-error *ngIf="form.get('latitudUsuario')?.hasError('required')">
-          La Latitud es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br>
-
-      <mat-radio-group aria-label="Select an option" formControlName="enabled" [ngModel]="status">
+      <mat-radio-group formControlName="enabled">
         <mat-radio-button [value]="true">Activo</mat-radio-button>
         <mat-radio-button [value]="false">Inactivo</mat-radio-button>
       </mat-radio-group>
+      <br><br>
 
-      <br>
-
-      <button mat-raised-button color="primary">Aceptar</button>
-      <button mat-raised-button color="warn" routerLink="/usuarios">
-        Cancelar
+      <button mat-raised-button color="primary" type="submit" [disabled]="cargandoGPS">
+        {{ edicion ? 'Actualizar' : 'Registrar' }}
       </button>
+      <button mat-raised-button color="warn" routerLink="/usuarios">Cancelar</button>
 
     </form>
   </div>

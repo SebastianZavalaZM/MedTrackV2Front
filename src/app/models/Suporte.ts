@@ -1,9 +1,9 @@
 import { Usuarios } from './Usuarios';
 
 export class Suporte {
-  idsuporte?: number;
+  idsuporte: number = 0;
   titulo: string = '';
-  fecha: string = '';
+  fecha: Date = new Date();
   descripcion: string = '';
   users: Usuarios = new Usuarios();
 }
