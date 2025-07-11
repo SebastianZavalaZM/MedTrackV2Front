@@ -56,7 +56,7 @@ export const routes: Routes = [
         path:'formulario',component:InsertareditarComponent
       },
       {
-        path:'ediciones/:id',component:InsertareditarComponent
+        path:'ediciones/:id',component:InsertareditarComponent,
       }
     ],
     canActivate: [seguridadGuard],
@@ -68,7 +68,7 @@ export const routes: Routes = [
         path:'formulario',component:InsertareditarteComponent
       },
       {
-        path:'ediciones/:id',component:InsertareditarteComponent
+        path:'ediciones/:id',component:InsertareditarteComponent,
       },
       {
         path:'buscarPorNombre',component:BuscarteComponent
@@ -86,7 +86,7 @@ export const routes: Routes = [
         path:'formulario',component:InsertareditareComponent
       },
       {
-        path:'ediciones/:id',component:InsertareditareComponent
+        path:'ediciones/:id',component:InsertareditareComponent,
       },
       {
         path:'contar-nivel-riesgo',component:ContadornvlriesgoComponent
@@ -102,7 +102,7 @@ export const routes: Routes = [
         path:'formulario',component:InsertareditarmcComponent,
       },
       {
-        path:'ediciones/:id',component:InsertareditarmcComponent
+        path:'ediciones/:id',component:InsertareditarmcComponent,
       }
     ],
     canActivate: [seguridadGuard],
@@ -114,7 +114,7 @@ export const routes: Routes = [
         path: 'formulario', component: InsertareditarnotComponent,
       },
       {
-        path: 'ediciones/:id', component: InsertareditarnotComponent
+        path: 'ediciones/:id', component: InsertareditarnotComponent,
       }
     ],
     canActivate: [seguridadGuard],
@@ -135,7 +135,7 @@ export const routes: Routes = [
     children: [
       { path: 'listar', component: ListarSuporteComponent },
       { path: 'insertar', component: InsertarSuporteComponent },
-      { path: 'editar/:id', component: InsertarSuporteComponent },
+      { path: 'editar/:id', component: InsertarSuporteComponent},
       { path: 'buscar-usuario', component: BuscarUsuarioSuporteComponent },
       { path: 'buscar-fecha', component: BuscarFechaSuporteComponent },
       { path: '', redirectTo: 'listar', pathMatch: 'full' }
@@ -149,7 +149,7 @@ export const routes: Routes = [
         path:'formulario',component:InsertareditaraiComponent
       },
       {
-        path:'ediciones/:id',component:InsertareditaraiComponent
+        path:'ediciones/:id',component:InsertareditaraiComponent,
       },
       {
         path:'buscartitulo',component:BuscartituloComponent
@@ -165,7 +165,8 @@ export const routes: Routes = [
         path:'formulario',component:InsertareditarrcComponent
       },
       {
-        path:'ediciones/:id',component:InsertareditarrcComponent
+        path:'ediciones/:id',component:InsertareditarrcComponent,
+
       },
       {
         path:'buscarPorCiudadOEnfermedad',component:BuscarPorCiudadOenfermedadComponent
@@ -181,7 +182,7 @@ export const routes: Routes = [
         path: 'formularioforo', component:InsertareditarforosComponent
       },
       {
-        path: 'edicionesforo/:id', component:InsertareditarforosComponent
+        path: 'edicionesforo/:id', component:InsertareditarforosComponent,
       },
       {
         path: 'buscarporperiodo', component: BuscarporperiodoComponent
@@ -196,7 +197,7 @@ export const routes: Routes = [
         path: 'formulariocomentario', component:InsertareditarcomentarioforosComponent
       },
       {
-        path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent
+        path: 'edicionescomentario/:id', component:InsertareditarcomentarioforosComponent,
       },
       {
         path: 'busquedatituloforo', component:BuscarforoComponent
