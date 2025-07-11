@@ -14,7 +14,7 @@ declare var L: any;
   styleUrl: './mapasdecalor.component.css'
 })
 export class MapasdecalorComponent implements OnInit, AfterViewInit {
-  
+
   private map: any;
   private heatLayer: any;
   mapasCalor: any[] = [];
@@ -54,7 +54,7 @@ export class MapasdecalorComponent implements OnInit, AfterViewInit {
       next: (data) => {
         this.mapasCalor = data;
         console.log('Datos de mapa de calor cargados:', data);
-        
+
         if (this.map) {
           this.crearCapaCalor();
         }
@@ -115,7 +115,7 @@ export class MapasdecalorComponent implements OnInit, AfterViewInit {
     this.mapasCalor.forEach(punto => {
       const color = this.obtenerColorPorNivel(punto.nivelriesgo);
       const radio = this.obtenerRadioPorConcentracion(punto.concentraciondecalor);
-      
+
       const circulo = L.circle([punto.latitud, punto.longitud], {
         color: color,
         fillColor: color,
@@ -153,14 +153,14 @@ export class MapasdecalorComponent implements OnInit, AfterViewInit {
 
   convertirNivelAIntensidad(nivel: string, concentracion: number): number {
     let multiplicador = 1;
-    
+
     switch (nivel?.toLowerCase()) {
       case 'alto': multiplicador = 3; break;
       case 'medio': multiplicador = 2; break;
       case 'bajo': multiplicador = 1; break;
       default: multiplicador = 1;
     }
-    
+
     return (concentracion * multiplicador) / 100;
   }
 
