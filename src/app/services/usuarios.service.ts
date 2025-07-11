@@ -3,6 +3,8 @@ import { Usuarios } from '../models/Usuarios';
 import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {DistribuciondesuscriptoresuruarioDTO} from '../models/distribuciondesuscriptoresuruarioDTO';
+import {EstadisticasporusuariocalorDTO} from '../models/EstadisticasporusuariocalorDTO';
 
 const base_url = environment.base;
 
@@ -19,7 +21,7 @@ export class UsuariosService {
   list(): Observable<Usuarios[]> {
     return this.http.get<Usuarios[]>(this.url); // ← GET /usuarios
   }
-  
+
   insert(u: Usuarios): Observable<any> {
     return this.http.post(this.url, u); // ← POST /usuarios
   }
@@ -27,7 +29,7 @@ export class UsuariosService {
   setList(listaNueva: Usuarios[]): void {
     this.listaCambio.next(listaNueva);
   }
-  
+
   getList(): Observable<Usuarios[]> {
     return this.listaCambio.asObservable();
   }
@@ -42,5 +44,13 @@ export class UsuariosService {
 
   deleteA(id: number): Observable<any> {
     return this.http.delete(`${this.url}/${id}`); // ← DELETE /usuarios/{id}
+  }
+
+  getdistribucion(): Observable<DistribuciondesuscriptoresuruarioDTO[]>{
+      return this.http.get<DistribuciondesuscriptoresuruarioDTO[]>(`${this.url}/distribuciondesuscriptoresuruario`);
+  }
+
+  getestadisticas(): Observable<EstadisticasporusuariocalorDTO[]> {
+    return this.http.get<EstadisticasporusuariocalorDTO[]>(`${this.url}/estadisticasporusuariocalor`);
   }
 }

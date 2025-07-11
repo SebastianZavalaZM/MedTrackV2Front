@@ -7,10 +7,10 @@ import { BuscarteComponent } from './components/tipoenfermedad/buscar/buscar.com
 import { EnfermedadComponent } from './components/enfermedad/enfermedad.component';
 import { InsertareditareComponent } from './components/enfermedad/insertareditar/insertareditar.component';
 import { ContadornvlriesgoComponent } from './components/enfermedad/contadornvlriesgo/contadornvlriesgo.component';
-import {MapacalorComponent} from './components/mapacalor/mapacalor.component';
-import {InsertareditarmcComponent} from './components/mapacalor/insertareditarmc/insertareditarmc.component';
-import {NotificacionComponent} from './components/notificacion/notificacion.component';
-import {InsertareditarnotComponent} from './components/notificacion/insertareditarnot/insertareditarnot.component';
+import { MapacalorComponent} from './components/mapacalor/mapacalor.component';
+import { InsertareditarmcComponent} from './components/mapacalor/insertareditarmc/insertareditarmc.component';
+import { NotificacionComponent} from './components/notificacion/notificacion.component';
+import { InsertareditarnotComponent} from './components/notificacion/insertareditarnot/insertareditarnot.component';
 import { ListarTiposuscripcionComponent } from './components/tiposuscripcion/listar-tiposuscripcion/listar-tiposuscripcion.component';
 import { InsertarTiposuscripcionComponent } from './components/tiposuscripcion/insertar-tiposuscripcion/insertar-tiposuscripcion.component';
 import { ListarSuporteComponent } from './components/suporte/listar-suporte/listar-suporte.component';
@@ -30,6 +30,9 @@ import { BuscarporperiodoComponent } from './components/foros/buscarporperiodo/b
 import { LoginComponent } from './components/login/login.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { HomeComponent } from './components/home/home.component';
+import {ReportesComponent} from './components/reportes/reportes.component';
+import {Reporte1Component} from './components/reportes/reporte1/reporte1.component';
+import {Reporte2Component} from './components/reportes/reporte2/reporte2.component';
 
 
 export const routes: Routes = [
@@ -192,6 +195,21 @@ export const routes: Routes = [
         path: 'busquedatituloforo', component:BuscarforoComponent
       }
     ]
+  },
+  {
+    path: 'reportes',
+    component: ReportesComponent,
+    children: [
+      {
+        path: 'estadisticas',
+        component:Reporte1Component,
+      },
+      {
+        path: 'estadisticas2',
+        component:Reporte2Component,
+      }
+      ],
+
   },
   {
     path: 'homes',

@@ -87,6 +87,13 @@
     </button>
   </div>
 
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuRepo" class="btn-verde">
+      <mat-icon>dns</mat-icon>
+      Reportes
+    </button>
+  </div>
+
   <!-- Nuevo Botón: Landing Page -->
   <div>
     <a mat-button class="btn-verde"
@@ -249,6 +256,17 @@
   <button mat-menu-item routerLink="/Comentarios/busquedatituloforo" class="item-verde">
     <mat-icon>search</mat-icon>
     <span>Buscar Comentario por Foro </span>
+  </button>
+</mat-menu>
+
+<mat-menu #menuRepo="matMenu" class="menu-verde" >
+  <button mat-menu-item routerLink="/reportes/estadisticas">
+    <mat-icon>gesture</mat-icon>
+    <span>Reporte de Distribución</span>
+  </button>
+  <button mat-menu-item routerLink="/reportes/estadisticas2">
+    <mat-icon>stars</mat-icon>
+    <span>Reporte de Estadísticas</span>
   </button>
 </mat-menu>
 
