@@ -1,95 +1,187 @@
 <div class="container">
   <div style="text-align: center;margin: 5%;">
-    <h1>Registro de Mapas de Calor</h1>
+    <h1>{{ edicion ? 'Editar' : 'Registrar' }} Mapa de Calor</h1>
+    <p style="color: #666;">Powered by Google Maps + Leaflet</p>
   </div>
-  <div style="text-align: center;">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field *ngIf="edicion">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigomc">
+  
+  <div class="form-container">
+    <!-- MAPA GOOGLE MAPS CON LEAFLET -->
+    <div class="mapa-section">
+      <h3>Seleccionar Zona de Calor</h3>
+      
+      <!-- Controles del mapa -->
+      <div class="controles-mapa">
+        <!-- Selector de tipo de mapa Google -->
+        <div class="control-group">
+          <label>Tipo de mapa:</label>
+          <mat-select [(value)]="tipoMapa" (selectionChange)="cambiarTipoMapa($event)">
+            <mat-option *ngFor="let tipo of tiposMapa" [value]="tipo.value">
+              {{tipo.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+        
+        <div class="control-group">
+          <label>Radio de influencia: <strong>{{radioInfluencia}}m</strong></label>
+          <input 
+            type="range" 
+            class="custom-slider"
+            min="50" 
+            max="2000" 
+            step="50" 
+            [value]="radioInfluencia"
+            (input)="cambiarRadio($event)">
+          <div class="slider-labels">
+            <span>50m</span>
+            <span>1km</span>
+            <span>2km</span>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <label>Intensidad de calor: <strong>{{intensidadCalor}}%</strong></label>
+          <input 
+            type="range" 
+            class="custom-slider intensidad-slider"
+            min="10" 
+            max="100" 
+            step="10" 
+            [value]="intensidadCalor"
+            (input)="cambiarIntensidad($event)">
+          <div class="slider-labels">
+            <span>Baja</span>
+            <span>Media</span>
+            <span>Alta</span>
+          </div>
+        </div>
+        
+        <div class="botones-mapa">
+          <button type="button" mat-button color="accent" (click)="centrarEnMiUbicacion()">
+            <mat-icon>my_location</mat-icon>
+            Mi Ubicación GPS
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mapa Google Maps con Leaflet -->
+      <div id="mapaCalor" class="mapa-leaflet"></div>
+      
+      <!-- Indicador de estado -->
+      <div class="estado-mapa">
+        <div *ngIf="!mapaCargado" class="cargando">
+          <mat-spinner diameter="20"></mat-spinner>
+          <span>Cargando Google Maps...</span>
+        </div>
+        
+        <div *ngIf="ubicacionSeleccionada && mapaCargado" class="ubicacion-ok">
+          <mat-icon>check_circle</mat-icon>
+          <span>Zona de calor configurada en Google Maps</span>
+        </div>
+        
+        <div *ngIf="!ubicacionSeleccionada && mapaCargado" class="instrucciones">
+          <mat-icon>touch_app</mat-icon>
+          <span>Haz clic en Google Maps para seleccionar la zona</span>
+        </div>
+      </div>
+      
+      <!-- Leyenda de colores -->
+      <div class="leyenda-calor">
+        <h4>Leyenda de Intensidad</h4>
+        <div class="leyenda-items">
+          <div class="leyenda-item">
+            <div class="color-circle" style="background: #4caf50;"></div>
+            <span>Bajo Riesgo (menor a 500m o menor a 45%)</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="color-circle" style="background: #ff9800;"></div>
+            <span>Medio Riesgo (500m-1km o 45%-75%)</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="color-circle" style="background: #f44336;"></div>
+            <span>Alto Riesgo (mayor a 1km o mayor a 75%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <mat-error *ngIf="form.get('codigomc')?.hasError('required')">
-          El codigo del mapa es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-      <br>
+    <!-- FORMULARIO -->
+    <div class="formulario-section">
+      <form [formGroup]="form" (submit)="aceptar()">
+        
+        <mat-form-field *ngIf="edicion">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigomc" readonly>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Lat.</mat-label>
-        <input matInput formControlName="latitudmc">
+        <!-- COORDENADAS (SOLO LECTURA) -->
+        <div class="coordenadas-grupo">
+          <h4>Coordenadas Seleccionadas</h4>
+          <div class="coordenadas-row">
+            <mat-form-field>
+              <mat-label>Latitud</mat-label>
+              <input matInput formControlName="latitudmc">
+              <mat-icon matSuffix>room</mat-icon>
+            </mat-form-field>
 
-        <mat-error *ngIf="form.get('latitudmc')?.hasError('required')">
-          La latitud es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br>
+            <mat-form-field>
+              <mat-label>Longitud</mat-label>
+              <input matInput formControlName="longitudmc">
+              <mat-icon matSuffix>room</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
 
-      <mat-form-field>
-        <mat-label>Lon.</mat-label>
-        <input matInput formControlName="longitudmc">
+        <mat-form-field>
+          <mat-label>Nivel de Riesgo</mat-label>
+          <mat-select formControlName="nivelriesgomc">
+            <mat-option value="Alto">Alto</mat-option>
+            <mat-option value="Medio">Medio</mat-option>
+            <mat-option value="Bajo">Bajo</mat-option>
+          </mat-select>
+          <mat-hint>Se actualiza automáticamente según la zona</mat-hint>
+        </mat-form-field>
 
-        <mat-error *ngIf="form.get('longitudmc')?.hasError('required')">
-          La longitud es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br>
+        <mat-form-field>
+          <mat-label>Fecha de Actualización</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaactualizacionmc">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('fechaactualizacionmc')?.hasError('required')">
+            La fecha es obligatoria!!
+          </mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Nivel de Riesgo</mat-label>
-        <mat-select formControlName="nivelriesgomc">
-          @for (food of niveles; track food) {
-            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <br>
+        <mat-form-field>
+          <mat-label>Concentración de Calor (%)</mat-label>
+          <input matInput formControlName="concentraciondecalormc" type="number" readonly>
+          <mat-icon matSuffix>thermostat</mat-icon>
+          <mat-hint>Se configura automáticamente desde el slider</mat-hint>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaactualizacionmc">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="form.get('fechaactualizacionmc')?.hasError('required')">
-          La fecha es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br>
+        <mat-form-field>
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="users">
+            <mat-option *ngFor="let usuario of listausers" [value]="usuario.idUsers">
+              {{usuario.username}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('users')?.hasError('required')">
+            El usuario es obligatorio!!
+          </mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Concentración</mat-label>
-        <input matInput formControlName="concentraciondecalormc">
+        <div class="botones-form">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!ubicacionSeleccionada">
+            <mat-icon>save</mat-icon>
+            {{ edicion ? 'Actualizar' : 'Registrar' }} Mapa de Calor
+          </button>
+          <button mat-raised-button color="warn" routerLink="/mapacalor" type="button">
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+        </div>
 
-        <mat-error *ngIf="form.get('concentraciondecalormc')?.hasError('required')">
-          El nivel de concentración es obligatoria!!
-        </mat-error>
-      </mat-form-field>
-      <br>
-
-      <!-- Name Column
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <input matInput formControlName="users">
-        <mat-error *ngIf="form.get('users')?.hasError('required')">
-          EL codigo del usario es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-      <br>
-    -->
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="users">
-          @for (food of listausers; track food) {
-            <mat-option [value]="food.idUsers">{{food.username}}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary">Aceptar</button>
-      <button mat-raised-button color="warn" routerLink="/tipoenfermedades/listas">
-        Cancelar
-      </button>
-
-    </form>
+      </form>
+    </div>
   </div>
 </div>

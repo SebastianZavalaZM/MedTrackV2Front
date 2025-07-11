@@ -1,79 +1,170 @@
-import {AfterViewInit, Component} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
-import {MapacalorService} from '../../../services/mapacalor.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MapacalorService } from '../../../services/mapacalor.service';
 
-declare let HeatmapOverlay: any; // heatmap.js + leaflet-heatmap no tiene typings
+declare var L: any;
 
 @Component({
   selector: 'app-mapasdecalor',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './mapasdecalor.component.html',
   styleUrl: './mapasdecalor.component.css'
 })
-export class MapasdecalorComponent implements AfterViewInit {
+export class MapasdecalorComponent implements OnInit, AfterViewInit {
 
-  private isBrowser: boolean;
-  //private loadedScripts: Set<string> = new Set();
+  private map: any;
+  private heatLayer: any;
+  mapasCalor: any[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.isBrowser = isPlatformBrowser(platformId);
+  constructor(private mapacalorService: MapacalorService) {}
+
+  ngOnInit(): void {
+    this.cargarDatosMapaCalor();
   }
 
-  async ngAfterViewInit(): Promise<void> {
-    if (this.isBrowser) {
-      await this.loadHeatmapScripts();
-      this.loadMap();
+  ngAfterViewInit(): void {
+    this.cargarLeaflet();
+  }
+
+  // CARGAR LEAFLET
+  cargarLeaflet(): void {
+    if (typeof L === 'undefined') {
+      const linkCSS = document.createElement('link');
+      linkCSS.rel = 'stylesheet';
+      linkCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(linkCSS);
+
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.onload = () => {
+        console.log('Leaflet cargado');
+        setTimeout(() => this.inicializarMapa(), 100);
+      };
+      document.head.appendChild(script);
+    } else {
+      setTimeout(() => this.inicializarMapa(), 100);
     }
   }
 
-  private async loadHeatmapScripts(): Promise<void> {
-    // Este orden es MUY importante
-    await this.loadScript('assets/libs/leaflet.js');
-    await this.loadScript('assets/libs/heatmap.min.js');
-    await this.loadScript('assets/libs/leaflet-heatmap.js');  // luego el plugin
-  }
+  cargarDatosMapaCalor(): void {
+    this.mapacalorService.list().subscribe({
+      next: (data) => {
+        this.mapasCalor = data;
+        console.log('Datos de mapa de calor cargados:', data);
 
-  private loadScript(src: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.onload = () => resolve();
-      script.onerror = () => reject(`Error cargando ${src}`);
-      document.body.appendChild(script);
+        if (this.map) {
+          this.crearCapaCalor();
+        }
+      },
+      error: (error) => {
+        console.error('Error cargando datos:', error);
+      }
     });
   }
 
-  private loadMap(): void {
-    const L = (window as any).L; // 👈️ aquí usamos L desde window
+  inicializarMapa(): void {
+    const mapElement = document.getElementById('mapaCalor');
+    if (!mapElement) {
+      console.error('Elemento #mapaCalor no encontrado');
+      return;
+    }
 
-    const baseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    try {
+      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+      });
 
-    const cfg = {
-      radius: 15,
-      maxOpacity: 0.7,
-      scaleRadius: false,
-      useLocalExtrema: true,
-      latField: 'lat',
-      lngField: 'lng',
-      valueField: 'count'
-    };
+      this.map = L.map('mapaCalor').setView([-12.0464, -77.0428], 10);
 
-    const heatmapLayer = new HeatmapOverlay(cfg);
+      L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        attribution: '© Google Maps',
+        maxZoom: 20
+      }).addTo(this.map);
 
-    // 🔽 AQUÍ INSERTAS ESTA PARTE 👇
-    const map = new L.Map('map', {
-      center: [-12.0464, -77.0428], // Centrado en Lima
-      zoom: 6,
-      layers: [baseLayer, heatmapLayer]
-    });
-
-    const registros = [
-      { lat: -12.0464, lng: -77.0428, count: 3 },
-      { lat: -12.0450, lng: -77.0410, count: 1 },
-      { lat: -12.0470, lng: -77.0430, count: 5 }
-    ];
-    heatmapLayer.setData({ data: registros });
+      if (this.mapasCalor.length > 0) {
+        this.crearCapaCalor();
+      }
+    } catch (error) {
+      console.error('Error inicializando mapa:', error);
+    }
   }
 
+  crearCapaCalor(): void {
+    const puntosCalor = this.mapasCalor.map(punto => [
+      punto.latitud,
+      punto.longitud,
+      this.convertirNivelAIntensidad(punto.nivelriesgo, punto.concentraciondecalor)
+    ]);
+
+    console.log('Puntos de calor:', puntosCalor);
+
+    if (this.heatLayer) {
+      this.map.removeLayer(this.heatLayer);
+    }
+
+    this.crearCirculosCalor();
+  }
+
+  crearCirculosCalor(): void {
+    this.mapasCalor.forEach(punto => {
+      const color = this.obtenerColorPorNivel(punto.nivelriesgo);
+      const radio = this.obtenerRadioPorConcentracion(punto.concentraciondecalor);
+
+      const circulo = L.circle([punto.latitud, punto.longitud], {
+        color: color,
+        fillColor: color,
+        fillOpacity: 0.4,
+        radius: radio,
+        weight: 3
+      }).addTo(this.map);
+
+      circulo.bindPopup(`
+        <div style="text-align: center; min-width: 200px;">
+          <h4>Zona de Calor</h4>
+          <p><strong>Nivel:</strong> ${punto.nivelriesgo}</p>
+          <p><strong>Concentración:</strong> ${punto.concentraciondecalor}%</p>
+          <p><strong>Radio:</strong> ${radio}m</p>
+          <p><strong>Fecha:</strong> ${new Date(punto.fechaactualizacion).toLocaleDateString()}</p>
+          <p><strong>Usuario:</strong> ${punto.users?.username || 'N/A'}</p>
+          <p><strong>Coordenadas:</strong><br>${punto.latitud.toFixed(6)}, ${punto.longitud.toFixed(6)}</p>
+        </div>
+      `);
+    });
+  }
+
+  obtenerColorPorNivel(nivel: string): string {
+    switch (nivel?.toLowerCase()) {
+      case 'alto': return '#f44336';
+      case 'medio': return '#ff9800';
+      case 'bajo': return '#4caf50';
+      default: return '#757575';
+    }
+  }
+
+  obtenerRadioPorConcentracion(concentracion: number): number {
+    return Math.max(100, Math.min(1000, concentracion * 10));
+  }
+
+  convertirNivelAIntensidad(nivel: string, concentracion: number): number {
+    let multiplicador = 1;
+
+    switch (nivel?.toLowerCase()) {
+      case 'alto': multiplicador = 3; break;
+      case 'medio': multiplicador = 2; break;
+      case 'bajo': multiplicador = 1; break;
+      default: multiplicador = 1;
+    }
+
+    return (concentracion * multiplicador) / 100;
+  }
+
+  recargarMapa(): void {
+    this.cargarDatosMapaCalor();
+  }
 }

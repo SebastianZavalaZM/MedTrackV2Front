@@ -55,7 +55,6 @@ export class UsuariosService {
   }
 
 
-  // 🆕 GPS CON PRECISIÓN - SOLO OpenStreetMap
   obtenerUbicacionConPrecision(): Promise<{
     latitude: number,
     longitude: number,
